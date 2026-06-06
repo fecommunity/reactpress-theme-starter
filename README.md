@@ -152,11 +152,16 @@ pnpm start                            # 生产预览
 
 ## 部署到 Vercel
 
-本主题是 **Headless 前端**，部署时需要配置远程 ReactPress API：
+> **说明**：`vercel.json` 只配置构建命令，**不会**自动触发部署。需要任选一种方式完成接入。
 
-1. 将本仓库导入 [Vercel](https://vercel.com)
-2. Framework Preset 选择 **Next.js**（`vercel.json` 已配置 pnpm）
-3. 在 Vercel 项目 Settings → Environment Variables 中添加：
+本主题是 **Headless 前端**，部署时需要配置远程 ReactPress API。
+
+### 方式 A：Vercel 控制台连接 GitHub（推荐）
+
+1. 打开 [Vercel New Project](https://vercel.com/new)，Import `fecommunity/reactpress-theme-starter`
+2. Framework 选 **Next.js**（会读取 `vercel.json` 中的 pnpm 命令）
+3. **Production Branch** 设为 `master`（或你的默认分支）
+4. Settings → Environment Variables 添加：
 
 | 变量                             | 示例值                         |
 | :------------------------------- | :----------------------------- |
@@ -164,9 +169,30 @@ pnpm start                            # 生产预览
 | `NEXT_PUBLIC_REACTPRESS_API_URL` | `https://api.yoursite.com/api` |
 | `CLIENT_SITE_URL`                | `https://www.yoursite.com`     |
 
-4. 部署完成后，在 ReactPress 后台将活跃主题指向本主题（若使用 monorepo 管理）或确保 API CORS / 域名配置正确。
+5. 推送代码到 `master` / `main` 后，Vercel 会自动构建部署
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/fecommunity/reactpress-theme-starter)
+
+### 方式 B：GitHub Actions 部署
+
+仓库已包含 [`.github/workflows/vercel.yml`](./.github/workflows/vercel.yml)，push 到 `master` / `main` 时触发。
+
+在 GitHub 仓库 **Settings → Secrets and variables → Actions** 添加：
+
+| Secret               | 获取方式 |
+| :------------------- | :------- |
+| `VERCEL_TOKEN`       | [Vercel Account Tokens](https://vercel.com/account/tokens) |
+| `VERCEL_ORG_ID`      | 本地 `vercel link` 后见 `.vercel/project.json` 的 `orgId` |
+| `VERCEL_PROJECT_ID`  | 同上，字段 `projectId` |
+
+本地获取 ID 示例：
+
+```bash
+pnpm dlx vercel link
+cat .vercel/project.json
+```
+
+若已用 **方式 A** 连接 GitHub，可删除或禁用 `vercel.yml`，避免重复部署。
 
 ## 在 ReactPress Monorepo 中使用
 
