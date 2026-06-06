@@ -35,13 +35,16 @@ jobs:
         run: pnpm run typecheck
         continue-on-error: true
 
+      # Mock API runs in next dev with a separate distDir so production `next build`
+      # never shares `.next` with the dev server (avoids vendor-chunks / 500 errors).
       - name: Start Next dev with mock API routes
         env:
+          NEXT_DIST_DIR: .next-dev
           REACTPRESS_MOCK_API: '1'
           REACTPRESS_API_URL: http://127.0.0.1:3010/api
           NEXT_PUBLIC_REACTPRESS_API_URL: http://127.0.0.1:3010/api
           CLIENT_SITE_URL: https://example.com
-        run: pnpm exec next dev -p 3010 &
+        run: pnpm exec next dev -p 3010 -H 127.0.0.1 &
 
       - name: Wait for mock API
         run: |
@@ -61,4 +64,4 @@ jobs:
           REACTPRESS_API_URL: http://127.0.0.1:3010/api
           NEXT_PUBLIC_REACTPRESS_API_URL: http://127.0.0.1:3010/api
           CLIENT_SITE_URL: https://example.com
-        run: pnpm run build
+        run: pnpm run build:ci

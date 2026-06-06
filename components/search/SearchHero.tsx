@@ -3,7 +3,9 @@
 import Link from '@/components/shared/Link'
 import { SearchIcon } from '@/lib/utils/icons'
 import { ArticleProvider, SearchProvider } from '@/lib/providers/client'
+import { normalizeList } from '@/lib/reactpress/normalizeApiResponse'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
+import type { IArticle } from '@fecommunity/reactpress-toolkit/types'
 import { jsonp } from '@fecommunity/reactpress-toolkit/theme'
 import { getSiteTitle, useSiteSetting } from '@fecommunity/reactpress-toolkit/theme'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -92,8 +94,9 @@ export default function SearchHero({
           : ArticleProvider.getRecommend()
         return request
           .then((res) => {
+            const items = normalizeList<IArticle>(res)
             setSuggestions(
-              res
+              items
                 .filter((item) => !item.status || item.status === 'publish')
                 .map((item) => ({
                   label: item.title,

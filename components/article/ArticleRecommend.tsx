@@ -4,9 +4,11 @@ import ArticleList from '@/components/article/ArticleList'
 import Link from '@/components/shared/Link'
 import SectionHeading, { EmptyState } from '@/components/shared/SectionHeading'
 import { ArticleProvider } from '@/lib/providers/client'
+import { normalizeList, normalizePaginated } from '@/lib/reactpress/normalizeApiResponse'
 import { EyeIcon } from '@/lib/utils/icons'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import { slimArticlesForList } from '@fecommunity/reactpress-toolkit/theme'
+import type { IArticle } from '@fecommunity/reactpress-toolkit/types'
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 
 interface ArticleRecommendProps {
@@ -52,7 +54,9 @@ async function loadRecommendArticles(
   articleId: string | null,
   fetchSize: number
 ): Promise<RecommendArticle[]> {
-  const recommended = slimArticlesForList(await ArticleProvider.getRecommend(articleId, fetchSize))
+  const recommended = slimArticlesForList(
+    normalizeList<IArticle>(await ArticleProvider.getRecommend(articleId, fetchSize))
+  )
   let pool = dedupeById(recommended)
   pool.sort((a, b) => b.views - a.views)
 
@@ -60,11 +64,13 @@ async function loadRecommendArticles(
     return pool.slice(0, fetchSize)
   }
 
-  const [listRows] = await ArticleProvider.getArticles({
-    page: 1,
-    pageSize: Math.max(fetchSize * 2, 24),
-    status: 'publish',
-  })
+  const [listRows] = normalizePaginated<IArticle>(
+    await ArticleProvider.getArticles({
+      page: 1,
+      pageSize: Math.max(fetchSize * 2, 24),
+      status: 'publish',
+    })
+  )
 
   pool = dedupeById([...pool, ...slimArticlesForList(listRows)])
   pool.sort((a, b) => b.views - a.views)

@@ -16,6 +16,7 @@ const output = process.env.EXPORT ? 'export' : undefined
 module.exports = {
   output,
   basePath,
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   outputFileTracingRoot: path.join(__dirname),
   ...(config.CLIENT_ASSET_PREFIX ? { assetPrefix: config.CLIENT_ASSET_PREFIX } : {}),
   poweredByHeader: false,

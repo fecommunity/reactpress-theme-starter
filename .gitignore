@@ -4,6 +4,7 @@ node_modules
 
 # next.js
 .next
+.next-dev
 out
 
 # env（仓库内提交 .env 作为默认配置；本地覆盖用 .env.local）
