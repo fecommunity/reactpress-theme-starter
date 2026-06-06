@@ -5,6 +5,7 @@
   "buildCommand": "pnpm run build:mock",
   "env": {
     "REACTPRESS_MOCK_API": "1",
+    "REACTPRESS_API_URL": "https://reactpress-theme-starter.vercel.app/api",
     "NEXT_PUBLIC_REACTPRESS_API_URL": "/api",
     "CLIENT_SITE_URL": "https://reactpress-theme-starter.vercel.app"
   }

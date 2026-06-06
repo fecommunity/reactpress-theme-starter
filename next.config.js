@@ -1,13 +1,34 @@
 const path = require('path')
 const { config } = require('@fecommunity/reactpress-toolkit/config')
-const { resolveThemeApiEnv, resolveApiRewriteOrigin } = require('./scripts/resolve-api-env.mjs')
+const {
+  resolveThemeApiEnv,
+  resolveApiRewriteOrigin,
+  resolveClientSiteUrl,
+  isLocalhostUrl,
+} = require('./scripts/resolve-api-env.mjs')
 
 // App Router (Next 15): do not use createReactPressNextConfig's react webpack alias —
 // it conflicts with Next's compiled React and causes SSR "useContext" null errors.
 // Server code imports `@fecommunity/reactpress-toolkit/theme/server` (no UI barrel).
 
 const themeApiEnv = resolveThemeApiEnv()
-const apiOrigin = resolveApiRewriteOrigin(themeApiEnv)
+
+function resolveUploadRewriteOrigin() {
+  if (process.env.REACTPRESS_MOCK_API === '1') {
+    const site = resolveClientSiteUrl()
+    if (site && !isLocalhostUrl(site)) return site
+  }
+  return resolveApiRewriteOrigin(themeApiEnv)
+}
+
+const uploadRewriteOrigin = resolveUploadRewriteOrigin()
+
+/** Only inline browser-safe env — server API URLs must stay runtime on Vercel. */
+const publicThemeEnv = {
+  NEXT_PUBLIC_REACTPRESS_API_URL: themeApiEnv.NEXT_PUBLIC_REACTPRESS_API_URL,
+  NEXT_PUBLIC_REACTPRESS_ADMIN_URL: themeApiEnv.NEXT_PUBLIC_REACTPRESS_ADMIN_URL,
+  CLIENT_SITE_URL: themeApiEnv.CLIENT_SITE_URL,
+}
 
 const basePath = process.env.BASE_PATH || undefined
 const output = process.env.EXPORT ? 'export' : undefined
@@ -35,7 +56,7 @@ module.exports = {
   eslint: { ignoreDuringBuilds: process.env.ENFORCE_ESLINT === '1' ? false : true },
   typescript: { ignoreBuildErrors: process.env.ENFORCE_TYPECHECK === '1' ? false : true },
   env: {
-    ...themeApiEnv,
+    ...publicThemeEnv,
   },
   images: {
     remotePatterns: [
@@ -52,7 +73,7 @@ module.exports = {
     return webpackConfig
   },
   async rewrites() {
-    return [{ source: '/uploads/:path*', destination: `${apiOrigin}/uploads/:path*` }]
+    return [{ source: '/uploads/:path*', destination: `${uploadRewriteOrigin}/uploads/:path*` }]
   },
   async redirects() {
     return [

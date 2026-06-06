@@ -62,6 +62,6 @@ jobs:
         env:
           REACTPRESS_MOCK_API: '1'
           REACTPRESS_API_URL: http://127.0.0.1:3010/api
-          NEXT_PUBLIC_REACTPRESS_API_URL: http://127.0.0.1:3010/api
+          NEXT_PUBLIC_REACTPRESS_API_URL: /api
           CLIENT_SITE_URL: https://example.com
         run: pnpm run build:ci

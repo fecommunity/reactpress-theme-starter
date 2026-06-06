@@ -103,10 +103,14 @@ async function main() {
     const buildEnv = {
       ...process.env,
       INIT_CWD: projectRoot,
+      VERCEL: '1',
       REACTPRESS_MOCK_API: '1',
       REACTPRESS_API_URL: MOCK_API,
       SERVER_API_URL: MOCK_API,
-      NEXT_PUBLIC_REACTPRESS_API_URL: MOCK_API,
+      CLIENT_SITE_URL:
+        process.env.CLIENT_SITE_URL?.trim() || 'https://reactpress-theme-starter.vercel.app',
+      // Client bundle must use same-origin /api at runtime (not build-time localhost).
+      NEXT_PUBLIC_REACTPRESS_API_URL: '/api',
     }
 
     console.log('[build:mock] Running production build')
