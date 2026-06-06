@@ -35,8 +35,12 @@ jobs:
         run: pnpm run typecheck
         continue-on-error: true
 
-      - name: Start mock ReactPress API
-        run: node scripts/mock-api/server.mjs &
+      - name: Run Mockoon CLI
+        uses: mockoon/cli-action@v3
+        with:
+          version: latest
+          data-file: ./mockoon-data.json
+          port: 3010
 
       - name: Wait for mock API
         run: |

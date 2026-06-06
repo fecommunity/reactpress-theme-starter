@@ -18,6 +18,7 @@
     "format:check": "prettier --check .",
     "check": "pnpm run lint:check && pnpm run format:check",
     "mock:api": "node scripts/mock-api/server.mjs",
+    "mock:api:generate": "node scripts/mock-api/generate-mockoon-data.mjs",
     "postinstall": "node scripts/verify-toolkit.mjs"
   },
   "dependencies": {
