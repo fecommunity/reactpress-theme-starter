@@ -6,10 +6,10 @@ node_modules
 .next
 out
 
-# env
-.env
-.env.*
-!.env.example
+# env（仓库内提交 .env 作为默认配置；本地覆盖用 .env.local）
+.env.local
+.env.prod
+.env.*.local
 
 # debug / IDE
 *.log

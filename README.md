@@ -45,9 +45,8 @@ git clone https://github.com/fecommunity/reactpress-theme-starter.git
 cd reactpress-theme-starter
 pnpm install
 
-# 2. 配置环境变量
-cp .env.example .env
-# 编辑 .env，填写 REACTPRESS_API_URL 等
+# 2. 按需编辑 .env（默认已含本地开发配置）
+#    REACTPRESS_API_URL、CLIENT_SITE_URL 等
 
 # 3. 启动主题开发服务器（默认 http://localhost:3001）
 pnpm dev
@@ -55,10 +54,9 @@ pnpm dev
 
 ### 对接本地 ReactPress
 
-若已在本地运行 `reactpress dev`（API 默认 `http://localhost:3002/api`）：
+若已在本地运行 `reactpress dev`（API 默认 `http://localhost:3002/api`），直接：
 
 ```bash
-cp .env.example .env
 pnpm dev
 ```
 
@@ -86,7 +84,7 @@ pnpm dev -- --remote-origin api.yoursite.com --admin-origin local --client-origi
 
 ## 环境变量
 
-见 [`.env.example`](./.env.example)：
+见 [`.env`](./.env)：
 
 | 变量                             | 说明                                       |
 | :------------------------------- | :----------------------------------------- |

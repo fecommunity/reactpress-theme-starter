@@ -25,9 +25,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Prepare environment
-        run: cp .env.example .env
-
       - name: Lint
         run: pnpm run lint:check
 
