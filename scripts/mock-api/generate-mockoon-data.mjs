@@ -72,112 +72,112 @@ const routes = [
     'b1000001-0000-4000-8000-000000000001',
     'post',
     'setting/get',
-    envelope(mockSetting),
+    envelope(mockSetting)
   ),
   createRoute(
     'a1000001-0000-4000-8000-000000000002',
     'b1000001-0000-4000-8000-000000000002',
     'get',
     'article/all/recommend',
-    envelope(mockArticles),
+    envelope(mockArticles)
   ),
   createRoute(
     'a1000001-0000-4000-8000-000000000003',
     'b1000001-0000-4000-8000-000000000003',
     'get',
     'article/archives',
-    envelope(mockArchives),
+    envelope(mockArchives)
   ),
   createRoute(
     'a1000001-0000-4000-8000-000000000004',
     'b1000001-0000-4000-8000-000000000004',
     'get',
     'article/category/:category',
-    envelope([mockArticles, mockArticles.length]),
+    envelope([mockArticles, mockArticles.length])
   ),
   createRoute(
     'a1000001-0000-4000-8000-000000000005',
     'b1000001-0000-4000-8000-000000000005',
     'get',
     'article/tag/:tag',
-    envelope([mockArticles, mockArticles.length]),
+    envelope([mockArticles, mockArticles.length])
   ),
   createRoute(
     'a1000001-0000-4000-8000-000000000006',
     'b1000001-0000-4000-8000-000000000006',
     'get',
     'article/:id',
-    envelope(mockArticle),
+    envelope(mockArticle)
   ),
   createRoute(
     'a1000001-0000-4000-8000-000000000007',
     'b1000001-0000-4000-8000-000000000007',
     'get',
     'article',
-    envelope([mockArticles, mockArticles.length]),
+    envelope([mockArticles, mockArticles.length])
   ),
   createRoute(
     'a1000001-0000-4000-8000-000000000008',
     'b1000001-0000-4000-8000-000000000008',
     'get',
     'category',
-    envelope(mockCategories),
+    envelope(mockCategories)
   ),
   createRoute(
     'a1000001-0000-4000-8000-000000000009',
     'b1000001-0000-4000-8000-000000000009',
     'get',
     'category/:id',
-    envelope(mockCategory),
+    envelope(mockCategory)
   ),
   createRoute(
     'a1000001-0000-4000-8000-00000000000a',
     'b1000001-0000-4000-8000-00000000000a',
     'get',
     'tag',
-    envelope(mockTags),
+    envelope(mockTags)
   ),
   createRoute(
     'a1000001-0000-4000-8000-00000000000b',
     'b1000001-0000-4000-8000-00000000000b',
     'get',
     'tag/:id',
-    envelope(mockTag),
+    envelope(mockTag)
   ),
   createRoute(
     'a1000001-0000-4000-8000-00000000000c',
     'b1000001-0000-4000-8000-00000000000c',
     'get',
     'page/:id',
-    envelope(mockPage),
+    envelope(mockPage)
   ),
   createRoute(
     'a1000001-0000-4000-8000-00000000000d',
     'b1000001-0000-4000-8000-00000000000d',
     'get',
     'page',
-    envelope([mockPages, mockPages.length]),
+    envelope([mockPages, mockPages.length])
   ),
   createRoute(
     'a1000001-0000-4000-8000-00000000000e',
     'b1000001-0000-4000-8000-00000000000e',
     'get',
     'knowledge/:id',
-    envelope(null),
+    envelope(null)
   ),
   createRoute(
     'a1000001-0000-4000-8000-00000000000f',
     'b1000001-0000-4000-8000-00000000000f',
     'get',
     'knowledge',
-    envelope([mockKnowledgeBooks, mockKnowledgeBooks.length]),
+    envelope([mockKnowledgeBooks, mockKnowledgeBooks.length])
   ),
   createRoute(
     'a1000001-0000-4000-8000-000000000010',
     'b1000001-0000-4000-8000-000000000010',
     'get',
     'search/article',
-    envelope(mockArticles),
+    envelope(mockArticles)
   ),
 ]
 
