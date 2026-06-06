@@ -35,9 +35,24 @@ jobs:
         run: pnpm run typecheck
         continue-on-error: true
 
+      - name: Start mock ReactPress API
+        run: node scripts/mock-api/server.mjs &
+
+      - name: Wait for mock API
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf -X POST http://127.0.0.1:3010/api/setting/get > /dev/null; then
+              echo "Mock API ready"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Mock API failed to start"
+          exit 1
+
       - name: Production build
         env:
-          REACTPRESS_API_URL: https://reactpress-theme-starter.vercel.app/api
-          NEXT_PUBLIC_REACTPRESS_API_URL: https://reactpress-theme-starter.vercel.app/api
-          CLIENT_SITE_URL: https://gaoredu.com
+          REACTPRESS_API_URL: http://127.0.0.1:3010/api
+          NEXT_PUBLIC_REACTPRESS_API_URL: http://127.0.0.1:3010/api
+          CLIENT_SITE_URL: https://example.com
         run: pnpm run build

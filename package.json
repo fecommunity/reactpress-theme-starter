@@ -17,6 +17,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "pnpm run lint:check && pnpm run format:check",
+    "mock:api": "node scripts/mock-api/server.mjs",
     "postinstall": "node scripts/verify-toolkit.mjs"
   },
   "dependencies": {
