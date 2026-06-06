@@ -179,11 +179,11 @@ pnpm start                            # 生产预览
 
 在 GitHub 仓库 **Settings → Secrets and variables → Actions** 添加：
 
-| Secret               | 获取方式 |
-| :------------------- | :------- |
-| `VERCEL_TOKEN`       | [Vercel Account Tokens](https://vercel.com/account/tokens) |
-| `VERCEL_ORG_ID`      | 本地 `vercel link` 后见 `.vercel/project.json` 的 `orgId` |
-| `VERCEL_PROJECT_ID`  | 同上，字段 `projectId` |
+| Secret              | 获取方式                                                   |
+| :------------------ | :--------------------------------------------------------- |
+| `VERCEL_TOKEN`      | [Vercel Account Tokens](https://vercel.com/account/tokens) |
+| `VERCEL_ORG_ID`     | 本地 `vercel link` 后见 `.vercel/project.json` 的 `orgId`  |
+| `VERCEL_PROJECT_ID` | 同上，字段 `projectId`                                     |
 
 本地获取 ID 示例：
 
