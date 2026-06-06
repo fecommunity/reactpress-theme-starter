@@ -2,9 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm run build",
+  "buildCommand": "pnpm run build:mock",
   "env": {
-    "REACTPRESS_API_URL": "https://reactpress-theme-starter.vercel.app/api",
+    "REACTPRESS_MOCK_API": "1",
     "NEXT_PUBLIC_REACTPRESS_API_URL": "/api",
     "CLIENT_SITE_URL": "https://reactpress-theme-starter.vercel.app"
   }

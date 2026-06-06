@@ -55,6 +55,7 @@ export function resolveClientSiteUrl(processEnv = process.env) {
  * @param {NodeJS.ProcessEnv} [processEnv]
  */
 export function resolveThemeApiEnv(processEnv = process.env) {
+  const mockEnabled = processEnv.REACTPRESS_MOCK_API === '1'
   const explicitServer =
     trimApiUrl(processEnv.REACTPRESS_API_URL) || trimApiUrl(processEnv.SERVER_API_URL)
   const explicitPublic = trimApiUrl(processEnv.NEXT_PUBLIC_REACTPRESS_API_URL)
@@ -62,12 +63,19 @@ export function resolveThemeApiEnv(processEnv = process.env) {
 
   let serverApi = explicitServer || explicitPublic || remoteApi || DEFAULT_LOCAL_API
 
-  if (processEnv.VERCEL === '1' && isLocalhostUrl(serverApi)) {
+  // Vercel runtime: SSR should call this deployment's /api mock route handler.
+  if (mockEnabled && processEnv.VERCEL === '1' && !explicitServer) {
+    serverApi = `${resolveClientSiteUrl(processEnv)}/api`
+  }
+
+  if (processEnv.VERCEL === '1' && isLocalhostUrl(serverApi) && !mockEnabled) {
     serverApi = DEFAULT_VERCEL_DEMO_API
   }
 
   let publicApi = explicitPublic
-  if (!publicApi) {
+  if (mockEnabled) {
+    publicApi = explicitPublic || '/api'
+  } else if (!publicApi) {
     if (processEnv.NODE_ENV === 'production' && !isLocalhostUrl(serverApi)) {
       publicApi = '/api'
     } else {

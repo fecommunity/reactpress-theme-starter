@@ -12,6 +12,7 @@
     "dev:mock": "cross-env REACTPRESS_MOCK_API=1 node scripts/dev.mjs",
     "clean": "rm -rf .next .next-dev",
     "build": "cross-env INIT_CWD=$PWD next build",
+    "build:mock": "node scripts/build-mock.mjs",
     "build:ci": "pnpm clean && cross-env INIT_CWD=$PWD next build",
     "start": "cross-env INIT_CWD=$PWD next start -p 3001",
     "lint": "eslint . --fix",
