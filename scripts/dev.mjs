@@ -17,6 +17,11 @@ import {
   resolveDevApiOrigins,
   resolveRemoteThemeApiBase,
 } from './remote-dev.mjs'
+import {
+  DEFAULT_LOCAL_API,
+  DEFAULT_THEME_DEV_PORT,
+  resolveThemeApiEnv as resolveProjectApiEnv,
+} from './resolve-api-env.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.resolve(__dirname, '..')
@@ -29,7 +34,7 @@ const ERROR_MESSAGES = {
 
 function parseArgs(argv) {
   const result = {
-    port: 3001,
+    port: DEFAULT_THEME_DEV_PORT,
     remoteOrigin: undefined,
     adminOrigin: undefined,
     clientOrigin: undefined,
@@ -64,11 +69,11 @@ function parseArgs(argv) {
       continue
     }
     if (arg === '-p' || arg === '--port') {
-      result.port = Number(argv[++i]) || 3001
+      result.port = Number(argv[++i]) || DEFAULT_THEME_DEV_PORT
       continue
     }
     if (arg.startsWith('--port=')) {
-      result.port = Number(arg.slice('--port='.length)) || 3001
+      result.port = Number(arg.slice('--port='.length)) || DEFAULT_THEME_DEV_PORT
       continue
     }
 
@@ -82,7 +87,7 @@ function readLocalApiUrl() {
   const fromEnv =
     process.env.REACTPRESS_API_URL?.trim() ||
     process.env.SERVER_API_URL?.trim() ||
-    'http://localhost:3002/api'
+    DEFAULT_LOCAL_API
   return fromEnv.replace(/\/$/, '')
 }
 
@@ -150,23 +155,35 @@ function resolveThemeApiEnv(cli) {
   }
 }
 
-function buildChildEnv(apiEnv) {
+function buildChildEnv(apiEnv, port) {
+  const projectEnv = resolveProjectApiEnv()
+  const mockEnabled = process.env.REACTPRESS_MOCK_API === '1'
+  const localMockApi = `http://localhost:${port}/api`
+  const serverApiUrl = mockEnabled ? localMockApi : apiEnv.serverApiUrl
+  const publicApiUrl = mockEnabled ? '/api' : apiEnv.publicApiUrl
+
   return {
     ...process.env,
     INIT_CWD: projectRoot,
     REACTPRESS_ORIGINAL_CWD: projectRoot,
-    SERVER_API_URL: apiEnv.serverApiUrl,
-    REACTPRESS_API_URL: apiEnv.serverApiUrl,
-    NEXT_PUBLIC_REACTPRESS_API_URL: apiEnv.publicApiUrl,
+    SERVER_API_URL: serverApiUrl,
+    REACTPRESS_API_URL: serverApiUrl,
+    NEXT_PUBLIC_REACTPRESS_API_URL: publicApiUrl,
+    NEXT_PUBLIC_REACTPRESS_ADMIN_URL: projectEnv.NEXT_PUBLIC_REACTPRESS_ADMIN_URL,
+    CLIENT_SITE_URL: projectEnv.CLIENT_SITE_URL,
+    REACTPRESS_MOCK_API: mockEnabled ? '1' : '',
     NEXT_TELEMETRY_DISABLED: '1',
   }
 }
 
 function printBanner(apiEnv, port) {
+  const mockEnabled = process.env.REACTPRESS_MOCK_API === '1'
   console.log('')
   console.log('  ReactPress Theme Dev')
   console.log(`  Local:  http://localhost:${port}`)
-  if (apiEnv.remoteOrigin) {
+  if (mockEnabled) {
+    console.log(`  API:    /api (mock routes, same-origin in browser)`)
+  } else if (apiEnv.remoteOrigin) {
     console.log(`  API:    ${apiEnv.serverApiUrl} (remote: ${apiEnv.remoteOrigin})`)
   } else {
     console.log(`  API:    ${apiEnv.serverApiUrl} (local)`)
@@ -177,7 +194,7 @@ function printBanner(apiEnv, port) {
 function main() {
   const cli = parseArgs(process.argv.slice(2))
   const apiEnv = resolveThemeApiEnv(cli)
-  const childEnv = buildChildEnv(apiEnv)
+  const childEnv = buildChildEnv(apiEnv, cli.port)
 
   printBanner(apiEnv, cli.port)
 

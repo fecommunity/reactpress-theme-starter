@@ -9,6 +9,8 @@
   },
   "scripts": {
     "dev": "node scripts/dev.mjs",
+    "dev:mock": "cross-env REACTPRESS_MOCK_API=1 node scripts/dev.mjs",
+    "clean": "rm -rf .next",
     "build": "cross-env INIT_CWD=$PWD next build",
     "start": "cross-env INIT_CWD=$PWD next start -p 3001",
     "lint": "eslint . --fix",
@@ -17,8 +19,6 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "pnpm run lint:check && pnpm run format:check",
-    "mock:api": "node scripts/mock-api/server.mjs",
-    "mock:api:generate": "node scripts/mock-api/generate-mockoon-data.mjs",
     "postinstall": "node scripts/verify-toolkit.mjs"
   },
   "dependencies": {
@@ -29,6 +29,7 @@
     "cross-env": "^10.1.0",
     "highlight.js": "^9.18.5",
     "next": "15.5.12",
+    "nprogress": "^0.2.0",
     "postcss": "^8.5.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",

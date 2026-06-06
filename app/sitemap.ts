@@ -1,3 +1,4 @@
+import { getClientSiteUrl } from '@/lib/reactpress/env'
 import { MetadataRoute } from 'next'
 import {
   themeApi,
@@ -9,7 +10,7 @@ import type { IArticle } from '@fecommunity/reactpress-toolkit/types'
 export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = (process.env.CLIENT_SITE_URL || 'http://localhost:3001').replace(/\/$/, '')
+  const siteUrl = getClientSiteUrl()
 
   const staticRoutes = ['', 'blog', 'tags', 'archives', 'search'].map((route) => ({
     url: route ? `${siteUrl}/${route}` : siteUrl,

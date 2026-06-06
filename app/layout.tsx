@@ -7,6 +7,7 @@ import ConditionalSiteFooter from '@/components/layout/ConditionalSiteFooter'
 import PageContainer from '@/components/layout/PageContainer'
 import { loadAppBootstrap } from '@/lib/reactpress/bootstrap'
 import { buildMyBlogAppearanceCss } from '@/lib/reactpress/appearance'
+import { getApiPreconnectOrigin } from '@/lib/reactpress/env'
 import { ReactPressAppProviders } from '@/lib/reactpress/providers'
 import { buildRootMetadata } from '@/lib/reactpress/siteMetadata'
 import { colorModeInitScript } from '@fecommunity/reactpress-toolkit/theme/server'
@@ -28,6 +29,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const bootstrap = await loadAppBootstrap('/')
   const appearanceCss = buildMyBlogAppearanceCss(bootstrap.themeMods)
   const basePath = process.env.BASE_PATH || ''
+  const apiPreconnect = getApiPreconnectOrigin()
 
   return (
     <html lang={bootstrap.initialLocale} suppressHydrationWarning>
@@ -37,7 +39,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             __html: `document.documentElement.setAttribute('data-rp-loading','');`,
           }}
         />
-        <link rel="preconnect" href="https://api.yoursite.com" crossOrigin="anonymous" />
+        {apiPreconnect ? (
+          <link rel="preconnect" href={apiPreconnect} crossOrigin="anonymous" />
+        ) : null}
         <link rel="icon" href={`${basePath}/favicon.ico`} sizes="any" />
         <link rel="icon" type="image/png" sizes="32x32" href={`${basePath}/favicon-32.png`} />
         <link rel="apple-touch-icon" sizes="180x180" href={`${basePath}/apple-touch-icon.png`} />

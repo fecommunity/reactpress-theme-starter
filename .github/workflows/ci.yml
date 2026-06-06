@@ -35,16 +35,17 @@ jobs:
         run: pnpm run typecheck
         continue-on-error: true
 
-      - name: Run Mockoon CLI
-        uses: mockoon/cli-action@v3
-        with:
-          version: latest
-          data-file: ./mockoon-data.json
-          port: 3010
+      - name: Start Next dev with mock API routes
+        env:
+          REACTPRESS_MOCK_API: '1'
+          REACTPRESS_API_URL: http://127.0.0.1:3010/api
+          NEXT_PUBLIC_REACTPRESS_API_URL: http://127.0.0.1:3010/api
+          CLIENT_SITE_URL: https://example.com
+        run: pnpm exec next dev -p 3010 &
 
       - name: Wait for mock API
         run: |
-          for i in $(seq 1 30); do
+          for i in $(seq 1 60); do
             if curl -sf -X POST http://127.0.0.1:3010/api/setting/get > /dev/null; then
               echo "Mock API ready"
               exit 0
@@ -56,6 +57,7 @@ jobs:
 
       - name: Production build
         env:
+          REACTPRESS_MOCK_API: '1'
           REACTPRESS_API_URL: http://127.0.0.1:3010/api
           NEXT_PUBLIC_REACTPRESS_API_URL: http://127.0.0.1:3010/api
           CLIENT_SITE_URL: https://example.com

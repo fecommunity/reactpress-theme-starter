@@ -127,7 +127,7 @@ export default function SiteHeader() {
         return {
           key: `${index}-${menu.label}`,
           href,
-          label: t(menu.path) || menu.name,
+          label: (menu.path ? t(menu.path) : '') || menu.name,
           icon: Icon ? <Icon size={20} /> : null,
         }
       })

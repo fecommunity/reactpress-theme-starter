@@ -1,7 +1,8 @@
+import { getClientSiteUrl } from '@/lib/reactpress/env'
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = (process.env.CLIENT_SITE_URL || 'http://localhost:3001').replace(/\/$/, '')
+  const siteUrl = getClientSiteUrl()
 
   return {
     rules: {

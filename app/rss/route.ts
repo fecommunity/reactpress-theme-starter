@@ -1,4 +1,5 @@
 import { ArticleProvider, CategoryProvider, SettingProvider } from '@/lib/providers/server'
+import { getClientSiteUrl } from '@/lib/reactpress/env'
 
 function escapeXml(value: string) {
   return value
@@ -20,7 +21,7 @@ export async function GET() {
   let setting: Awaited<ReturnType<typeof SettingProvider.getSetting>> = {
     systemTitle: 'Blog',
     seoDesc: 'Blog',
-    systemUrl: 'https://reactpress-theme-starter.vercel.app',
+    systemUrl: getClientSiteUrl(),
   } as Awaited<ReturnType<typeof SettingProvider.getSetting>>
   let categories: Awaited<ReturnType<typeof CategoryProvider.getCategory>> = []
 
@@ -41,7 +42,7 @@ export async function GET() {
     console.error('[my-blog] rss fetch failed', error)
   }
 
-  const siteUrl = setting.systemUrl || 'https://reactpress-theme-starter.vercel.app'
+  const siteUrl = setting.systemUrl || getClientSiteUrl()
   const items = articles
     .map((article) => {
       const categoryLabel =

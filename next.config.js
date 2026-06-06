@@ -51,10 +51,7 @@ module.exports = {
     return webpackConfig
   },
   async rewrites() {
-    return [
-      { source: '/api/:path*', destination: `${apiOrigin}/api/:path*` },
-      { source: '/uploads/:path*', destination: `${apiOrigin}/uploads/:path*` },
-    ]
+    return [{ source: '/uploads/:path*', destination: `${apiOrigin}/uploads/:path*` }]
   },
   async redirects() {
     return [

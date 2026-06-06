@@ -8,10 +8,14 @@ import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import { useCallback, useEffect, useState } from 'react'
 
 interface Tag {
-  id: string | number
+  id?: string | number
   value: string
   label: string
   articleCount?: number
+}
+
+function tagKey(tag: Tag, index: number): string {
+  return String(tag.id ?? tag.value ?? index)
 }
 
 interface TagsWidgetProps {
@@ -76,7 +80,7 @@ export default function TagsWidget({
     tags.length > 0 ? (
       <ul className="m-0 flex list-none flex-wrap gap-2 p-4">
         {tags.map((tag, index) => (
-          <li key={tag.id} className="m-0 p-0">
+          <li key={tagKey(tag, index)} className="m-0 p-0">
             <Link
               href={`/tag/${tag.value}`}
               aria-label={tag.label}
@@ -116,7 +120,7 @@ export default function TagsWidget({
               >
                 {tags.map((tag, index) => (
                   <a
-                    key={tag.id}
+                    key={tagKey(tag, index)}
                     href={`/tag/${tag.value}`}
                     tabIndex={-1}
                     aria-hidden
@@ -134,8 +138,8 @@ export default function TagsWidget({
           </div>
           <nav aria-label={t('tagTitle')} className="sr-only">
             <ul>
-              {tags.map((tag) => (
-                <li key={tag.id}>
+              {tags.map((tag, index) => (
+                <li key={tagKey(tag, index)}>
                   <Link href={`/tag/${tag.value}`}>{tag.label}</Link>
                 </li>
               ))}

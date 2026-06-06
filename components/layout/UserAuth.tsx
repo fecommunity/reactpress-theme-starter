@@ -1,5 +1,6 @@
 'use client'
 
+import { getAdminBaseUrl } from '@/lib/reactpress/env'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import { resolveImageUrl, useSiteUser } from '@fecommunity/reactpress-toolkit/theme'
 import { useState } from 'react'
@@ -8,7 +9,7 @@ function resolveAdminHref(): string {
   const configured = process.env.NEXT_PUBLIC_REACTPRESS_ADMIN_URL?.trim()
   if (configured) return configured.endsWith('/') ? configured : `${configured}/`
   if (typeof window !== 'undefined') return `${window.location.origin}/admin/`
-  return 'http://localhost/admin/'
+  return `${getAdminBaseUrl()}/`
 }
 
 function resolveAdminAuthHref(path: 'login' | 'register'): string {
