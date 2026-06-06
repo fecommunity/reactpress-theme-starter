@@ -1,13 +1,13 @@
 const path = require('path')
 const { config } = require('@fecommunity/reactpress-toolkit/config')
-const { resolveThemeNextEnv } = require('@fecommunity/reactpress-toolkit/theme/next-config')
+const { resolveThemeApiEnv, resolveApiRewriteOrigin } = require('./scripts/resolve-api-env.mjs')
 
 // App Router (Next 15): do not use createReactPressNextConfig's react webpack alias —
 // it conflicts with Next's compiled React and causes SSR "useContext" null errors.
 // Server code imports `@fecommunity/reactpress-toolkit/theme/server` (no UI barrel).
 
-const themeApiEnv = resolveThemeNextEnv()
-const apiOrigin = themeApiEnv.SERVER_API_URL.replace(/\/api\/?$/, '')
+const themeApiEnv = resolveThemeApiEnv()
+const apiOrigin = resolveApiRewriteOrigin(themeApiEnv)
 
 const basePath = process.env.BASE_PATH || undefined
 const output = process.env.EXPORT ? 'export' : undefined
