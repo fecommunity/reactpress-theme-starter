@@ -37,7 +37,7 @@ jobs:
 
       - name: Production build
         env:
-          REACTPRESS_API_URL: https://api.example.com/api
-          NEXT_PUBLIC_REACTPRESS_API_URL: https://api.example.com/api
-          CLIENT_SITE_URL: https://example.com
+          REACTPRESS_API_URL: https://reactpress-theme-starter.vercel.app/api
+          NEXT_PUBLIC_REACTPRESS_API_URL: https://reactpress-theme-starter.vercel.app/api
+          CLIENT_SITE_URL: https://gaoredu.com
         run: pnpm run build
