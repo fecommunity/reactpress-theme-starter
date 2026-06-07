@@ -420,6 +420,45 @@ export const mockArchives = {
   },
 }
 
+export const mockKnowledgeChapters = [
+  {
+    id: 'api-overview',
+    parentId: 'reactpress-docs',
+    order: 0,
+    title: 'API Overview',
+    cover: '',
+    summary: 'How the ReactPress REST API is structured.',
+    content: 'API overview for theme developers.',
+    html: '<p>Learn the core endpoints for articles, pages, settings, and media.</p>',
+    toc: '',
+    status: 'publish',
+    views: 18,
+    likes: 0,
+    isCommentable: false,
+    publishAt: daysAgo(20),
+    createAt: daysAgo(20),
+    updateAt: daysAgo(20),
+  },
+  {
+    id: 'theme-manifest',
+    parentId: 'reactpress-docs',
+    order: 1,
+    title: 'Theme Manifest',
+    cover: '',
+    summary: 'Configure routes and appearance via theme.json.',
+    content: 'Theme manifest guide.',
+    html: '<p>Map templates to App Router files and declare appearance controls.</p>',
+    toc: '',
+    status: 'publish',
+    views: 12,
+    likes: 0,
+    isCommentable: false,
+    publishAt: daysAgo(15),
+    createAt: daysAgo(15),
+    updateAt: daysAgo(15),
+  },
+]
+
 export const mockKnowledgeBooks = [
   {
     id: 'reactpress-docs',
@@ -438,8 +477,23 @@ export const mockKnowledgeBooks = [
     publishAt: daysAgo(30),
     createAt: daysAgo(30),
     updateAt: daysAgo(30),
+    children: mockKnowledgeChapters,
   },
 ]
+
+export const mockKnowledgeItems = [...mockKnowledgeBooks, ...mockKnowledgeChapters]
+
+export function getMockKnowledgeById(id: string) {
+  const item = mockKnowledgeItems.find((entry) => entry.id === id)
+  if (!item) return mockKnowledgeBooks[0] ?? null
+  if (!item.parentId) {
+    return {
+      ...item,
+      children: mockKnowledgeChapters.filter((chapter) => chapter.parentId === item.id),
+    }
+  }
+  return item
+}
 
 export function getMockArticleById(id: string) {
   return mockArticles.find((article) => article.id === id) ?? mockArticles[0]

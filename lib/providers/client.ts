@@ -1,5 +1,6 @@
 import { createThemeHttpStack } from '@fecommunity/reactpress-toolkit/theme'
 import { normalizeList, normalizePaginated } from '@/lib/reactpress/normalizeApiResponse'
+import { materializeProvider } from '@/lib/providers/materializeProvider'
 
 const stack = createThemeHttpStack({
   onError: (msg) => {
@@ -12,29 +13,38 @@ const stack = createThemeHttpStack({
 export const { CommentProvider, UserProvider, SettingProvider } = stack
 
 export const ArticleProvider = {
-  ...stack.ArticleProvider,
-  getArticles: (params) => stack.ArticleProvider.getArticles(params).then(normalizePaginated),
-  getArticlesByCategory: (category, params) =>
-    stack.ArticleProvider.getArticlesByCategory(category, params).then(normalizePaginated),
-  getArticlesByTag: (tag, params) =>
-    stack.ArticleProvider.getArticlesByTag(tag, params).then(normalizePaginated),
-  getRecommend: (articleId?: string | null, pageSize?: number) =>
-    stack.ArticleProvider.getRecommend(articleId, pageSize).then(normalizeList),
+  ...materializeProvider(stack.ArticleProvider),
+  getArticles: (params: Parameters<typeof stack.ArticleProvider.getArticles>[0]) =>
+    stack.ArticleProvider.getArticles(params).then(normalizePaginated),
+  getArticlesByCategory: (
+    category: Parameters<typeof stack.ArticleProvider.getArticlesByCategory>[0],
+    params: Parameters<typeof stack.ArticleProvider.getArticlesByCategory>[1]
+  ) => stack.ArticleProvider.getArticlesByCategory(category, params).then(normalizePaginated),
+  getArticlesByTag: (
+    tag: Parameters<typeof stack.ArticleProvider.getArticlesByTag>[0],
+    params: Parameters<typeof stack.ArticleProvider.getArticlesByTag>[1]
+  ) => stack.ArticleProvider.getArticlesByTag(tag, params).then(normalizePaginated),
+  getRecommend: (
+    articleId?: Parameters<typeof stack.ArticleProvider.getRecommend>[0],
+    pageSize?: Parameters<typeof stack.ArticleProvider.getRecommend>[1]
+  ) => stack.ArticleProvider.getRecommend(articleId, pageSize).then(normalizeList),
   getAllRecommendArticles: () =>
     stack.ArticleProvider.getAllRecommendArticles().then(normalizeList),
-}
+} as typeof stack.ArticleProvider
 
 export const SearchProvider = {
-  ...stack.SearchProvider,
-  searchArticles: (keyword) => stack.SearchProvider.searchArticles(keyword).then(normalizeList),
-}
+  ...materializeProvider(stack.SearchProvider),
+  searchArticles: (keyword: string) =>
+    stack.SearchProvider.searchArticles(keyword).then(normalizeList),
+} as typeof stack.SearchProvider
 
 export const PageProvider = {
-  ...stack.PageProvider,
+  ...materializeProvider(stack.PageProvider),
   getAllPublisedPages: () => stack.PageProvider.getAllPublisedPages().then(normalizePaginated),
-}
+} as typeof stack.PageProvider
 
 export const KnowledgeProvider = {
-  ...stack.KnowledgeProvider,
-  getKnowledges: (params) => stack.KnowledgeProvider.getKnowledges(params).then(normalizePaginated),
-}
+  ...materializeProvider(stack.KnowledgeProvider),
+  getKnowledges: (params: Parameters<typeof stack.KnowledgeProvider.getKnowledges>[0]) =>
+    stack.KnowledgeProvider.getKnowledges(params).then(normalizePaginated),
+} as typeof stack.KnowledgeProvider
