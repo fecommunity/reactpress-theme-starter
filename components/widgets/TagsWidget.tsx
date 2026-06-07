@@ -100,7 +100,7 @@ export default function TagsWidget({
 
   return (
     <div
-      className={`rp-widget-panel rp-sidebar-widget mb-5 overflow-hidden rounded-xl bg-[var(--bg-box)] leading-snug shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5${useTagCloud ? ' rp-sidebar-widget--cloud' : ' rp-sidebar-widget--compact'}`}
+      className={`rp-widget-panel rp-sidebar-widget mb-5 overflow-hidden rounded-xl bg-[var(--bg-box)] leading-snug shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5${useTagCloud ? 'rp-sidebar-widget--cloud' : 'rp-sidebar-widget--compact'}`}
     >
       {needTitle ? (
         <div className="rp-sidebar-widget__header">

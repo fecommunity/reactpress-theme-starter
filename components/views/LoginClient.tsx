@@ -68,11 +68,7 @@ export default function LoginClient({ code = '', from = '/' }: LoginClientProps)
     return (
       <div className="rp-auth-page">
         <div className="rp-auth-card rp-auth-card--loading">
-          <div
-            className="rp-auth-spinner"
-            role="status"
-            aria-label={t('logingWithGithub')}
-          />
+          <div className="rp-auth-spinner" role="status" aria-label={t('logingWithGithub')} />
           <p className="rp-auth-loading-text">{t('logingWithGithub')}</p>
           <p className="rp-auth-loading-subtext">{setting.systemTitle}</p>
         </div>

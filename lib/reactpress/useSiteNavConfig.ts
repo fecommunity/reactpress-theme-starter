@@ -17,10 +17,7 @@ export function useSiteNavConfig(initialNav?: Partial<SiteNavBlocks>) {
   }))
 
   useEffect(() => {
-    if (
-      skipInitialFetchRef.current &&
-      locale === initialLocaleRef.current
-    ) {
+    if (skipInitialFetchRef.current && locale === initialLocaleRef.current) {
       skipInitialFetchRef.current = false
       return
     }

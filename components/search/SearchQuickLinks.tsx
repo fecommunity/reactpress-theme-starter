@@ -125,7 +125,7 @@ function SiteIcon({ child }: { child: NavChild }) {
           height={34}
           loading="lazy"
           decoding="async"
-          className={`rp-nav-portal__site-img${loaded ? ' is-visible' : ''}`}
+          className={`rp-nav-portal__site-img${loaded ? 'is-visible' : ''}`}
           onLoad={() => setLoaded(true)}
           onError={handleError}
         />
@@ -268,7 +268,7 @@ export default function SearchQuickLinks({ dataSource = [] }: SearchQuickLinksPr
                   .join(' ')}
               >
                 <header
-                  className={`rp-nav-portal__section-head${showTabs ? ' rp-nav-portal__section-head--compact' : ''}`}
+                  className={`rp-nav-portal__section-head${showTabs ? 'rp-nav-portal__section-head--compact' : ''}`}
                 >
                   <Icon size={16} className="rp-nav-portal__section-icon" />
                   <h3 className="rp-nav-portal__section-title">{group.label}</h3>

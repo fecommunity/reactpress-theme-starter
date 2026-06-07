@@ -99,7 +99,7 @@ export default function ArticleCarousel({ articles = [] }: ArticleCarouselProps)
 
   return (
     <section
-      className={`rp-carousel group/carousel relative isolate overflow-hidden rounded-xl bg-[var(--bg-second)] shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5${paused ? ' is-paused' : ''}`}
+      className={`rp-carousel group/carousel relative isolate overflow-hidden rounded-xl bg-[var(--bg-second)] shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5${paused ? 'is-paused' : ''}`}
       aria-roledescription="carousel"
       aria-label={t('recommendToReading')}
       style={{ '--rp-autoplay-ms': `${AUTOPLAY_MS}ms` } as CSSProperties}

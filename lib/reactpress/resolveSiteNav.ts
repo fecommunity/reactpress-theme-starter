@@ -43,8 +43,7 @@ export function resolveSiteNavConfig(
 
   return {
     urlConfig: themeNav?.urlConfig ?? legacy?.urlConfig ?? [],
-    searchCategories:
-      themeNav?.searchCategories ?? legacy?.navConfig ?? EMPTY_NAV.searchCategories,
+    searchCategories: themeNav?.searchCategories ?? legacy?.navConfig ?? EMPTY_NAV.searchCategories,
   }
 }
 

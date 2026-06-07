@@ -39,10 +39,7 @@ export default function CmsPageClient({ page }: CmsPageClientProps) {
                 <p className="rp-article-lead">{heroSubtitle}</p>
               </header>
               <div className="rp-article-body">
-                <ReadingContent
-                  key={locale}
-                  content={getSuggestionsPageHtml(locale, page.html)}
-                />
+                <ReadingContent key={locale} content={getSuggestionsPageHtml(locale, page.html)} />
               </div>
             </div>
           </article>

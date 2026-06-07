@@ -100,8 +100,12 @@ export function getTagStyle(backgroundColor: string): { backgroundColor: string;
       contrastBetween(backgroundColor, '#ffffff'),
       contrastBetween(backgroundColor, '#1a1a1a')
     )
-    const whiteDelta = Math.abs(contrastBetween(whitePath.backgroundColor, '#ffffff') - originalContrast)
-    const blackDelta = Math.abs(contrastBetween(blackPath.backgroundColor, '#1a1a1a') - originalContrast)
+    const whiteDelta = Math.abs(
+      contrastBetween(whitePath.backgroundColor, '#ffffff') - originalContrast
+    )
+    const blackDelta = Math.abs(
+      contrastBetween(blackPath.backgroundColor, '#1a1a1a') - originalContrast
+    )
     return whiteDelta <= blackDelta ? whitePath : blackPath
   }
 

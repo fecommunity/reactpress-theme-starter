@@ -1,8 +1,4 @@
-import {
-  mockAuthGithub,
-  mockAuthLogin,
-  mockAuthRegister,
-} from './auth'
+import { mockAuthGithub, mockAuthLogin, mockAuthRegister } from './auth'
 import {
   filterMockArticlesByCategory,
   filterMockArticlesByTag,

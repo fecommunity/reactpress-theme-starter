@@ -234,7 +234,7 @@ function RecommendInlineScroller({ articles }: { articles: RecommendArticle[] })
 
   return (
     <div
-      className={`rp-recommend-scroll rp-recommend-fade-in${paused ? ' is-paused' : ''}`}
+      className={`rp-recommend-scroll rp-recommend-fade-in${paused ? 'is-paused' : ''}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -244,12 +244,9 @@ function RecommendInlineScroller({ articles }: { articles: RecommendArticle[] })
         }
       }}
     >
-      <div
-        className={`rp-recommend-scroll-viewport${moving ? ' is-moving' : ''}`}
-        aria-live="off"
-      >
+      <div className={`rp-recommend-scroll-viewport${moving ? 'is-moving' : ''}`} aria-live="off">
         <ul
-          className={`rp-recommend-list rp-recommend-scroll-track m-0 list-none ${instant ? 'is-instant' : ''}${moving ? ' is-moving' : ''}`}
+          className={`rp-recommend-list rp-recommend-scroll-track m-0 list-none ${instant ? 'is-instant' : ''}${moving ? 'is-moving' : ''}`}
           style={{ transform: `translate3d(0, ${trackY}px, 0)` }}
           onTransitionEnd={handleTrackTransitionEnd}
         >
