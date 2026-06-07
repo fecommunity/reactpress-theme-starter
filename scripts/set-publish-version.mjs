@@ -14,14 +14,18 @@ if (!version || !/^\d+\.\d+\.\d+(-[\w.]+)?$/.test(version)) {
   process.exit(1)
 }
 
-const pkgPath = path.join(root, 'package.json')
-const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))
-pkg.version = version
-fs.writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`)
+const VERSION_RE = /("version"\s*:\s*")[^"]+(")/
 
-const themePath = path.join(root, 'theme.json')
-const theme = JSON.parse(fs.readFileSync(themePath, 'utf8'))
-theme.version = version
-fs.writeFileSync(themePath, `${JSON.stringify(theme, null, 2)}\n`)
+function setFileVersion(filePath) {
+  const content = fs.readFileSync(filePath, 'utf8')
+  if (!VERSION_RE.test(content)) {
+    console.error(`Could not find version field in ${filePath}`)
+    process.exit(1)
+  }
+  fs.writeFileSync(filePath, content.replace(VERSION_RE, `$1${version}$2`))
+}
+
+setFileVersion(path.join(root, 'package.json'))
+setFileVersion(path.join(root, 'theme.json'))
 
 console.log(`[set-publish-version] ${version}`)

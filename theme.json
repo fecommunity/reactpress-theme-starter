@@ -7,19 +7,12 @@
   "author": "ReactPress",
   "authorUri": "https://reactpress.surge.sh/",
   "themeUri": "https://github.com/fecommunity/reactpress-theme-starter",
-  "tags": [
-    "博客",
-    "Tailwind",
-    "App Router",
-    "ReactPress"
-  ],
+  "tags": ["博客", "Tailwind", "App Router", "ReactPress"],
   "cover": "public/logo-400.png",
   "requires": ">=3.0.0",
   "supports": {
     "darkMode": true,
-    "menus": [
-      "primary"
-    ]
+    "menus": ["primary"]
   },
   "templates": {
     "404": "app/not-found.tsx",
