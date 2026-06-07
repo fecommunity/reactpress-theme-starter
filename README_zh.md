@@ -6,6 +6,18 @@
 
 > 本仓库是 **Theme（主题）**，不是完整的 CMS。你需要一个正在运行的 ReactPress API，或使用内置 **Mock 模式**离线预览。
 
+### 预览（Mock 模式）
+
+运行 `pnpm dev:mock` 可浏览以**技术架构**为主题的示例文章，并查看浅色宣传图：
+
+| 主题 | 海报 |
+| :--- | :--- |
+| 技术架构概览 | ![架构概览](/public/promo/hero-architecture.png) |
+| 架构分层 | ![架构分层](/public/promo/architecture-stack.png) |
+| Theme Starter | ![Theme Starter](/public/promo/theme-starter.png) |
+
+宣传素材位于 [`public/promo/`](./public/promo/)，统一深色科技风，Logo 为 React 原子环 + 中心 **P**（无圆圈包裹），官网为 **reactpress.surge.sh**。
+
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8)](https://tailwindcss.com/)

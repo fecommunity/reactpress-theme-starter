@@ -6,6 +6,18 @@ Official **[ReactPress](https://github.com/fecommunity/reactpress)** visitor the
 
 > This repo is a **theme**, not a full CMS. You need a running ReactPress API, or use built-in **mock mode** for offline preview.
 
+### Preview (mock mode)
+
+Run `pnpm dev:mock` to browse architecture-focused sample articles with light-themed promo assets:
+
+| Topic | Poster |
+| :--- | :--- |
+| Technical architecture | ![Architecture overview](/public/promo/hero-architecture.png) |
+| Architecture stack | ![Architecture stack](/public/promo/architecture-stack.png) |
+| Theme Starter | ![Theme Starter](/public/promo/theme-starter.png) |
+
+All posters live under [`public/promo/`](./public/promo/) — dark tech style with ReactPress atom logo (letter **P** without circle), **reactpress.surge.sh** as the official site.
+
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8)](https://tailwindcss.com/)
