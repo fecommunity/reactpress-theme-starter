@@ -25,8 +25,32 @@ A lightweight, simple, and easy-to-use Next.js theme, powered by [ReactPress](ht
 <img src="https://img.shields.io/badge/Tailwind_4-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4" />
 <img src="https://img.shields.io/badge/TypeScript-0074c1?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
 <img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square" alt="MIT License" />
+<a href="https://github.com/fecommunity/reactpress-theme-starter/stargazers">
+  <img src="https://img.shields.io/github/stars/fecommunity/reactpress-theme-starter?style=flat-square&logo=github" alt="GitHub stars" />
+</a>
+
+<br />
+
+**If this project helps you, a ⭐ on GitHub helps others discover it.**
 
 </div>
+
+---
+
+## Try in 60 seconds (no backend)
+
+Preview the full theme UI with built-in sample data — no ReactPress install required:
+
+```bash
+git clone https://github.com/fecommunity/reactpress-theme-starter.git
+cd reactpress-theme-starter
+pnpm install
+pnpm dev:mock
+```
+
+Open **http://localhost:3001** — same mode as the [live demo](https://reactpress-theme-starter.vercel.app).
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/fecommunity/reactpress-theme-starter)
 
 ---
 
@@ -41,6 +65,15 @@ ReactPress API  ──REST──▶  Theme Starter (Next.js)  ──▶  Public 
 **Stack:** Next.js 15 · React 19 · Tailwind CSS 4 · Node.js 20+ · pnpm 9
 
 **Includes:** articles, archives, search, CMS pages, knowledge base, comments, light/dark mode, RSS/sitemap, and an optional embedded mock API for offline development.
+
+### Why this theme?
+
+|                           | ReactPress Theme Starter                                                 | Generic Next.js blog template |
+| :------------------------ | :----------------------------------------------------------------------- | :---------------------------- |
+| CMS & admin               | ✅ [ReactPress](https://github.com/fecommunity/reactpress) backend + CLI | ❌ Build or wire your own     |
+| Try without backend       | ✅ `pnpm dev:mock`                                                       | ❌ Usually needs content/API  |
+| Knowledge base & comments | ✅ Built-in                                                              | ❌ Roll your own              |
+| Customizable appearance   | ✅ Admin console + `theme.json`                                          | ❌ Hard-coded or manual       |
 
 ---
 
@@ -104,7 +137,7 @@ Open **http://localhost:3001** — sample data comes from [`lib/mock-api/data.ts
 
 | Command              | Purpose                                                       |
 | :------------------- | :------------------------------------------------------------ |
-| `pnpm dev`           | Theme dev server + live ReactPress API (CLI or remote)          |
+| `pnpm dev`           | Theme dev server + live ReactPress API (CLI or remote)        |
 | `pnpm dev:mock`      | Theme dev server + built-in mock API (no backend)             |
 | `pnpm build:mock`    | Production build with mock data (Vercel demo / offline build) |
 | `pnpm build`         | Production build (API must be reachable at build time)        |
@@ -135,13 +168,7 @@ See `.env.example` for optional variables (subpath deploy, GitHub OAuth, remote 
 
 ### Demo (Vercel)
 
-Import this repo as-is — [`vercel.json`](./vercel.json) uses `build:mock` with mock data.
-
-<div align="center">
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/fecommunity/reactpress-theme-starter)
-
-</div>
+Import this repo as-is — [`vercel.json`](./vercel.json) uses `build:mock` with mock data. See [Try in 60 seconds](#try-in-60-seconds-no-backend) for the one-click deploy button.
 
 > The [live demo](https://reactpress-theme-starter.vercel.app) runs in mock mode (UI + sample data only).
 
@@ -168,6 +195,49 @@ theme.json     Theme manifest (routes, appearance schema)
 ```
 
 Route templates are declared in [`theme.json`](./theme.json). Appearance (colors, logo, navigation) is configured in the ReactPress admin console.
+
+---
+
+## FAQ
+
+<details>
+<summary><strong>Do I need ReactPress to preview the theme?</strong></summary>
+
+No. Run `pnpm dev:mock` for a full UI preview with sample data. Install [ReactPress CLI](https://reactpress.surge.sh/) when you want a real CMS, admin panel, and API.
+
+</details>
+
+<details>
+<summary><strong>How is this different from WordPress or Ghost themes?</strong></summary>
+
+This is a **headless frontend** — content lives in ReactPress (REST API + admin). You deploy the Next.js theme separately and point it at your API. See [ReactPress docs](https://reactpress.surge.sh/) for the full stack.
+
+</details>
+
+<details>
+<summary><strong>Can I use my own Next.js components or fork the theme?</strong></summary>
+
+Yes. MIT licensed. Customize components under `app/` and `components/`, or declare routes in [`theme.json`](./theme.json). Pull requests welcome — see [Contributing](./CONTRIBUTING.md).
+
+</details>
+
+<details>
+<summary><strong>Where do I report bugs in the CMS or CLI?</strong></summary>
+
+Theme issues → [this repo](https://github.com/fecommunity/reactpress-theme-starter/issues). Core ReactPress (API, admin, CLI) → [fecommunity/reactpress](https://github.com/fecommunity/reactpress/issues).
+
+</details>
+
+---
+
+## Community
+
+| Channel         | Link                                                                                      |
+| :-------------- | :---------------------------------------------------------------------------------------- |
+| Q&A & showcase  | [GitHub Discussions](https://github.com/fecommunity/reactpress-theme-starter/discussions) |
+| Bug reports     | [Issues](https://github.com/fecommunity/reactpress-theme-starter/issues)                  |
+| ReactPress core | [github.com/fecommunity/reactpress](https://github.com/fecommunity/reactpress)            |
+| Documentation   | [reactpress.surge.sh](https://reactpress.surge.sh/)                                       |
 
 ---
 

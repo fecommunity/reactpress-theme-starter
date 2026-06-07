@@ -1,0 +1,78 @@
+name: Bug Report
+description: Something is broken or not working as documented
+title: '[Bug]: '
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please include enough detail so we can reproduce the issue.
+        For questions or setup help, use [GitHub Discussions](https://github.com/fecommunity/reactpress-theme-starter/discussions) instead.
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Which mode?
+      options:
+        - dev:mock (no backend)
+        - pnpm dev (live ReactPress API)
+        - pnpm build / build:mock
+        - Production deployment
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Clear description of the bug
+      placeholder: When I run pnpm dev:mock, the search page returns 500...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Commands and actions from a clean clone
+      placeholder: |
+        1. git clone ...
+        2. pnpm install
+        3. pnpm dev:mock
+        4. Open /search/
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Theme version or commit
+      placeholder: v1.0.0 or abc1234
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Node.js, pnpm, browser
+      placeholder: |
+        OS: macOS 15
+        Node: 20.11.0
+        pnpm: 9.15.9
+        Browser: Chrome 131
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or screenshots
+      description: Terminal output, browser console, or screenshots
+      render: shell

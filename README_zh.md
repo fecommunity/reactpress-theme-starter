@@ -102,15 +102,15 @@ pnpm dev:mock
 
 ## 常用命令
 
-| 命令                 | 说明                                           |
-| :------------------- | :--------------------------------------------- |
-| `pnpm dev`           | 主题开发服务器 + 真实 API（CLI 或远程）        |
-| `pnpm dev:mock`      | 主题开发服务器 + 内置 Mock API（无需后台）     |
-| `pnpm build:mock`    | Mock 数据生产构建（Vercel 演示 / 离线构建）    |
-| `pnpm build`         | 生产构建（构建时需能访问 API）                 |
-| `pnpm start`         | 启动生产服务，端口 **3001**                    |
-| `pnpm run check`     | ESLint + Prettier                              |
-| `pnpm run typecheck` | TypeScript 类型检查                            |
+| 命令                 | 说明                                        |
+| :------------------- | :------------------------------------------ |
+| `pnpm dev`           | 主题开发服务器 + 真实 API（CLI 或远程）     |
+| `pnpm dev:mock`      | 主题开发服务器 + 内置 Mock API（无需后台）  |
+| `pnpm build:mock`    | Mock 数据生产构建（Vercel 演示 / 离线构建） |
+| `pnpm build`         | 生产构建（构建时需能访问 API）              |
+| `pnpm start`         | 启动生产服务，端口 **3001**                 |
+| `pnpm run check`     | ESLint + Prettier                           |
+| `pnpm run typecheck` | TypeScript 类型检查                         |
 
 全栈本地开发（访客站 + 管理后台 + API）请优先使用 ReactPress CLI 的 **`reactpress dev`** — 见 [快速开始](#快速开始)。
 

@@ -1,0 +1,42 @@
+name: Feature Request
+description: Suggest an idea for the theme
+title: '[Feature]: '
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Feature requests are welcome. For large changes (new routes, breaking API assumptions),
+        please describe the problem first — we may suggest opening a discussion before implementation.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What problem does this solve? Who benefits?
+      placeholder: I want to customize the archive page layout without forking the whole theme...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How would you like this to work?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workarounds or other approaches you tried?
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: This affects theme.json / appearance schema
+        - label: This requires changes in @fecommunity/reactpress-toolkit
+        - label: I am willing to submit a PR

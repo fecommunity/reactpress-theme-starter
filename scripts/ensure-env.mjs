@@ -92,7 +92,8 @@ export function ensureEnvFile(root = projectRoot, options = {}) {
   return envPath
 }
 
-const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+const isDirectRun =
+  process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 
 if (isDirectRun) {
   ensureEnvFile(projectRoot, { onlyIfMissing: true })

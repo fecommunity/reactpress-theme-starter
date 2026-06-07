@@ -94,6 +94,7 @@ This project follows the [Contributor Covenant](./CODE_OF_CONDUCT.md). By partic
 
 ## Questions
 
+- [GitHub Discussions (Q&A)](https://github.com/fecommunity/reactpress-theme-starter/discussions/categories/q-a)
 - [ReactPress documentation](https://reactpress.surge.sh/)
 - [ReactPress repository](https://github.com/fecommunity/reactpress)
-- [GitHub Discussions / Issues](https://github.com/fecommunity/reactpress-theme-starter/issues)
+- [Bug reports & features](https://github.com/fecommunity/reactpress-theme-starter/issues)
