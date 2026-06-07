@@ -228,11 +228,7 @@ export default function ArticleCarousel({ articles = [] }: ArticleCarouselProps)
           </div>
 
           <div className="rp-carousel-progress-track absolute right-0 bottom-0 left-0 z-20">
-            {paused ? (
-              <div className="h-full w-full bg-white/45" aria-hidden />
-            ) : (
-              <div key={progressKey} className="rp-carousel-progress-bar w-full" aria-hidden />
-            )}
+            <div key={progressKey} className="rp-carousel-progress-meteor" aria-hidden />
           </div>
         </>
       ) : null}

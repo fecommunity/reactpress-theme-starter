@@ -1649,16 +1649,63 @@ html[data-rp-loading]::before {
   text-shadow: 0 1px 3px rgb(0 0 0 / 45%);
 }
 
-.rp-carousel-progress-track {
-  height: 2px;
-  background: rgb(255 255 255 / 18%);
+@keyframes rp-carousel-meteor {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(400%);
+  }
 }
 
-.rp-carousel-progress-bar {
+.rp-carousel-progress-track {
+  position: relative;
+  height: 3px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 10%);
+}
+
+.rp-carousel-progress-meteor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 28%;
   height: 100%;
-  background: rgb(255 255 255 / 92%);
-  transform-origin: left center;
-  animation: rp-dot-progress var(--rp-autoplay-ms, 5s) linear forwards;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    color-mix(in srgb, var(--primary-color) 18%, transparent) 30%,
+    color-mix(in srgb, var(--primary-color) 55%, rgb(255 255 255 / 55%)) 68%,
+    color-mix(in srgb, var(--primary-color) 88%, rgb(255 255 255 / 92%)) 88%,
+    #fff 100%
+  );
+  border-radius: 0 9999px 9999px 0;
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--primary-color) 55%, transparent),
+    0 0 22px color-mix(in srgb, var(--primary-color) 28%, transparent);
+  transform: translateX(-100%);
+  animation: rp-carousel-meteor var(--rp-autoplay-ms, 5s) linear forwards;
+  will-change: transform;
+}
+
+.rp-carousel-progress-meteor::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(40%, -50%);
+  box-shadow:
+    0 0 4px 1px rgb(255 255 255 / 95%),
+    0 0 10px 3px color-mix(in srgb, var(--primary-color) 75%, transparent);
+}
+
+.rp-carousel.is-paused .rp-carousel-progress-meteor {
+  animation-play-state: paused;
 }
 
 .rp-carousel-dot {
@@ -3055,7 +3102,7 @@ html[data-rp-loading]::before {
   .rp-carousel-text-enter,
   .rp-carousel-slide,
   .rp-carousel-dot-progress,
-  .rp-carousel-progress-bar,
+  .rp-carousel-progress-meteor,
   .rp-recommend-fade-in,
   .rp-mobile-drawer,
   .rp-mobile-backdrop,
