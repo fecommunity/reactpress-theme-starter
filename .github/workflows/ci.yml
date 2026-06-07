@@ -39,6 +39,7 @@ jobs:
     needs: check
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    environment: NPM_TOKEN
     permissions:
       contents: read
     steps:
@@ -49,7 +50,7 @@ jobs:
         run: |
           if [ -z "${NPM_TOKEN}" ]; then
             echo "configured=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::NPM_TOKEN is not configured. Skipping npm publish. Add it in Settings → Secrets → Actions."
+            echo "::warning::NPM_TOKEN is not configured. Skipping npm publish. Add a Repository secret or Environment secret named NPM_TOKEN."
           else
             echo "configured=true" >> "$GITHUB_OUTPUT"
           fi
