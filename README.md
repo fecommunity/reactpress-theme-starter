@@ -102,22 +102,22 @@ Built on Next.js 15 App Router with server rendering, static generation, and min
 
 </div>
 
-| Category        | Score  |
-| :-------------- | :----- |
-| Performance     | **95** |
-| Accessibility   | **100** |
-| Best Practices  | **100** |
-| SEO             | **100** |
+| Category       | Score   |
+| :------------- | :------ |
+| Performance    | **95**  |
+| Accessibility  | **100** |
+| Best Practices | **100** |
+| SEO            | **100** |
 
 **Core Web Vitals** (homepage audit on the [live demo](https://reactpress-theme-starter.vercel.app)):
 
-| Metric                         | Result   |
-| :----------------------------- | :------- |
-| First Contentful Paint (FCP)   | **0.4 s** |
-| Largest Contentful Paint (LCP) | **1.0 s** |
+| Metric                         | Result     |
+| :----------------------------- | :--------- |
+| First Contentful Paint (FCP)   | **0.4 s**  |
+| Largest Contentful Paint (LCP) | **1.0 s**  |
 | Total Blocking Time (TBT)      | **150 ms** |
-| Cumulative Layout Shift (CLS)  | **0**    |
-| Speed Index                    | **1.1 s** |
+| Cumulative Layout Shift (CLS)  | **0**      |
+| Speed Index                    | **1.1 s**  |
 
 **Why it feels fast:**
 
