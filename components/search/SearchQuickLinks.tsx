@@ -24,10 +24,44 @@ interface SearchQuickLinksProps {
   dataSource?: NavGroup[]
 }
 
-function getIconUrl(item: { icon?: string; url?: string }) {
-  if (item?.icon?.trim()) return item.icon.trim()
-  if (item?.url) return `${item.url.replace(/\/$/, '')}/favicon.ico`
-  return ''
+function getHostname(url?: string) {
+  if (!url?.trim()) return ''
+  try {
+    return new URL(url.trim()).hostname
+  } catch {
+    return ''
+  }
+}
+
+function getSiteFaviconUrl(url?: string) {
+  if (!url?.trim()) return ''
+  try {
+    return `${new URL(url.trim()).origin}/favicon.ico`
+  } catch {
+    return ''
+  }
+}
+
+function getGoogleFaviconUrl(url?: string) {
+  const host = getHostname(url)
+  if (!host) return ''
+  return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=64`
+}
+
+function getIconSources(item: { icon?: string; url?: string }) {
+  if (item?.icon?.trim()) {
+    return { primary: item.icon.trim(), fallback: '' }
+  }
+  return {
+    primary: getSiteFaviconUrl(item?.url),
+    fallback: getGoogleFaviconUrl(item?.url),
+  }
+}
+
+function getInitial(label: string) {
+  const trimmed = label.trim()
+  if (!trimmed) return '?'
+  return trimmed.charAt(0).toUpperCase()
 }
 
 function plainDescription(value?: string) {
@@ -50,28 +84,53 @@ function getScrollOffset(tabsHeight: number) {
 }
 
 function SiteIcon({ child }: { child: NavChild }) {
+  const { primary, fallback } = getIconSources(child)
+  const [src, setSrc] = useState(primary)
+  const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
-  const src = getIconUrl(child)
+  const initial = getInitial(child.label)
+  const showFallback = failed || !loaded
 
-  if (!src || failed) {
-    return (
-      <span className="rp-nav-portal__site-fallback" aria-hidden>
-        {child.label.slice(0, 1)}
-      </span>
-    )
+  useEffect(() => {
+    setSrc(primary)
+    setLoaded(false)
+    setFailed(false)
+  }, [primary, child.key])
+
+  const handleError = () => {
+    setLoaded(false)
+    if (fallback && src !== fallback) {
+      setSrc(fallback)
+      return
+    }
+    setFailed(true)
+  }
+
+  const bindImgRef = (node: HTMLImageElement | null) => {
+    if (node?.complete && node.naturalWidth > 0) {
+      setLoaded(true)
+    }
   }
 
   return (
-    <img
-      src={src}
-      alt=""
-      width={36}
-      height={36}
-      loading="lazy"
-      decoding="async"
-      className="rp-nav-portal__site-img"
-      onError={() => setFailed(true)}
-    />
+    <span className="rp-nav-portal__site-icon-stack" aria-hidden>
+      {showFallback ? <span className="rp-nav-portal__site-fallback">{initial}</span> : null}
+      {src && !failed ? (
+        <img
+          ref={bindImgRef}
+          key={src}
+          src={src}
+          alt=""
+          width={34}
+          height={34}
+          loading="lazy"
+          decoding="async"
+          className={`rp-nav-portal__site-img${loaded ? ' is-visible' : ''}`}
+          onLoad={() => setLoaded(true)}
+          onError={handleError}
+        />
+      ) : null}
+    </span>
   )
 }
 
@@ -208,17 +267,15 @@ export default function SearchQuickLinks({ dataSource = [] }: SearchQuickLinksPr
                   .filter(Boolean)
                   .join(' ')}
               >
-                {!showTabs ? (
-                  <header className="rp-nav-portal__section-head">
-                    <Icon size={16} className="rp-nav-portal__section-icon" />
-                    <h3 className="rp-nav-portal__section-title">{group.label}</h3>
-                    <span className="rp-nav-portal__section-count">
-                      {(group.children ?? []).length}
-                    </span>
-                  </header>
-                ) : (
-                  <h3 className="sr-only">{group.label}</h3>
-                )}
+                <header
+                  className={`rp-nav-portal__section-head${showTabs ? ' rp-nav-portal__section-head--compact' : ''}`}
+                >
+                  <Icon size={16} className="rp-nav-portal__section-icon" />
+                  <h3 className="rp-nav-portal__section-title">{group.label}</h3>
+                  <span className="rp-nav-portal__section-count">
+                    {(group.children ?? []).length}
+                  </span>
+                </header>
                 <ul className="rp-nav-portal__grid">
                   {(group.children ?? []).map((child, childIndex) => (
                     <SiteTile key={child.key ?? childIndex} child={child} />

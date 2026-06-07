@@ -74,7 +74,8 @@ export function resolveThemeApiEnv(processEnv = process.env) {
 
   let publicApi = explicitPublic
   if (mockEnabled) {
-    publicApi = explicitPublic || '/api'
+    // Browser must hit same-origin mock routes; ignore .env localhost:3002.
+    publicApi = '/api'
   } else if (!publicApi) {
     if (processEnv.NODE_ENV === 'production' && !isLocalhostUrl(serverApi)) {
       publicApi = '/api'

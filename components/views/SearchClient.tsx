@@ -5,9 +5,9 @@ import DoubleColumnLayout from '@/components/layout/DoubleColumnLayout'
 import SearchHero from '@/components/search/SearchHero'
 import SearchQuickLinks from '@/components/search/SearchQuickLinks'
 import { useFeedFooterPlacement } from '@/lib/reactpress/useFeedFooterPlacement'
+import { useSiteNavConfig } from '@/lib/reactpress/useSiteNavConfig'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import type { ListArticle } from '@fecommunity/reactpress-toolkit/theme'
-import { useSiteCatalog } from '@fecommunity/reactpress-toolkit/theme'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -28,19 +28,16 @@ export default function SearchClient({
   articles: initialArticles = [],
   navConfig,
 }: SearchClientProps) {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const router = useRouter()
-  const { siteConfig } = useSiteCatalog()
   const [articles, setArticles] = useState(initialArticles)
   const hasSearchResults = Boolean(initialKeyword.trim())
   const { footerAtBottom } = useFeedFooterPlacement({
     itemCount: hasSearchResults ? articles.length : 0,
   })
 
-  const searchCategories = navConfig?.searchCategories || siteConfig?.nav?.searchCategories
-  const urlConfig = (navConfig?.urlConfig || siteConfig?.nav?.urlConfig || []) as Parameters<
-    typeof SearchQuickLinks
-  >[0]['dataSource']
+  const { urlConfig, searchCategories } = useSiteNavConfig(navConfig)
+  const quickLinks = urlConfig as Parameters<typeof SearchQuickLinks>[0]['dataSource']
 
   useEffect(() => {
     setArticles(initialArticles)
@@ -64,6 +61,7 @@ export default function SearchClient({
       fillMinHeight={footerAtBottom}
       topNode={
         <SearchHero
+          key={locale}
           searchCategories={searchCategories}
           initialKeyword={initialKeyword}
           onLocalSearch={runSearch}
@@ -94,7 +92,7 @@ export default function SearchClient({
             </main>
           </div>
         ) : (
-          <SearchQuickLinks dataSource={urlConfig} />
+          <SearchQuickLinks key={locale} dataSource={quickLinks} />
         )
       }
     />

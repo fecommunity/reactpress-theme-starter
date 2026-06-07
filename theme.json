@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "Tailwind 风格博客主题，Next.js App Router + ReactPress 动态内容，支持深浅色、评论、知识库与网址导航。",
   "author": "ReactPress",
-  "authorUri": "https://reactpress.dev",
+  "authorUri": "https://reactpress.surge.sh/",
   "themeUri": "https://github.com/fecommunity/reactpress-theme-starter",
   "tags": ["博客", "Tailwind", "App Router", "ReactPress"],
   "cover": "public/logo-400.png",

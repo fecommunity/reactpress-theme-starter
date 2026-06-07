@@ -10,7 +10,7 @@ const REACTPRESS_SITE = 'https://reactpress.surge.sh/'
 const REACTPRESS_DEMO = 'https://reactpress-theme-starter.vercel.app'
 const REACTPRESS_NPM = 'https://www.npmjs.com/package/@fecommunity/reactpress'
 
-const mockSearchCategories = {
+const mockSearchCategoriesEn = {
   categories: [
     { label: 'Site', key: 'local' },
     { label: 'Web', key: 'search' },
@@ -57,7 +57,54 @@ const mockSearchCategories = {
   },
 }
 
-const mockUrlConfig = [
+const mockSearchCategoriesZh = {
+  categories: [
+    { label: '站内', key: 'local' },
+    { label: '搜索', key: 'search' },
+    { label: 'GitHub', key: 'github' },
+    { label: '包管理', key: 'packages' },
+  ],
+  subCategories: {
+    search: [
+      {
+        label: 'Google',
+        key: 'search-google',
+        url: 'https://www.google.com/search?q=',
+      },
+      {
+        label: 'Bing',
+        key: 'search-bing',
+        url: 'https://www.bing.com/search?q=',
+      },
+    ],
+    github: [
+      {
+        label: '仓库',
+        key: 'github-repos',
+        url: 'https://github.com/search?type=repositories&q=',
+      },
+      {
+        label: '代码',
+        key: 'github-code',
+        url: 'https://github.com/search?type=code&q=',
+      },
+      {
+        label: 'Issues',
+        key: 'github-issues',
+        url: 'https://github.com/search?type=issues&q=',
+      },
+    ],
+    packages: [
+      {
+        label: 'npm',
+        key: 'npm-search',
+        url: 'https://www.npmjs.com/search?q=',
+      },
+    ],
+  },
+}
+
+const mockUrlConfigEn = [
   {
     key: 'reactpress',
     label: 'ReactPress',
@@ -155,6 +202,102 @@ const mockUrlConfig = [
   },
 ]
 
+const mockUrlConfigZh = [
+  {
+    key: 'reactpress',
+    label: 'ReactPress',
+    icon: 'GlobalOutlined',
+    children: [
+      {
+        key: 'rp-github',
+        label: 'GitHub',
+        description: '官方开源仓库 — CLI、管理端、API、模板与工具包。',
+        url: REACTPRESS_GITHUB,
+      },
+      {
+        key: 'rp-site',
+        label: '官方网站',
+        description: '产品概览、3.0 亮点、平台能力与文档入口。',
+        url: REACTPRESS_SITE,
+      },
+      {
+        key: 'rp-demo',
+        label: '在线演示',
+        description: '查看正在运行的 ReactPress 访客站与管理后台。',
+        url: REACTPRESS_DEMO,
+      },
+      {
+        key: 'rp-npm',
+        label: 'npm CLI',
+        description: '全局安装 @fecommunity/reactpress，几分钟内启动 CMS。',
+        url: REACTPRESS_NPM,
+      },
+    ],
+  },
+  {
+    key: 'docs-community',
+    label: '文档与社区',
+    icon: 'BookOutlined',
+    children: [
+      {
+        key: 'rp-tutorial',
+        label: '教程',
+        description: '安装、初始化与发布的分步指南。',
+        url: `${REACTPRESS_SITE}docs/tutorial`,
+      },
+      {
+        key: 'rp-blog',
+        label: '博客',
+        description: '产品更新、版本说明与内容发布实践。',
+        url: `${REACTPRESS_SITE}blog`,
+      },
+      {
+        key: 'stackoverflow',
+        label: 'Stack Overflow',
+        description: 'ReactPress 开发者社区问答。',
+        url: 'https://stackoverflow.com/questions/tagged/reactpress',
+      },
+      {
+        key: 'fecommunity',
+        label: 'FECommunity',
+        description: 'GitHub 上的 ReactPress 开源组织。',
+        url: 'https://github.com/fecommunity',
+      },
+    ],
+  },
+  {
+    key: 'tech-stack',
+    label: '技术栈',
+    icon: 'CodeOutlined',
+    children: [
+      {
+        key: 'nextjs',
+        label: 'Next.js',
+        description: '驱动 ReactPress 访客站与主题的 React 框架。',
+        url: 'https://nextjs.org/',
+      },
+      {
+        key: 'nestjs',
+        label: 'NestJS',
+        description: 'ReactPress REST API 的后端框架。',
+        url: 'https://nestjs.com/',
+      },
+      {
+        key: 'antd',
+        label: 'Ant Design',
+        description: 'ReactPress 管理端使用的 UI 组件库。',
+        url: 'https://ant.design/',
+      },
+      {
+        key: 'theme-starter',
+        label: '主题模板',
+        description: '官方 Next.js App Router 访客站主题 Starter。',
+        url: 'https://github.com/fecommunity/reactpress-theme-starter',
+      },
+    ],
+  },
+]
+
 const mockThemeConfig = {
   header: {
     navLinks: [
@@ -163,16 +306,19 @@ const mockThemeConfig = {
       { path: '/search', locale: 'search', icon: 'SearchOutlined', visible: true },
     ],
   },
-  nav: {
-    urlConfig: mockUrlConfig,
-    searchCategories: mockSearchCategories,
+}
+
+const mockGlobalConfigBundleEn = {
+  globalConfig: {
+    navConfig: mockSearchCategoriesEn,
+    urlConfig: mockUrlConfigEn,
   },
 }
 
-const mockGlobalConfigBundle = {
+const mockGlobalConfigBundleZh = {
   globalConfig: {
-    navConfig: mockSearchCategories,
-    urlConfig: mockUrlConfig,
+    navConfig: mockSearchCategoriesZh,
+    urlConfig: mockUrlConfigZh,
   },
 }
 
@@ -207,28 +353,34 @@ export const mockSetting = {
         'ReactPress — one package, one minute to your own CMS. Public site, admin, and API ready to go.',
     },
     zh: {
-      suggestions: 'Suggestions',
-      archives: 'Archives',
-      tags: 'Tags',
-      search: 'Search',
-      tagTitle: 'Tags',
-      empty: 'No data',
-      homeTitle: 'Home',
-      comment: 'Comments',
-      recommendToReading: 'Recommended Readings',
-      articleCover: 'Cover',
-      totalSearch: 'Found',
-      piece: 'results',
-      searchArticle: 'Search Articles',
-      searchArticlePlaceholder: 'Search ReactPress articles…',
-      gettingArticle: 'Fetching articles…',
+      suggestions: '建议反馈',
+      archives: '归档',
+      tags: '标签',
+      search: '搜索',
+      tagTitle: '标签',
+      empty: '暂无数据',
+      homeTitle: '首页',
+      comment: '评论',
+      recommendToReading: '推荐阅读',
+      articleCover: '封面',
+      totalSearch: '共找到',
+      piece: '条结果',
+      searchArticle: '搜索文章',
+      searchArticlePlaceholder: '搜索 ReactPress 相关文章…',
+      gettingArticle: '正在获取文章…',
+      nav: '网址导航',
       aboutUsFallback:
-        'ReactPress — one package, one minute to your own CMS. Public site, admin, and API ready to go.',
+        'ReactPress — 一个包，一分钟搭建属于你的 CMS。访客站、管理端与 API 开箱即用。',
     },
   }),
   globalSetting: JSON.stringify({
-    en: mockGlobalConfigBundle,
-    zh: mockGlobalConfigBundle,
+    en: mockGlobalConfigBundleEn,
+    zh: mockGlobalConfigBundleZh,
+    theme: {
+      activeTheme: 'my-blog',
+      installedThemes: ['my-blog'],
+      mods: {},
+    },
     config: {
       'my-blog': mockThemeConfig,
     },
@@ -476,22 +628,22 @@ const themeStarterHtml = `
 `.trim()
 
 const suggestionsHtml = `
-<h1>Suggestions &amp; Feedback</h1>
-<p>Thank you for exploring <strong>ReactPress</strong>. We welcome your ideas to make the platform and this theme starter better.</p>
+<p>Thank you for using ReactPress. We welcome your ideas, bug reports, and documentation feedback.</p>
 <h2>Share your thoughts</h2>
 <ul>
-  <li>Report bugs or UX issues on the <a href="${REACTPRESS_GITHUB}/issues" rel="noopener noreferrer">GitHub issue tracker</a>.</li>
-  <li>Suggest features for the CLI, admin console, or theme toolkit.</li>
-  <li>Share deployment guides for platforms beyond Vercel.</li>
-  <li>Tell us which documentation topics need clearer examples.</li>
+<li>Report bugs or UX issues on the <a href="${REACTPRESS_GITHUB}/issues" rel="noopener noreferrer">GitHub issue tracker</a>.</li>
+<li>Suggest features for the CLI, admin console, or theme toolkit.</li>
+<li>Share deployment guides for platforms beyond Vercel.</li>
+<li>Tell us which documentation topics need clearer examples.</li>
 </ul>
 <h2>Contributing</h2>
 <p>ReactPress is open source under the MIT license. Fork the repository, run <code>pnpm install</code> and <code>pnpm run dev</code>, and open a pull request. Meaningful contributions are credited in the README.</p>
-<h3>Related reading</h3>
+<h2>Related reading</h2>
 <ul>
-  <li><a href="/article/what-is-reactpress/">What is ReactPress?</a></li>
-  <li><a href="/article/quick-start/">Quick Start with ReactPress</a></li>
-  <li><a href="${REACTPRESS_SITE}" rel="noopener noreferrer">Official documentation</a></li>
+<li><a href="/article/what-is-reactpress/">What is ReactPress?</a></li>
+<li><a href="/article/quick-start/">Quick Start with ReactPress</a></li>
+<li><a href="${REACTPRESS_SITE}" rel="noopener noreferrer">Official documentation</a></li>
+<li><a href="${REACTPRESS_GITHUB}" rel="noopener noreferrer">GitHub repository</a></li>
 </ul>
 `.trim()
 
@@ -639,7 +791,7 @@ export const mockTag = mockTags[0]
 export const mockPages = [
   {
     id: 'suggestions',
-    cover: '/logo.png',
+    cover: '',
     name: 'Suggestions',
     path: 'suggestions',
     order: 0,

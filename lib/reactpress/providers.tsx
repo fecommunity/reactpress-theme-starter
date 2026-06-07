@@ -1,6 +1,6 @@
 'use client'
 
-import { SettingProvider } from '@/lib/providers/client'
+import { fetchVisitorSetting } from '@/lib/reactpress/fetchSetting'
 import {
   ReactPressProvider,
   SiteCatalogProvider,
@@ -90,8 +90,9 @@ export function ReactPressAppProviders({ bootstrap, children }: Props) {
   const prefetchRemainingI18nLocales = useCallback(() => {
     if (!Array.isArray(locales) || locales.length <= 1) return
 
-    SettingProvider.getSetting()
+    fetchVisitorSetting()
       .then((res) => {
+        if (!res) return
         const full = mergeVisitorI18n(safeJsonParse(res.i18n, {})) as Record<
           string,
           Record<string, string>
