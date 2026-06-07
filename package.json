@@ -1,6 +1,6 @@
 {
   "name": "@fecommunity/reactpress-theme-starter",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.0",
   "description": "ReactPress 博客主题 Starter：Tailwind CSS + Next.js App Router，对接 toolkit 动态内容",
   "license": "MIT",
   "keywords": [

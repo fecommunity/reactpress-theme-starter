@@ -37,7 +37,7 @@ jobs:
 
   publish:
     needs: check
-    if: github.event_name == 'push'
+    if: false # temporarily disabled — restore: github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: read
