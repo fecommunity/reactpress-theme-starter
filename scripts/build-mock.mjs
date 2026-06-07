@@ -8,6 +8,7 @@
 import { spawn } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { ensureEnvFile } from './ensure-env.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.resolve(__dirname, '..')
@@ -56,6 +57,19 @@ async function waitForMockApi() {
 }
 
 async function main() {
+  const clientSiteUrl =
+    process.env.CLIENT_SITE_URL?.trim() || 'https://reactpress-theme-starter.vercel.app'
+
+  ensureEnvFile(projectRoot, {
+    overrides: {
+      REACTPRESS_MOCK_API: '1',
+      REACTPRESS_API_URL: MOCK_API,
+      SERVER_API_URL: MOCK_API,
+      NEXT_PUBLIC_REACTPRESS_API_URL: MOCK_API,
+      CLIENT_SITE_URL: clientSiteUrl,
+    },
+  })
+
   const devEnv = {
     ...process.env,
     INIT_CWD: projectRoot,
@@ -107,8 +121,7 @@ async function main() {
       REACTPRESS_MOCK_API: '1',
       REACTPRESS_API_URL: MOCK_API,
       SERVER_API_URL: MOCK_API,
-      CLIENT_SITE_URL:
-        process.env.CLIENT_SITE_URL?.trim() || 'https://reactpress-theme-starter.vercel.app',
+      CLIENT_SITE_URL: clientSiteUrl,
       // Client bundle must use same-origin /api at runtime (not build-time localhost).
       NEXT_PUBLIC_REACTPRESS_API_URL: '/api',
     }
