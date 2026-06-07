@@ -11,17 +11,14 @@ const REACTPRESS_DEMO = 'https://reactpress-theme-starter.vercel.app'
 const REACTPRESS_NPM = 'https://www.npmjs.com/package/@fecommunity/reactpress'
 const THEME_STARTER_GITHUB = 'https://github.com/fecommunity/reactpress-theme-starter'
 
-const promoImages = {
-  hero: '/promo/hero-architecture.png',
-  architecture: '/promo/architecture-stack.png',
-  quickStart: '/promo/quick-start.png',
-  deploy: '/promo/deploy-headless.png',
-  themeStarter: '/promo/theme-starter.png',
+const mockImages = {
   logo: '/logo-400.png',
+  logoFull: '/logo.png',
   icon: '/icon-512.png',
+  iconSmall: '/icon-192.png',
 } as const
 
-const promoFigure = (src: string, alt: string, caption?: string) =>
+const mockFigure = (src: string, alt: string, caption?: string) =>
   `<figure><img src="${src}" alt="${alt}" loading="lazy" />${
     caption ? `<figcaption>${caption}</figcaption>` : ''
   }</figure>`
@@ -519,10 +516,10 @@ export const mockTags = [
 const tag = (value: string) => mockTags.find((item) => item.value === value) ?? mockTags[0]
 
 const whatIsReactPressHtml = `
-${promoFigure(promoImages.hero, 'ReactPress technical architecture — CLI, NestJS API, MySQL, admin, and headless themes', 'Official architecture overview · reactpress.surge.sh')}
+${mockFigure(mockImages.logo, 'ReactPress technical architecture — CLI, NestJS API, MySQL, admin, and headless themes', 'Official architecture overview · reactpress.surge.sh')}
 <h2>ReactPress Technical Architecture</h2>
 <p><strong>ReactPress</strong> is a monolithic-yet-modular publishing platform: one CLI bootstraps a NestJS API, MySQL database, built-in admin console, and optional headless visitor themes. Content is authored once in the admin and consumed everywhere through a stable REST envelope <code>{ "success": true, "data": ... }</code>.</p>
-<p><img src="${promoImages.logo}" alt="ReactPress logo — atom mark with letter P" width="200" loading="lazy" /></p>
+<p><img src="${mockImages.logo}" alt="ReactPress logo — atom mark with letter P" width="200" loading="lazy" /></p>
 <blockquote><p><strong>One backend, many presentation layers.</strong> The same API powers the bundled admin UI, official themes, and your custom Next.js frontends.</p></blockquote>
 <h3>Core layers</h3>
 <table>
@@ -535,7 +532,7 @@ ${promoFigure(promoImages.hero, 'ReactPress technical architecture — CLI, Nest
     <tr><td>Visitor theme</td><td>Next.js App Router</td><td>Headless SSR via <code>@fecommunity/reactpress-toolkit</code></td></tr>
   </tbody>
 </table>
-${promoFigure(promoImages.architecture, 'ReactPress architecture stack diagram', 'From CLI to NestJS API, admin console, and Theme Starter')}
+${mockFigure(mockImages.logoFull, 'ReactPress architecture stack diagram', 'From CLI to NestJS API, admin console, and Theme Starter')}
 <h3>Learn more</h3>
 <ul>
   <li><a href="${REACTPRESS_SITE}" rel="noopener noreferrer">reactpress.surge.sh</a> — product overview and documentation</li>
@@ -545,7 +542,7 @@ ${promoFigure(promoImages.architecture, 'ReactPress architecture stack diagram',
 `.trim()
 
 const quickStartHtml = `
-${promoFigure(promoImages.quickStart, 'Quick Start with ReactPress CLI', 'Three commands to spin up visitor site, admin, and API')}
+${mockFigure(mockImages.logo, 'Quick Start with ReactPress CLI', 'Three commands to spin up visitor site, admin, and API')}
 <h2>Quick Start</h2>
 <p>The CLI orchestrates every service in the ReactPress architecture. After a global install, <code>init</code> writes project config and <code>dev</code> starts the API, admin, and default visitor site together.</p>
 <h3>Prerequisites</h3>
@@ -576,7 +573,7 @@ reactpress dev</code></pre>
 `.trim()
 
 const platformCapabilitiesHtml = `
-${promoFigure(promoImages.architecture, 'ReactPress architecture stack', 'CLI → NestJS + MySQL → Admin UI + headless Theme Starter')}
+${mockFigure(mockImages.logoFull, 'ReactPress architecture stack', 'CLI → NestJS + MySQL → Admin UI + headless Theme Starter')}
 <h2>Architecture in Detail</h2>
 <p>ReactPress separates <strong>content management</strong> (NestJS + MySQL + admin) from <strong>presentation</strong> (visitor themes). The REST API is the contract between both sides.</p>
 <h3>Request flow (headless mode)</h3>
@@ -600,10 +597,10 @@ ${promoFigure(promoImages.architecture, 'ReactPress architecture stack', 'CLI �
 `.trim()
 
 const cliReferenceHtml = `
-${promoFigure(promoImages.quickStart, 'ReactPress CLI workflow', 'Every command starts from the terminal after a global install')}
+${mockFigure(mockImages.logo, 'ReactPress CLI workflow', 'Every command starts from the terminal after a global install')}
 <h2>CLI Reference</h2>
 <p>After a global install, every workflow starts from the terminal.</p>
-<p><img src="${promoImages.logo}" alt="ReactPress" width="180" loading="lazy" /></p>
+<p><img src="${mockImages.logo}" alt="ReactPress" width="180" loading="lazy" /></p>
 <pre><code>npm i -g @fecommunity/reactpress@3</code></pre>
 <table>
   <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -622,7 +619,7 @@ ${promoFigure(promoImages.quickStart, 'ReactPress CLI workflow', 'Every command 
 `.trim()
 
 const deployHtml = `
-${promoFigure(promoImages.deploy, 'Headless theme deployment', 'Theme Starter on Vercel · ReactPress API on your infrastructure')}
+${mockFigure(mockImages.icon, 'Headless theme deployment', 'Theme Starter on Vercel · ReactPress API on your infrastructure')}
 <h2>Deploy ReactPress</h2>
 <p>Production deployment can be monolithic (CLI <code>build</code> + <code>start</code>) or split: NestJS API on your server, Theme Starter on Vercel.</p>
 <h3>Production commands</h3>
@@ -640,7 +637,7 @@ reactpress start</code></pre>
 `.trim()
 
 const themeStarterHtml = `
-${promoFigure(promoImages.themeStarter, 'ReactPress Theme Starter — official headless visitor theme', 'Next.js 15 · Tailwind 4 · toolkit · mock mode · Vercel')}
+${mockFigure(mockImages.logoFull, 'ReactPress Theme Starter — official headless visitor theme', 'Next.js 15 · Tailwind 4 · toolkit · mock mode · Vercel')}
 <h2>ReactPress Theme Starter</h2>
 <p>This repository is the <strong>official headless visitor theme</strong> for ReactPress. It does not store content locally — every page is rendered from the ReactPress REST API (or built-in mock API during development).</p>
 <h3>Project structure</h3>
@@ -651,7 +648,7 @@ lib/mock-api/     # Offline mock data for pnpm dev:mock
 theme.json        # Template map + appearance panel schema</code></pre>
 <h3>Data integration</h3>
 <p>Server components call <code>fetch*PageProps(themeApi, …)</code> from <code>@fecommunity/reactpress-toolkit/theme/server</code>. Client islands use hooks and providers from <code>@fecommunity/reactpress-toolkit/ui</code>. All API responses follow <code>{ "success": true, "data": ... }</code>.</p>
-${promoFigure(promoImages.deploy, 'Headless deployment — API and theme on separate hosts', 'Production: remote API + Vercel theme · Demo: REACTPRESS_MOCK_API=1')}
+${mockFigure(mockImages.icon, 'Headless deployment — API and theme on separate hosts', 'Production: remote API + Vercel theme · Demo: REACTPRESS_MOCK_API=1')}
 <h3>Development modes</h3>
 <ul>
   <li><code>pnpm dev:mock</code> — built-in mock API, no backend required (used by Vercel demo)</li>
@@ -664,7 +661,7 @@ ${promoFigure(promoImages.deploy, 'Headless deployment — API and theme on sepa
 `.trim()
 
 const suggestionsHtml = `
-${promoFigure(promoImages.hero, 'ReactPress community feedback', 'Help us improve ReactPress and this theme starter')}
+${mockFigure(mockImages.logo, 'ReactPress community feedback', 'Help us improve ReactPress and this theme starter')}
 <p>Thank you for using ReactPress. We welcome your ideas, bug reports, and documentation feedback.</p>
 <h2>Share your thoughts</h2>
 <ul>
@@ -693,7 +690,7 @@ export const mockArticles = [
     content: whatIsReactPressHtml.replace(/<[^>]+>/g, ' '),
     html: whatIsReactPressHtml,
     toc: '',
-    cover: promoImages.hero,
+    cover: mockImages.logo,
     status: 'publish',
     publishAt: daysAgo(1),
     updateAt: daysAgo(1),
@@ -715,7 +712,7 @@ export const mockArticles = [
     content: quickStartHtml.replace(/<[^>]+>/g, ' '),
     html: quickStartHtml,
     toc: '',
-    cover: promoImages.quickStart,
+    cover: mockImages.logo,
     status: 'publish',
     publishAt: daysAgo(3),
     updateAt: daysAgo(2),
@@ -737,7 +734,7 @@ export const mockArticles = [
     content: platformCapabilitiesHtml.replace(/<[^>]+>/g, ' '),
     html: platformCapabilitiesHtml,
     toc: '',
-    cover: promoImages.architecture,
+    cover: mockImages.logoFull,
     status: 'publish',
     publishAt: daysAgo(7),
     updateAt: daysAgo(5),
@@ -759,7 +756,7 @@ export const mockArticles = [
     content: cliReferenceHtml.replace(/<[^>]+>/g, ' '),
     html: cliReferenceHtml,
     toc: '',
-    cover: promoImages.icon,
+    cover: mockImages.icon,
     status: 'publish',
     publishAt: daysAgo(12),
     updateAt: daysAgo(8),
@@ -781,7 +778,7 @@ export const mockArticles = [
     content: deployHtml.replace(/<[^>]+>/g, ' '),
     html: deployHtml,
     toc: '',
-    cover: promoImages.deploy,
+    cover: mockImages.icon,
     status: 'publish',
     publishAt: daysAgo(15),
     updateAt: daysAgo(10),
@@ -803,7 +800,7 @@ export const mockArticles = [
     content: themeStarterHtml.replace(/<[^>]+>/g, ' '),
     html: themeStarterHtml,
     toc: '',
-    cover: promoImages.themeStarter,
+    cover: mockImages.logoFull,
     status: 'publish',
     publishAt: daysAgo(18),
     updateAt: daysAgo(12),
@@ -828,7 +825,7 @@ export const mockTag = mockTags[0]
 export const mockPages = [
   {
     id: 'suggestions',
-    cover: promoImages.themeStarter,
+    cover: mockImages.logoFull,
     name: 'Suggestions',
     path: 'suggestions',
     order: 0,
@@ -859,12 +856,12 @@ export const mockKnowledgeChapters = [
     parentId: 'reactpress-handbook',
     order: 0,
     title: 'CLI Overview',
-    cover: promoImages.quickStart,
+    cover: mockImages.logo,
     summary: 'Commands for init, dev, doctor, status, build, and start.',
     content: 'ReactPress CLI overview for developers.',
-    html: `${promoFigure(promoImages.quickStart, 'ReactPress CLI quick start', 'Global install, init, and dev')}<p>Install <code>@fecommunity/reactpress@3</code> globally and use the interactive menu or run commands directly from your terminal.</p><pre><code>npm i -g @fecommunity/reactpress@3
+    html: `${mockFigure(mockImages.logo, 'ReactPress CLI quick start', 'Global install, init, and dev')}<p>Install <code>@fecommunity/reactpress@3</code> globally and use the interactive menu or run commands directly from your terminal.</p><pre><code>npm i -g @fecommunity/reactpress@3
 reactpress init
-reactpress dev</code></pre><p><img src="${promoImages.logo}" alt="ReactPress logo" width="160" loading="lazy" /></p>`,
+reactpress dev</code></pre><p><img src="${mockImages.logo}" alt="ReactPress logo" width="160" loading="lazy" /></p>`,
     toc: '',
     status: 'publish',
     views: 42,
@@ -879,10 +876,10 @@ reactpress dev</code></pre><p><img src="${promoImages.logo}" alt="ReactPress log
     parentId: 'reactpress-handbook',
     order: 1,
     title: 'REST API Endpoints',
-    cover: promoImages.architecture,
+    cover: mockImages.logoFull,
     summary: 'Articles, pages, settings, categories, tags, and media via JSON API.',
     content: 'Core API endpoints for theme and integration developers.',
-    html: `${promoFigure(promoImages.architecture, 'ReactPress REST API in the architecture', 'NestJS exposes JSON resources consumed by Theme Starter')}<p>The API runs on port <strong>3002</strong> by default. Health check: <code>GET /api/health</code>. All responses use the <code>{ success, data }</code> envelope consumed by <code>@fecommunity/reactpress-toolkit</code>.</p><table><thead><tr><th>Resource</th><th>Theme Starter usage</th></tr></thead><tbody><tr><td>Articles</td><td><code>app/article/[id]</code> SSR detail pages</td></tr><tr><td>Pages</td><td><code>app/page/[id]</code> custom CMS pages</td></tr><tr><td>Settings</td><td>Site title, SEO, navigation via providers</td></tr></tbody></table><p>See <a href="${REACTPRESS_SITE}" rel="noopener noreferrer">reactpress.surge.sh</a> for full API reference.</p>`,
+    html: `${mockFigure(mockImages.logoFull, 'ReactPress REST API in the architecture', 'NestJS exposes JSON resources consumed by Theme Starter')}<p>The API runs on port <strong>3002</strong> by default. Health check: <code>GET /api/health</code>. All responses use the <code>{ success, data }</code> envelope consumed by <code>@fecommunity/reactpress-toolkit</code>.</p><table><thead><tr><th>Resource</th><th>Theme Starter usage</th></tr></thead><tbody><tr><td>Articles</td><td><code>app/article/[id]</code> SSR detail pages</td></tr><tr><td>Pages</td><td><code>app/page/[id]</code> custom CMS pages</td></tr><tr><td>Settings</td><td>Site title, SEO, navigation via providers</td></tr></tbody></table><p>See <a href="${REACTPRESS_SITE}" rel="noopener noreferrer">reactpress.surge.sh</a> for full API reference.</p>`,
     toc: '',
     status: 'publish',
     views: 36,
@@ -897,10 +894,10 @@ reactpress dev</code></pre><p><img src="${promoImages.logo}" alt="ReactPress log
     parentId: 'reactpress-handbook',
     order: 2,
     title: 'Theme Development',
-    cover: promoImages.themeStarter,
+    cover: mockImages.logoFull,
     summary: 'Build visitor sites with theme.json, App Router, and the toolkit.',
     content: 'Guide to building custom ReactPress themes.',
-    html: `${promoFigure(promoImages.themeStarter, 'ReactPress Theme Starter', 'Official headless visitor theme for ReactPress')}<p>Start from <a href="${THEME_STARTER_GITHUB}">reactpress-theme-starter</a>. Map routes in <code>theme.json</code> templates and fetch content via <code>themeApi</code> during SSR.</p><ul><li><code>pnpm dev:mock</code> — offline preview with built-in mock API</li><li><code>pnpm dev</code> — connect to a live ReactPress instance</li><li><code>pnpm build:mock</code> — CI-friendly production build</li></ul><p>Docs: <a href="${REACTPRESS_SITE}" rel="noopener noreferrer">reactpress.surge.sh</a></p>`,
+    html: `${mockFigure(mockImages.logoFull, 'ReactPress Theme Starter', 'Official headless visitor theme for ReactPress')}<p>Start from <a href="${THEME_STARTER_GITHUB}">reactpress-theme-starter</a>. Map routes in <code>theme.json</code> templates and fetch content via <code>themeApi</code> during SSR.</p><ul><li><code>pnpm dev:mock</code> — offline preview with built-in mock API</li><li><code>pnpm dev</code> — connect to a live ReactPress instance</li><li><code>pnpm build:mock</code> — CI-friendly production build</li></ul><p>Docs: <a href="${REACTPRESS_SITE}" rel="noopener noreferrer">reactpress.surge.sh</a></p>`,
     toc: '',
     status: 'publish',
     views: 28,
@@ -918,10 +915,10 @@ export const mockKnowledgeBooks = [
     parentId: '',
     order: 0,
     title: 'ReactPress Handbook',
-    cover: promoImages.hero,
+    cover: mockImages.logo,
     summary: 'CLI, API, and theme development essentials for ReactPress.',
     content: 'ReactPress handbook overview.',
-    html: `${promoFigure(promoImages.hero, 'ReactPress Handbook', 'Architecture, API, and Theme Starter essentials')}<p>Everything you need to publish with ReactPress — from <code>reactpress init</code> to headless Theme Starter deployment. Official site: <a href="${REACTPRESS_SITE}" rel="noopener noreferrer">reactpress.surge.sh</a></p>`,
+    html: `${mockFigure(mockImages.logo, 'ReactPress Handbook', 'Architecture, API, and Theme Starter essentials')}<p>Everything you need to publish with ReactPress — from <code>reactpress init</code> to headless Theme Starter deployment. Official site: <a href="${REACTPRESS_SITE}" rel="noopener noreferrer">reactpress.surge.sh</a></p>`,
     toc: '',
     status: 'publish',
     views: 128,
