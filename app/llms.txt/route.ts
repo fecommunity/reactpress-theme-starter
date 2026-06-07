@@ -3,16 +3,18 @@ import { getClientSiteUrl } from '@/lib/reactpress/env'
 export async function GET() {
   const siteUrl = getClientSiteUrl()
 
-  const body = `# ReactPress Theme Starter
+  const body = `# ReactPress
 
-> Headless blog theme powered by ReactPress — dynamic content, ISR, dark mode, and Vercel-ready deployment.
+> One package. Your CMS in about a minute. Modern publishing platform for blogs, company sites, and content-driven products.
 
 ## Links
 
-- [Home](${siteUrl}/): Blog homepage with latest articles
+- [Home](${siteUrl}/): Latest ReactPress articles and guides
 - [Archives](${siteUrl}/archives): Browse all published articles
-- [Search](${siteUrl}/search): Search articles by keyword
+- [Search](${siteUrl}/search): Search ReactPress documentation articles
 - [Tags](${siteUrl}/tags): Browse articles by tag
+- [GitHub](https://github.com/fecommunity/reactpress): Official open-source repository
+- [Official Site](https://reactpress.surge.sh/): Product overview and documentation
 `
 
   return new Response(body, {

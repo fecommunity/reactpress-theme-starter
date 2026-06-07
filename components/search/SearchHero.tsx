@@ -6,7 +6,6 @@ import { ArticleProvider, SearchProvider } from '@/lib/providers/client'
 import { normalizeList } from '@/lib/reactpress/normalizeApiResponse'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import type { IArticle } from '@fecommunity/reactpress-toolkit/types'
-import { jsonp } from '@fecommunity/reactpress-toolkit/theme'
 import { getSiteTitle, useSiteSetting } from '@fecommunity/reactpress-toolkit/theme'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -112,32 +111,18 @@ export default function SearchHero({
       const sub =
         subCategories[category]?.find((item) => item.key === subCategory) ||
         subCategories[category]?.[0]
+      const fallback = value.trim() || 'ReactPress'
+      const query = encodeURIComponent(fallback)
 
-      return new Promise<void>((resolve) => {
-        jsonp('https://suggestion.baidu.com/su', { wd: value || '高热度网' }, (res) => {
-          const data = res as { s?: string[] } | Error
-          if (data instanceof Error || !data?.s) {
-            const fallback = value || '高热度网'
-            setSuggestions([
-              {
-                label: fallback,
-                link: sub?.url ? `${sub.url}${fallback}` : '#',
-                external: Boolean(sub?.url),
-              },
-            ])
-          } else {
-            setSuggestions(
-              data.s.map((item) => ({
-                label: item,
-                link: sub?.url ? `${sub.url}${item}` : '#',
-                external: Boolean(sub?.url),
-              }))
-            )
-          }
-          setLoading(false)
-          resolve()
-        })
-      })
+      setSuggestions([
+        {
+          label: fallback,
+          link: sub?.url ? `${sub.url}${query}` : '#',
+          external: Boolean(sub?.url),
+        },
+      ])
+      setLoading(false)
+      return Promise.resolve()
     },
     [category, subCategory, subCategories]
   )
@@ -162,7 +147,8 @@ export default function SearchHero({
       subCategories[category]?.find((item) => item.key === subCategory) ||
       subCategories[category]?.[0]
     if (sub?.url) {
-      window.open(`${sub.url}${keyword || '高热度网'}`, '_blank')
+      const query = encodeURIComponent(keyword.trim() || 'ReactPress')
+      window.open(`${sub.url}${query}`, '_blank')
     }
   }
 

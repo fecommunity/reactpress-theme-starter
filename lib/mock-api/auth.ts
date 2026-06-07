@@ -47,15 +47,15 @@ export function mockAuthLogin(body: unknown): Response {
   const password = typeof payload.password === 'string' ? payload.password : ''
 
   if (!name || !password) {
-    return jsonError('请输入用户名和密码')
+    return jsonError('Please enter username and password')
   }
 
   const user = findUserByName(name)
   if (!user || user.password !== password) {
-    return jsonError('用户名或密码错误')
+    return jsonError('Invalid username or password')
   }
   if (user.status === 'locked') {
-    return jsonError('用户已锁定，无法登录')
+    return jsonError('Account is locked')
   }
 
   return Response.json({ success: true, data: toPublicUser(user, user.name) })
@@ -68,10 +68,10 @@ export function mockAuthRegister(body: unknown): Response {
   const email = typeof payload.email === 'string' ? payload.email.trim() : ''
 
   if (!name || !password) {
-    return jsonError('请输入用户名和密码')
+    return jsonError('Please enter username and password')
   }
   if (findUserByName(name)) {
-    return jsonError('用户已存在')
+    return jsonError('Username already exists')
   }
 
   const user: MockUser = {
@@ -103,7 +103,7 @@ export function mockAuthGithub(body: unknown): Response {
         : ''
 
   if (!code.trim()) {
-    return jsonError('请输入Gitub授权码')
+    return jsonError('Please enter a GitHub authorization code')
   }
 
   const user: MockUser = {
