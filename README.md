@@ -131,16 +131,16 @@ ReactPress (CLI · NestJS API · MySQL · Admin Console)
 <summary><strong>Templates declared in <code>theme.json</code></strong></summary>
 <br />
 
-| Template Key | Route Pattern |
-| :-- | :-- |
-| `home` | `/` |
-| `single` | `/article/[id]/` |
-| `page` | `/page/[id]/` |
+| Template Key       | Route Pattern           |
+| :----------------- | :---------------------- |
+| `home`             | `/`                     |
+| `single`           | `/article/[id]/`        |
+| `page`             | `/page/[id]/`           |
 | `archive-category` | `/category/[category]/` |
-| `archive-tag` | `/tag/[tag]/` |
-| `archives` | `/archives/` |
-| `search` | `/search/` |
-| `404` | `app/not-found.tsx` |
+| `archive-tag`      | `/tag/[tag]/`           |
+| `archives`         | `/archives/`            |
+| `search`           | `/search/`              |
+| `404`              | `app/not-found.tsx`     |
 
 </details>
 
@@ -148,14 +148,14 @@ ReactPress (CLI · NestJS API · MySQL · Admin Console)
 <summary><strong>Additional routes in this starter</strong></summary>
 <br />
 
-| Route Pattern | Function |
-| :-- | :-- |
-| `/knowledge/`, `/knowledge/[pId]/`, `/knowledge/[pId]/[id]/` | Knowledge base |
-| `/tags/` | Tag index |
-| `/login/`, `/register/` | Authentication UI |
-| `/suggestions/` | Feedback page |
-| `/nav/[id]/` | URL directory |
-| `/rss/`, `/sitemap.xml`, `/robots.txt` | Syndication and SEO |
+| Route Pattern                                                | Function            |
+| :----------------------------------------------------------- | :------------------ |
+| `/knowledge/`, `/knowledge/[pId]/`, `/knowledge/[pId]/[id]/` | Knowledge base      |
+| `/tags/`                                                     | Tag index           |
+| `/login/`, `/register/`                                      | Authentication UI   |
+| `/suggestions/`                                              | Feedback page       |
+| `/nav/[id]/`                                                 | URL directory       |
+| `/rss/`, `/sitemap.xml`, `/robots.txt`                       | Syndication and SEO |
 
 </details>
 
@@ -241,30 +241,30 @@ pnpm dev -- --remote-origin api.yoursite.com --admin-origin local --client-origi
 
 ## Configuration
 
-| Variable | Description |
-| :-- | :-- |
-| `REACTPRESS_API_URL` | Server-side API base URL (must include `/api`) |
+| Variable                         | Description                                                      |
+| :------------------------------- | :--------------------------------------------------------------- |
+| `REACTPRESS_API_URL`             | Server-side API base URL (must include `/api`)                   |
 | `NEXT_PUBLIC_REACTPRESS_API_URL` | Client-side API URL; typically `/api` for same-origin deployment |
-| `CLIENT_SITE_URL` | Canonical public URL for metadata, sitemap, and Open Graph |
-| `BASE_PATH` | Optional application subpath (e.g. `/blog`) |
-| `REACTPRESS_MOCK_API` | Set to `1` to activate the embedded mock API handler |
-| `REACTPRESS_DEV_REMOTE_ORIGIN` | Default remote API origin for `pnpm dev` |
-| `NEXT_PUBLIC_GITHUB_CLIENT_ID` | GitHub OAuth client ID *(optional)* |
+| `CLIENT_SITE_URL`                | Canonical public URL for metadata, sitemap, and Open Graph       |
+| `BASE_PATH`                      | Optional application subpath (e.g. `/blog`)                      |
+| `REACTPRESS_MOCK_API`            | Set to `1` to activate the embedded mock API handler             |
+| `REACTPRESS_DEV_REMOTE_ORIGIN`   | Default remote API origin for `pnpm dev`                         |
+| `NEXT_PUBLIC_GITHUB_CLIENT_ID`   | GitHub OAuth client ID _(optional)_                              |
 
 ---
 
 ## Scripts
 
-| Command | Description |
-| :-- | :-- |
-| `pnpm dev:mock` | Development server with mock API |
-| `pnpm dev` | Development server against a live ReactPress API |
-| `pnpm build:mock` | Production build with mock data *(Vercel demo default)* |
-| `pnpm build` | Production build against a reachable API at build time |
-| `pnpm start` | Serve production output on port **3001** |
-| `pnpm start:mock` | Production server with mock API *(requires prior `build:mock`)* |
-| `pnpm run check` | ESLint and Prettier checks |
-| `pnpm run typecheck` | TypeScript compiler in no-emit mode |
+| Command              | Description                                                     |
+| :------------------- | :-------------------------------------------------------------- |
+| `pnpm dev:mock`      | Development server with mock API                                |
+| `pnpm dev`           | Development server against a live ReactPress API                |
+| `pnpm build:mock`    | Production build with mock data _(Vercel demo default)_         |
+| `pnpm build`         | Production build against a reachable API at build time          |
+| `pnpm start`         | Serve production output on port **3001**                        |
+| `pnpm start:mock`    | Production server with mock API _(requires prior `build:mock`)_ |
+| `pnpm run check`     | ESLint and Prettier checks                                      |
+| `pnpm run typecheck` | TypeScript compiler in no-emit mode                             |
 
 <details>
 <summary><strong>Smoke test</strong></summary>
@@ -285,11 +285,11 @@ node scripts/smoke-pages.mjs http://127.0.0.1:3001
 
 Mock mode activates when `REACTPRESS_MOCK_API=1`. Requests are handled by the catch-all route at `app/api/[[...path]]/route.ts`, returning JSON from [`lib/mock-api/data.ts`](./lib/mock-api/data.ts).
 
-| Use Case | Configuration |
-| :-- | :-- |
-| Local development | `pnpm dev:mock` |
-| Vercel demonstration | [`vercel.json`](./vercel.json) → `build:mock` + `REACTPRESS_MOCK_API=1` |
-| Continuous integration | Mock dev server on port **3010**, then `pnpm run build:ci` |
+| Use Case               | Configuration                                                           |
+| :--------------------- | :---------------------------------------------------------------------- |
+| Local development      | `pnpm dev:mock`                                                         |
+| Vercel demonstration   | [`vercel.json`](./vercel.json) → `build:mock` + `REACTPRESS_MOCK_API=1` |
+| Continuous integration | Mock dev server on port **3010**, then `pnpm run build:ci`              |
 
 > The [live demonstration](https://reactpress-theme-starter.vercel.app) runs in mock mode — theme UI and sample data only, not a production CMS.
 
@@ -311,20 +311,20 @@ Import the repository as-is. [`vercel.json`](./vercel.json) configures `pnpm run
 
 ### Production
 
-| Step | Action |
-| :--: | :-- |
-| 1 | Import or clone the repository on your hosting platform |
-| 2 | Set `REACTPRESS_API_URL`, `NEXT_PUBLIC_REACTPRESS_API_URL`, and `CLIENT_SITE_URL` |
-| 3 | Change build command to `pnpm run build` and remove `REACTPRESS_MOCK_API` |
-| 4 | Start with `pnpm start` (port **3001**) or the platform Next.js runtime |
+| Step | Action                                                                            |
+| :--: | :-------------------------------------------------------------------------------- |
+|  1   | Import or clone the repository on your hosting platform                           |
+|  2   | Set `REACTPRESS_API_URL`, `NEXT_PUBLIC_REACTPRESS_API_URL`, and `CLIENT_SITE_URL` |
+|  3   | Change build command to `pnpm run build` and remove `REACTPRESS_MOCK_API`         |
+|  4   | Start with `pnpm start` (port **3001**) or the platform Next.js runtime           |
 
 **Example environment variables**
 
-| Variable | Example Value |
-| :-- | :-- |
-| `REACTPRESS_API_URL` | `https://api.yoursite.com/api` |
-| `NEXT_PUBLIC_REACTPRESS_API_URL` | `/api` |
-| `CLIENT_SITE_URL` | `https://www.yoursite.com` |
+| Variable                         | Example Value                  |
+| :------------------------------- | :----------------------------- |
+| `REACTPRESS_API_URL`             | `https://api.yoursite.com/api` |
+| `NEXT_PUBLIC_REACTPRESS_API_URL` | `/api`                         |
+| `CLIENT_SITE_URL`                | `https://www.yoursite.com`     |
 
 > **Note:** `pnpm build` prefetches pages from the API during the build phase. The ReactPress API must be accessible at build time.
 
@@ -361,12 +361,12 @@ reactpress-theme-starter/
 
 [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) runs on push and pull request to `main` or `master`:
 
-| Step | Task |
-| :--: | :-- |
-| 1 | ESLint and Prettier validation |
-| 2 | TypeScript type checking *(non-blocking at time of writing)* |
-| 3 | Mock API startup on port **3010** |
-| 4 | Production build via `pnpm run build:ci` |
+| Step | Task                                                         |
+| :--: | :----------------------------------------------------------- |
+|  1   | ESLint and Prettier validation                               |
+|  2   | TypeScript type checking _(non-blocking at time of writing)_ |
+|  3   | Mock API startup on port **3010**                            |
+|  4   | Production build via `pnpm run build:ci`                     |
 
 ### Monorepo Integration
 
@@ -376,13 +376,13 @@ Place this theme under `themes/` in the ReactPress monorepo, set the toolkit dep
 
 ## Resources
 
-| Resource | Link |
-| :-- | :-- |
-| Live demonstration *(mock)* | [reactpress-theme-starter.vercel.app](https://reactpress-theme-starter.vercel.app) |
-| ReactPress documentation | [reactpress.surge.sh](https://reactpress.surge.sh/) |
-| ReactPress source | [github.com/fecommunity/reactpress](https://github.com/fecommunity/reactpress) |
-| Toolkit package | [@fecommunity/reactpress-toolkit](https://www.npmjs.com/package/@fecommunity/reactpress-toolkit) |
-| Theme manifest schema | [theme.manifest.schema.json](./theme.manifest.schema.json) |
+| Resource                    | Link                                                                                             |
+| :-------------------------- | :----------------------------------------------------------------------------------------------- |
+| Live demonstration _(mock)_ | [reactpress-theme-starter.vercel.app](https://reactpress-theme-starter.vercel.app)               |
+| ReactPress documentation    | [reactpress.surge.sh](https://reactpress.surge.sh/)                                              |
+| ReactPress source           | [github.com/fecommunity/reactpress](https://github.com/fecommunity/reactpress)                   |
+| Toolkit package             | [@fecommunity/reactpress-toolkit](https://www.npmjs.com/package/@fecommunity/reactpress-toolkit) |
+| Theme manifest schema       | [theme.manifest.schema.json](./theme.manifest.schema.json)                                       |
 
 <br />
 

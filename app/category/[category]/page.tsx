@@ -1,8 +1,5 @@
 import CategoryClient from '@/components/views/CategoryClient'
-import {
-  buildListPageMetadata,
-  buildLocalizedListPageMetadata,
-} from '@/lib/reactpress/siteMetadata'
+import { buildLocalizedListPageMetadata } from '@/lib/reactpress/siteMetadata'
 import { generateCategoryStaticParams } from '@/lib/reactpress/staticParams'
 import {
   fetchCategoryArchivePageProps,

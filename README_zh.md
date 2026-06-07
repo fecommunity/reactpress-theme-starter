@@ -131,16 +131,16 @@ ReactPress（CLI · NestJS API · MySQL · 管理后台）
 <summary><strong><code>theme.json</code> 中声明的模板</strong></summary>
 <br />
 
-| 模板键 | 路由 |
-| :-- | :-- |
-| `home` | `/` |
-| `single` | `/article/[id]/` |
-| `page` | `/page/[id]/` |
+| 模板键             | 路由                    |
+| :----------------- | :---------------------- |
+| `home`             | `/`                     |
+| `single`           | `/article/[id]/`        |
+| `page`             | `/page/[id]/`           |
 | `archive-category` | `/category/[category]/` |
-| `archive-tag` | `/tag/[tag]/` |
-| `archives` | `/archives/` |
-| `search` | `/search/` |
-| `404` | `app/not-found.tsx` |
+| `archive-tag`      | `/tag/[tag]/`           |
+| `archives`         | `/archives/`            |
+| `search`           | `/search/`              |
+| `404`              | `app/not-found.tsx`     |
 
 </details>
 
@@ -148,14 +148,14 @@ ReactPress（CLI · NestJS API · MySQL · 管理后台）
 <summary><strong>本 Starter 额外提供的路由</strong></summary>
 <br />
 
-| 路由 | 用途 |
-| :-- | :-- |
-| `/knowledge/`, `/knowledge/[pId]/`, `/knowledge/[pId]/[id]/` | 知识库 |
-| `/tags/` | 标签索引 |
-| `/login/`, `/register/` | 用户认证 |
-| `/suggestions/` | 建议反馈 |
-| `/nav/[id]/` | 网址导航 |
-| `/rss/`, `/sitemap.xml`, `/robots.txt` | 订阅与 SEO |
+| 路由                                                         | 用途       |
+| :----------------------------------------------------------- | :--------- |
+| `/knowledge/`, `/knowledge/[pId]/`, `/knowledge/[pId]/[id]/` | 知识库     |
+| `/tags/`                                                     | 标签索引   |
+| `/login/`, `/register/`                                      | 用户认证   |
+| `/suggestions/`                                              | 建议反馈   |
+| `/nav/[id]/`                                                 | 网址导航   |
+| `/rss/`, `/sitemap.xml`, `/robots.txt`                       | 订阅与 SEO |
 
 </details>
 
@@ -241,30 +241,30 @@ pnpm dev -- --remote-origin api.yoursite.com --admin-origin local --client-origi
 
 ## 环境变量
 
-| 变量 | 说明 |
-| :-- | :-- |
-| `REACTPRESS_API_URL` | 服务端 API 根地址（须含 `/api`） |
-| `NEXT_PUBLIC_REACTPRESS_API_URL` | 浏览器端 API 地址；同域部署时常用 `/api` |
-| `CLIENT_SITE_URL` | 站点公开 URL（元数据、站点地图、Open Graph） |
-| `BASE_PATH` | 可选子路径部署（如 `/blog`） |
-| `REACTPRESS_MOCK_API` | 设为 `1` 启用内置 Mock API |
-| `REACTPRESS_DEV_REMOTE_ORIGIN` | `pnpm dev` 默认远程 API 地址 |
-| `NEXT_PUBLIC_GITHUB_CLIENT_ID` | GitHub OAuth Client ID *（可选）* |
+| 变量                             | 说明                                         |
+| :------------------------------- | :------------------------------------------- |
+| `REACTPRESS_API_URL`             | 服务端 API 根地址（须含 `/api`）             |
+| `NEXT_PUBLIC_REACTPRESS_API_URL` | 浏览器端 API 地址；同域部署时常用 `/api`     |
+| `CLIENT_SITE_URL`                | 站点公开 URL（元数据、站点地图、Open Graph） |
+| `BASE_PATH`                      | 可选子路径部署（如 `/blog`）                 |
+| `REACTPRESS_MOCK_API`            | 设为 `1` 启用内置 Mock API                   |
+| `REACTPRESS_DEV_REMOTE_ORIGIN`   | `pnpm dev` 默认远程 API 地址                 |
+| `NEXT_PUBLIC_GITHUB_CLIENT_ID`   | GitHub OAuth Client ID _（可选）_            |
 
 ---
 
 ## 脚本命令
 
-| 命令 | 说明 |
-| :-- | :-- |
-| `pnpm dev:mock` | 开发服务器 + Mock API |
-| `pnpm dev` | 开发服务器 + 真实 ReactPress API |
-| `pnpm build:mock` | Mock 数据生产构建 *（Vercel 演示默认）* |
-| `pnpm build` | 对接可访问 API 的生产构建 |
-| `pnpm start` | 启动生产服务，端口 **3001** |
-| `pnpm start:mock` | 生产服务 + Mock API *（需先执行 `build:mock`）* |
-| `pnpm run check` | ESLint 与 Prettier 检查 |
-| `pnpm run typecheck` | TypeScript 类型检查（`tsc --noEmit`） |
+| 命令                 | 说明                                            |
+| :------------------- | :---------------------------------------------- |
+| `pnpm dev:mock`      | 开发服务器 + Mock API                           |
+| `pnpm dev`           | 开发服务器 + 真实 ReactPress API                |
+| `pnpm build:mock`    | Mock 数据生产构建 _（Vercel 演示默认）_         |
+| `pnpm build`         | 对接可访问 API 的生产构建                       |
+| `pnpm start`         | 启动生产服务，端口 **3001**                     |
+| `pnpm start:mock`    | 生产服务 + Mock API _（需先执行 `build:mock`）_ |
+| `pnpm run check`     | ESLint 与 Prettier 检查                         |
+| `pnpm run typecheck` | TypeScript 类型检查（`tsc --noEmit`）           |
 
 <details>
 <summary><strong>冒烟测试</strong></summary>
@@ -285,11 +285,11 @@ node scripts/smoke-pages.mjs http://127.0.0.1:3001
 
 当 `REACTPRESS_MOCK_API=1` 时，请求由 `app/api/[[...path]]/route.ts` 捕获并返回 [`lib/mock-api/data.ts`](./lib/mock-api/data.ts) 中的 JSON 数据。
 
-| 场景 | 配置 |
-| :-- | :-- |
-| 本地开发 | `pnpm dev:mock` |
+| 场景        | 配置                                                                    |
+| :---------- | :---------------------------------------------------------------------- |
+| 本地开发    | `pnpm dev:mock`                                                         |
 | Vercel 演示 | [`vercel.json`](./vercel.json) → `build:mock` + `REACTPRESS_MOCK_API=1` |
-| 持续集成 | 端口 **3010** 启动 Mock 服务，再执行 `pnpm run build:ci` |
+| 持续集成    | 端口 **3010** 启动 Mock 服务，再执行 `pnpm run build:ci`                |
 
 > [在线演示](https://reactpress-theme-starter.vercel.app) 运行于 Mock 模式 — 仅展示主题界面与示例数据，未连接生产 CMS。
 
@@ -311,20 +311,20 @@ node scripts/smoke-pages.mjs http://127.0.0.1:3001
 
 ### 生产部署
 
-| 步骤 | 操作 |
-| :--: | :-- |
-| 1 | 在托管平台 Import 或 Clone 本仓库 |
-| 2 | 配置 `REACTPRESS_API_URL`、`NEXT_PUBLIC_REACTPRESS_API_URL`、`CLIENT_SITE_URL` |
-| 3 | 构建命令改为 `pnpm run build`，并移除 `REACTPRESS_MOCK_API` |
-| 4 | 以 `pnpm start`（端口 **3001**）或平台 Next.js 运行时启动 |
+| 步骤 | 操作                                                                           |
+| :--: | :----------------------------------------------------------------------------- |
+|  1   | 在托管平台 Import 或 Clone 本仓库                                              |
+|  2   | 配置 `REACTPRESS_API_URL`、`NEXT_PUBLIC_REACTPRESS_API_URL`、`CLIENT_SITE_URL` |
+|  3   | 构建命令改为 `pnpm run build`，并移除 `REACTPRESS_MOCK_API`                    |
+|  4   | 以 `pnpm start`（端口 **3001**）或平台 Next.js 运行时启动                      |
 
 **环境变量示例**
 
-| 变量 | 示例值 |
-| :-- | :-- |
-| `REACTPRESS_API_URL` | `https://api.yoursite.com/api` |
-| `NEXT_PUBLIC_REACTPRESS_API_URL` | `/api` |
-| `CLIENT_SITE_URL` | `https://www.yoursite.com` |
+| 变量                             | 示例值                         |
+| :------------------------------- | :----------------------------- |
+| `REACTPRESS_API_URL`             | `https://api.yoursite.com/api` |
+| `NEXT_PUBLIC_REACTPRESS_API_URL` | `/api`                         |
+| `CLIENT_SITE_URL`                | `https://www.yoursite.com`     |
 
 > **说明：** `pnpm build` 会在构建阶段预取页面数据，构建时 ReactPress API 必须可访问。
 
@@ -361,12 +361,12 @@ reactpress-theme-starter/
 
 [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) 在 push / PR 至 `main` 或 `master` 时执行：
 
-| 步骤 | 任务 |
-| :--: | :-- |
-| 1 | ESLint 与 Prettier 校验 |
-| 2 | TypeScript 类型检查 *（当前为非阻塞）* |
-| 3 | 端口 **3010** 启动 Mock API |
-| 4 | 执行 `pnpm run build:ci` 生产构建 |
+| 步骤 | 任务                                   |
+| :--: | :------------------------------------- |
+|  1   | ESLint 与 Prettier 校验                |
+|  2   | TypeScript 类型检查 _（当前为非阻塞）_ |
+|  3   | 端口 **3010** 启动 Mock API            |
+|  4   | 执行 `pnpm run build:ci` 生产构建      |
 
 ### Monorepo 联调
 
@@ -376,13 +376,13 @@ reactpress-theme-starter/
 
 ## 相关资源
 
-| 资源 | 链接 |
-| :-- | :-- |
-| 在线演示 *（Mock）* | [reactpress-theme-starter.vercel.app](https://reactpress-theme-starter.vercel.app) |
-| ReactPress 文档 | [reactpress.surge.sh](https://reactpress.surge.sh/) |
-| ReactPress 源码 | [github.com/fecommunity/reactpress](https://github.com/fecommunity/reactpress) |
-| Toolkit 包 | [@fecommunity/reactpress-toolkit](https://www.npmjs.com/package/@fecommunity/reactpress-toolkit) |
-| 主题清单 Schema | [theme.manifest.schema.json](./theme.manifest.schema.json) |
+| 资源                | 链接                                                                                             |
+| :------------------ | :----------------------------------------------------------------------------------------------- |
+| 在线演示 _（Mock）_ | [reactpress-theme-starter.vercel.app](https://reactpress-theme-starter.vercel.app)               |
+| ReactPress 文档     | [reactpress.surge.sh](https://reactpress.surge.sh/)                                              |
+| ReactPress 源码     | [github.com/fecommunity/reactpress](https://github.com/fecommunity/reactpress)                   |
+| Toolkit 包          | [@fecommunity/reactpress-toolkit](https://www.npmjs.com/package/@fecommunity/reactpress-toolkit) |
+| 主题清单 Schema     | [theme.manifest.schema.json](./theme.manifest.schema.json)                                       |
 
 <br />
 

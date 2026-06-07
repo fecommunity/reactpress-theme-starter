@@ -61,15 +61,11 @@ function main() {
   console.log(`  API:    /api (mock routes, same-origin in browser)`)
   console.log('')
 
-  const child = spawn(
-    process.execPath,
-    [nextBin, 'start', '-p', String(port), ...passthrough],
-    {
-      cwd: projectRoot,
-      env: buildEnv(port),
-      stdio: 'inherit',
-    }
-  )
+  const child = spawn(process.execPath, [nextBin, 'start', '-p', String(port), ...passthrough], {
+    cwd: projectRoot,
+    env: buildEnv(port),
+    stdio: 'inherit',
+  })
 
   child.on('exit', (code, signal) => {
     if (signal) {

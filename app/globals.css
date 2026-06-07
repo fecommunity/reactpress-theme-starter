@@ -1461,24 +1461,12 @@ html[data-rp-loading]::before {
 .rp-recommend-scroll-viewport {
   height: calc(var(--rp-recommend-row-h) * var(--rp-recommend-visible));
   overflow: hidden;
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 5%,
-    #000 95%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 5%, #000 95%, transparent 100%);
   transition: mask-image 0.35s ease;
 }
 
 .rp-recommend-scroll-viewport.is-moving {
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 10%,
-    #000 90%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
 }
 
 .rp-recommend-scroll-track {

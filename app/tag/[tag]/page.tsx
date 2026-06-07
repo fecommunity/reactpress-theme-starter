@@ -1,8 +1,5 @@
 import TagArchiveClient from '@/components/views/TagArchiveClient'
-import {
-  buildListPageMetadata,
-  buildLocalizedListPageMetadata,
-} from '@/lib/reactpress/siteMetadata'
+import { buildLocalizedListPageMetadata } from '@/lib/reactpress/siteMetadata'
 import { generateTagStaticParams } from '@/lib/reactpress/staticParams'
 import {
   fetchTagArchivePageProps,
