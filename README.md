@@ -90,6 +90,41 @@ ReactPress API  ──REST──▶  Theme Starter (Next.js)  ──▶  Public 
 | Try without backend       | ✅ `pnpm dev:mock`                                                       | ❌ Usually needs content/API  |
 | Knowledge base & comments | ✅ Built-in                                                              | ❌ Roll your own              |
 | Customizable appearance   | ✅ Admin console + `theme.json`                                          | ❌ Hard-coded or manual       |
+| Lighthouse performance    | ✅ **95** out of the box (see below)                                     | ❌ Varies widely              |
+
+### Performance
+
+Built on Next.js 15 App Router with server rendering, static generation, and minimal client JavaScript — the theme delivers strong Core Web Vitals without extra tuning.
+
+<div align="center">
+
+<img src="./public/lighthouse.png" alt="Lighthouse audit: Performance 95, Accessibility 100, Best Practices 100, SEO 100" width="720" />
+
+</div>
+
+| Category        | Score  |
+| :-------------- | :----- |
+| Performance     | **95** |
+| Accessibility   | **100** |
+| Best Practices  | **100** |
+| SEO             | **100** |
+
+**Core Web Vitals** (homepage audit on the [live demo](https://reactpress-theme-starter.vercel.app)):
+
+| Metric                         | Result   |
+| :----------------------------- | :------- |
+| First Contentful Paint (FCP)   | **0.4 s** |
+| Largest Contentful Paint (LCP) | **1.0 s** |
+| Total Blocking Time (TBT)      | **150 ms** |
+| Cumulative Layout Shift (CLS)  | **0**    |
+| Speed Index                    | **1.1 s** |
+
+**Why it feels fast:**
+
+- **SSR + SSG** — pages render on the server; static routes are pre-built at deploy time
+- **Zero layout shift** — stable typography and layout from first paint
+- **Light client bundle** — content-first UI without heavy runtime overhead
+- **SEO-ready** — metadata, Open Graph, RSS, and sitemap included
 
 ---
 
