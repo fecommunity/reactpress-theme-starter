@@ -39,7 +39,19 @@ A lightweight, simple, and easy-to-use Next.js theme, powered by [ReactPress](ht
 
 ## Try in 60 seconds (no backend)
 
-Preview the full theme UI with built-in sample data — no ReactPress install required:
+Preview the full theme UI with built-in sample data — no ReactPress install required.
+
+### Option A — `create-next-app` (recommended)
+
+Bootstrap from this repository with the [official Next.js CLI](https://nextjs.org/docs/app/api-reference/cli/create-next-app):
+
+```bash
+npx create-next-app@latest my-blog --example "https://github.com/fecommunity/reactpress-theme-starter" --use-pnpm
+cd my-blog
+pnpm dev:mock
+```
+
+### Option B — clone manually
 
 ```bash
 git clone https://github.com/fecommunity/reactpress-theme-starter.git
@@ -50,7 +62,11 @@ pnpm dev:mock
 
 Open **http://localhost:3001** — same mode as the [live demo](https://reactpress-theme-starter.vercel.app).
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/fecommunity/reactpress-theme-starter)
+### Deploy to Vercel (zero env vars)
+
+One-click deploy uses [`vercel.json`](./vercel.json) with mock data — no backend required.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffecommunity%2Freactpress-theme-starter&project-name=reactpress-theme&repository-name=reactpress-theme&demo-title=ReactPress%20Theme%20Starter&demo-description=Next.js%2015%20headless%20blog%20theme%20with%20mock%20mode%20%E2%80%94%20no%20backend%20required&demo-url=https%3A%2F%2Freactpress-theme-starter.vercel.app&demo-image=https%3A%2F%2Fraw.githubusercontent.com%2Ffecommunity%2Freactpress-theme-starter%2Fmaster%2Fpublic%2Fhome-dark.png)
 
 ---
 
@@ -168,7 +184,7 @@ See `.env.example` for optional variables (subpath deploy, GitHub OAuth, remote 
 
 ### Demo (Vercel)
 
-Import this repo as-is — [`vercel.json`](./vercel.json) uses `build:mock` with mock data. See [Try in 60 seconds](#try-in-60-seconds-no-backend) for the one-click deploy button.
+Import this repo as-is — [`vercel.json`](./vercel.json) uses `build:mock` with mock data. See [Deploy to Vercel](#deploy-to-vercel-zero-env-vars) above for the one-click button with live demo preview.
 
 > The [live demo](https://reactpress-theme-starter.vercel.app) runs in mock mode (UI + sample data only).
 
