@@ -37,7 +37,7 @@ jobs:
 
   publish:
     needs: check
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && secrets.NPM_TOKEN != ''
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -61,10 +61,6 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          if [ -z "${NPM_TOKEN}" ]; then
-            echo "::error::NPM_TOKEN secret is not configured. Add an npm Automation token in GitHub repo Settings → Secrets → Actions."
-            exit 1
-          fi
           {
             echo "registry=https://registry.npmjs.org/"
             echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}"
