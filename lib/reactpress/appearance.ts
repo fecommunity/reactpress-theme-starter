@@ -37,7 +37,7 @@ function darkenHex(hex: string, amount = 0.22): string {
 }
 
 /** Maps Customizer color mods to Tailwind v4 primary scale overrides. */
-export function buildMyBlogAppearanceCss(mods: ThemeMods): string {
+export function buildThemeStarterAppearanceCss(mods: ThemeMods): string {
   const base = buildBrandingAppearanceCss(mods)
   const lightPrimary = normalizeHex(modValue(mods, 'primaryColor'))
   const darkPrimary = normalizeHex(modValue(mods, 'darkPrimaryColor'))

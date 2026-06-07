@@ -54,7 +54,7 @@ export default async function CategoryArchivePage({ params }: PageProps) {
       <CategoryClient initialArticles={data.articles} total={data.total} category={data.category} />
     )
   } catch (error) {
-    console.error('[my-blog] category archive fetch failed', error)
+    console.error('[reactpress-theme-starter] category archive fetch failed', error)
     notFound()
   }
 }

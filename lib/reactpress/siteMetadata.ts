@@ -74,7 +74,7 @@ export async function buildRootMetadata(): Promise<Metadata> {
       robots: { index: true, follow: true },
     }
   } catch (error) {
-    console.error('[my-blog] root metadata fetch failed', error)
+    console.error('[reactpress-theme-starter] root metadata fetch failed', error)
     return {
       title: { default: 'Blog', template: '%s - Blog' },
       description: DEFAULT_DESCRIPTION,
@@ -104,7 +104,7 @@ export async function buildHomePageMetadata(): Promise<Metadata> {
       images: [DEFAULT_OG_IMAGE],
     })
   } catch (error) {
-    console.error('[my-blog] home metadata fetch failed', error)
+    console.error('[reactpress-theme-starter] home metadata fetch failed', error)
     return { title: { absolute: 'Blog' } }
   }
 }
@@ -136,7 +136,7 @@ export async function buildListPageMetadata(
       images: [DEFAULT_OG_IMAGE],
     })
   } catch (error) {
-    console.error('[my-blog] list page metadata fetch failed', error)
+    console.error('[reactpress-theme-starter] list page metadata fetch failed', error)
     return { title: pageTitle }
   }
 }

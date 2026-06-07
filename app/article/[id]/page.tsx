@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const imageUrl = resolveAbsoluteImageUrl(article.cover, site.siteUrl)
     return buildArticleMetadata(article, site, imageUrl)
   } catch (error) {
-    console.error('[my-blog] article metadata fetch failed', error)
+    console.error('[reactpress-theme-starter] article metadata fetch failed', error)
     return {}
   }
 }
@@ -86,7 +86,7 @@ export default async function ArticlePage({ params }: PageProps) {
       </>
     )
   } catch (error) {
-    console.error('[my-blog] article page fetch failed', error)
+    console.error('[reactpress-theme-starter] article page fetch failed', error)
     notFound()
   }
 }

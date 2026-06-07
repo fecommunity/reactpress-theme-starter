@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const site = parseSiteSeoContext(settingRow, siteMeta)
     return buildKnowledgeChapterMetadata(data.chapter, data.book, site)
   } catch (error) {
-    console.error('[my-blog] knowledge chapter metadata fetch failed', error)
+    console.error('[reactpress-theme-starter] knowledge chapter metadata fetch failed', error)
     return {}
   }
 }
@@ -48,7 +48,7 @@ export default async function KnowledgeChapterPage({ params }: PageProps) {
     }
     return <KnowledgeChapterClient pId={pId} id={id} book={data.book} chapter={data.chapter} />
   } catch (error) {
-    console.error('[my-blog] knowledge chapter page fetch failed', error)
+    console.error('[reactpress-theme-starter] knowledge chapter page fetch failed', error)
     notFound()
   }
 }

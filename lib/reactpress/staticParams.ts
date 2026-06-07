@@ -18,7 +18,7 @@ export async function generateArticleStaticParams() {
     const [articles] = unpackPaginatedPair<IArticle>(response)
     return articles.map((article) => ({ id: article.id }))
   } catch (error) {
-    console.error('[my-blog] article static params failed', error)
+    console.error('[reactpress-theme-starter] article static params failed', error)
     return []
   }
 }
@@ -29,7 +29,7 @@ export async function generateTagStaticParams() {
     const tags = unpackList<ITag>(response).slice(0, STATIC_PARAM_LIMIT)
     return tags.map((tag) => ({ tag: tag.value }))
   } catch (error) {
-    console.error('[my-blog] tag static params failed', error)
+    console.error('[reactpress-theme-starter] tag static params failed', error)
     return []
   }
 }
@@ -40,7 +40,7 @@ export async function generateCategoryStaticParams() {
     const categories = unpackList<ICategory>(response).slice(0, STATIC_PARAM_LIMIT)
     return categories.map((category) => ({ category: category.value }))
   } catch (error) {
-    console.error('[my-blog] category static params failed', error)
+    console.error('[reactpress-theme-starter] category static params failed', error)
     return []
   }
 }

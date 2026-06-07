@@ -181,8 +181,8 @@ export function ReactPressAppProviders({ bootstrap, children }: Props) {
       locales={locales}
       messages={messages}
       catalog={i18nCatalog}
-      themeId="my-blog"
-      activeThemeId="my-blog"
+      themeId="reactpress-theme-starter"
+      activeThemeId="reactpress-theme-starter"
       mods={themeMods}
       onLocaleChange={changeLocale}
     >

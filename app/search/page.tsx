@@ -39,7 +39,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
     articles = searchData.articles
     navConfig = navData
   } catch (error) {
-    console.error('[my-blog] search page fetch failed', error)
+    console.error('[reactpress-theme-starter] search page fetch failed', error)
   }
 
   return <SearchClient keyword={trimmed} articles={articles} navConfig={navConfig} />

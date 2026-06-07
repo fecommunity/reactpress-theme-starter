@@ -52,7 +52,7 @@ export default async function TagArchivePage({ params }: PageProps) {
     const data = await withApiRetry(() => fetchTagArchivePageProps(themeApi, tagValue))
     return <TagArchiveClient initialArticles={data.articles} total={data.total} tag={data.tag} />
   } catch (error) {
-    console.error('[my-blog] tag archive fetch failed', error)
+    console.error('[reactpress-theme-starter] tag archive fetch failed', error)
     notFound()
   }
 }

@@ -46,7 +46,7 @@ export default async function Page() {
     total = data.total
     recommendedArticles = data.recommendedArticles
   } catch (error) {
-    console.error('[my-blog] home page fetch failed', error)
+    console.error('[reactpress-theme-starter] home page fetch failed', error)
   }
 
   return (

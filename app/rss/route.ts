@@ -39,7 +39,7 @@ export async function GET() {
     setting = settingResult
     categories = categoriesResult
   } catch (error) {
-    console.error('[my-blog] rss fetch failed', error)
+    console.error('[reactpress-theme-starter] rss fetch failed', error)
   }
 
   const siteUrl = setting.systemUrl || getClientSiteUrl()

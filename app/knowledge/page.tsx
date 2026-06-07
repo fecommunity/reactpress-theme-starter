@@ -22,7 +22,7 @@ export default async function KnowledgePage() {
     books = data.books
     total = data.total
   } catch (error) {
-    console.error('[my-blog] knowledge page fetch failed', error)
+    console.error('[reactpress-theme-starter] knowledge page fetch failed', error)
   }
 
   return <KnowledgeClient initialBooks={books} total={total} />

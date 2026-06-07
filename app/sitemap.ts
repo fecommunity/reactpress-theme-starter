@@ -31,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: article.updateAt ?? article.publishAt ?? new Date(),
     }))
   } catch (error) {
-    console.error('[my-blog] sitemap fetch failed', error)
+    console.error('[reactpress-theme-starter] sitemap fetch failed', error)
   }
 
   return [...staticRoutes, ...articleRoutes]

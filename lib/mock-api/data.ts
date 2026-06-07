@@ -390,12 +390,12 @@ export const mockSetting = {
     en: mockGlobalConfigBundleEn,
     zh: mockGlobalConfigBundleZh,
     theme: {
-      activeTheme: 'my-blog',
-      installedThemes: ['my-blog'],
+      activeTheme: 'reactpress-theme-starter',
+      installedThemes: ['reactpress-theme-starter'],
       mods: {},
     },
     config: {
-      'my-blog': mockThemeConfig,
+      'reactpress-theme-starter': mockThemeConfig,
     },
   }),
 }
@@ -553,7 +553,7 @@ ${mockFigure(mockImages.logo, 'Quick Start with ReactPress CLI', 'Three commands
 </ul>
 <h3>Install and run</h3>
 <pre><code>npm i -g @fecommunity/reactpress@3
-mkdir my-blog &amp;&amp; cd my-blog
+mkdir reactpress-theme-starter &amp;&amp; cd reactpress-theme-starter
 reactpress init
 reactpress dev</code></pre>
 <p>When <code>dev</code> is ready, open the URLs printed in the terminal:</p>

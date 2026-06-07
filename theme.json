@@ -1,7 +1,7 @@
 {
   "$schema": "./theme.manifest.schema.json",
-  "id": "my-blog",
-  "name": "My Blog",
+  "id": "reactpress-theme-starter",
+  "name": "ReactPress Theme Starter",
   "version": "1.0.0",
   "description": "Tailwind 风格博客主题，Next.js App Router + ReactPress 动态内容，支持深浅色、评论、知识库与网址导航。",
   "author": "ReactPress",

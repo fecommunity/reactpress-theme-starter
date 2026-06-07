@@ -37,7 +37,7 @@ export default async function NavDetailPage({ params }: PageProps) {
       getSetting: () => SettingProvider.getSetting(),
     })
   } catch (error) {
-    console.error('[my-blog] nav detail config fetch failed', error)
+    console.error('[reactpress-theme-starter] nav detail config fetch failed', error)
   }
 
   return <NavDetailClient siteKey={siteKey} navConfig={navConfig} />

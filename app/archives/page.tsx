@@ -21,7 +21,7 @@ export default async function ArchivesPage() {
     const data = await withApiRetry(() => fetchArchivesPageProps(themeApi))
     articles = data.articles
   } catch (error) {
-    console.error('[my-blog] archives fetch failed', error)
+    console.error('[reactpress-theme-starter] archives fetch failed', error)
   }
 
   return <ArchivesClient articles={articles} />

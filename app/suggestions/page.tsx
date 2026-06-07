@@ -41,7 +41,7 @@ export default async function SuggestionsPage() {
     }
     return <CmsPageClient page={page} />
   } catch (error) {
-    console.error('[my-blog] suggestions page fetch failed', error)
+    console.error('[reactpress-theme-starter] suggestions page fetch failed', error)
     notFound()
   }
 }

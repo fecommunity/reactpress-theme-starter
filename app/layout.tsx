@@ -6,7 +6,7 @@ import BackToTop from '@/components/layout/BackToTop'
 import ConditionalSiteFooter from '@/components/layout/ConditionalSiteFooter'
 import PageContainer from '@/components/layout/PageContainer'
 import { loadAppBootstrap } from '@/lib/reactpress/bootstrap'
-import { buildMyBlogAppearanceCss } from '@/lib/reactpress/appearance'
+import { buildThemeStarterAppearanceCss } from '@/lib/reactpress/appearance'
 import { getApiPreconnectOrigin } from '@/lib/reactpress/env'
 import { ReactPressAppProviders } from '@/lib/reactpress/providers'
 import { buildRootMetadata } from '@/lib/reactpress/siteMetadata'
@@ -29,7 +29,7 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const bootstrap = await loadAppBootstrap('/')
-  const appearanceCss = buildMyBlogAppearanceCss(bootstrap.themeMods)
+  const appearanceCss = buildThemeStarterAppearanceCss(bootstrap.themeMods)
   const basePath = process.env.BASE_PATH || ''
   const apiPreconnect = getApiPreconnectOrigin()
   const rootMetadata = await buildRootMetadata()

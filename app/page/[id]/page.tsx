@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const site = parseSiteSeoContext(settingRow, siteMeta)
     return buildCmsPageMetadata(page, site)
   } catch (error) {
-    console.error('[my-blog] cms page metadata fetch failed', error)
+    console.error('[reactpress-theme-starter] cms page metadata fetch failed', error)
     return {}
   }
 }
@@ -51,7 +51,7 @@ export default async function CmsPage({ params }: PageProps) {
     }
     return <CmsPageClient page={page} />
   } catch (error) {
-    console.error('[my-blog] cms page fetch failed', error)
+    console.error('[reactpress-theme-starter] cms page fetch failed', error)
     notFound()
   }
 }

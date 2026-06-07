@@ -46,8 +46,8 @@ Preview the full theme UI with built-in sample data — no ReactPress install re
 Bootstrap from this repository with the [official Next.js CLI](https://nextjs.org/docs/app/api-reference/cli/create-next-app):
 
 ```bash
-npx create-next-app@latest my-blog --example "https://github.com/fecommunity/reactpress-theme-starter" --use-pnpm
-cd my-blog
+npx create-next-app@latest reactpress-theme-starter --example "https://github.com/fecommunity/reactpress-theme-starter" --use-pnpm
+cd reactpress-theme-starter
 pnpm dev:mock
 ```
 

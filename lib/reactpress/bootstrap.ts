@@ -40,7 +40,7 @@ export async function loadAppBootstrap(pathname = '/'): Promise<AppBootstrapResu
     )
     return { ...slimmed, categories }
   } catch (error) {
-    console.error('[my-blog] fetchAppBootstrap failed, using defaults', error)
+    console.error('[reactpress-theme-starter] fetchAppBootstrap failed, using defaults', error)
     return createDefaultAppBootstrap()
   }
 }

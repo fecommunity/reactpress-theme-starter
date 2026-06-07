@@ -41,7 +41,7 @@ export default async function KnowledgeBookPage({ params }: PageProps) {
     }
     return <KnowledgeBookClient pId={pId} book={data.book} otherBooks={data.otherBooks} />
   } catch (error) {
-    console.error('[my-blog] knowledge book page fetch failed', error)
+    console.error('[reactpress-theme-starter] knowledge book page fetch failed', error)
     notFound()
   }
 }
