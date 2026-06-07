@@ -40,7 +40,19 @@ jobs:
       - name: Set publish version
         run: node scripts/set-publish-version.mjs "1.0.${{ github.run_number }}"
 
+      - name: Configure npm auth for pnpm
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "${NPM_TOKEN}" ]; then
+            echo "::error::NPM_TOKEN secret is not configured. Add an npm Automation token in GitHub repo Settings → Secrets → Actions."
+            exit 1
+          fi
+          {
+            echo "registry=https://registry.npmjs.org/"
+            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}"
+            echo "@fecommunity:registry=https://registry.npmjs.org/"
+          } > "${HOME}/.npmrc"
+
       - name: Publish to npm
         run: pnpm publish --access public --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
