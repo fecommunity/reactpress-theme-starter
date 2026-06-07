@@ -1,4 +1,9 @@
 import {
+  mockAuthGithub,
+  mockAuthLogin,
+  mockAuthRegister,
+} from './auth'
+import {
   filterMockArticlesByCategory,
   filterMockArticlesByTag,
   getMockArticleById,
@@ -27,6 +32,7 @@ function findMockKnowledgeById(id: string) {
 
 type MatchOptions = {
   keyword?: string
+  body?: unknown
 }
 
 function jsonEnvelope(data: unknown, status = 200): Response {
@@ -54,6 +60,16 @@ export function matchMockRoute(
   options: MatchOptions = {}
 ): Response | null {
   const path = normalizePath(segments)
+
+  if (method === 'POST' && path === '/auth/login') {
+    return mockAuthLogin(options.body)
+  }
+  if (method === 'POST' && path === '/auth/github') {
+    return mockAuthGithub(options.body)
+  }
+  if (method === 'POST' && path === '/user/register') {
+    return mockAuthRegister(options.body)
+  }
 
   if (method === 'POST' && path === '/setting/get') {
     return jsonEnvelope(mockSetting)

@@ -1,9 +1,11 @@
 'use client'
 
+import Link from '@/components/shared/Link'
 import { getAdminBaseUrl } from '@/lib/reactpress/env'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import { resolveImageUrl, useSiteUser } from '@fecommunity/reactpress-toolkit/theme'
-import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useMemo, useState } from 'react'
 
 function resolveAdminHref(): string {
   const configured = process.env.NEXT_PUBLIC_REACTPRESS_ADMIN_URL?.trim()
@@ -12,16 +14,19 @@ function resolveAdminHref(): string {
   return `${getAdminBaseUrl()}/`
 }
 
-function resolveAdminAuthHref(path: 'login' | 'register'): string {
-  return `${resolveAdminHref()}${path}`
+function resolveThemeAuthHref(path: 'login' | 'register', from: string): string {
+  const safeFrom = from.startsWith('/') ? from : '/'
+  return `/${path}?from=${encodeURIComponent(safeFrom)}`
 }
 
 type UserAuthLayout = 'header' | 'drawer'
 
 export default function UserAuth({ layout = 'header' }: { layout?: UserAuthLayout }) {
   const { t } = useLocale()
+  const pathname = usePathname() ?? '/'
   const { user, removeUser } = useSiteUser()
   const [menuOpen, setMenuOpen] = useState(false)
+  const authFrom = useMemo(() => pathname, [pathname])
 
   if (user?.name) {
     const initial = user.name.trim().charAt(0).toUpperCase()
@@ -87,36 +92,36 @@ export default function UserAuth({ layout = 'header' }: { layout?: UserAuthLayou
   if (layout === 'drawer') {
     return (
       <div className="flex w-full flex-col gap-2">
-        <a
-          href={resolveAdminAuthHref('login')}
+        <Link
+          href={resolveThemeAuthHref('login', authFrom)}
           className="inline-flex h-11 w-full items-center justify-center rounded-lg border border-[var(--border-color)] bg-[var(--bg-box)] text-sm font-medium text-[var(--main-text-color)] no-underline transition-colors hover:border-[var(--primary-color)] hover:text-[var(--primary-color)]"
         >
           {loginLabel}
-        </a>
-        <a
-          href={resolveAdminAuthHref('register')}
+        </Link>
+        <Link
+          href={resolveThemeAuthHref('register', authFrom)}
           className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-[var(--primary-color)] text-sm font-medium text-white no-underline transition-opacity hover:opacity-90"
         >
           {registerLabel}
-        </a>
+        </Link>
       </div>
     )
   }
 
   return (
     <div className="flex shrink-0 items-center gap-2">
-      <a
-        href={resolveAdminAuthHref('login')}
+      <Link
+        href={resolveThemeAuthHref('login', authFrom)}
         className="inline-flex h-8 items-center justify-center rounded-lg border border-[var(--border-color)] bg-transparent px-3 text-sm text-[var(--main-text-color)] no-underline transition-colors hover:border-[var(--primary-color)] hover:text-[var(--primary-color)]"
       >
         {loginLabel}
-      </a>
-      <a
-        href={resolveAdminAuthHref('register')}
+      </Link>
+      <Link
+        href={resolveThemeAuthHref('register', authFrom)}
         className="inline-flex h-8 items-center justify-center rounded-lg bg-[var(--primary-color)] px-3 text-sm font-medium text-white no-underline transition-opacity hover:opacity-90"
       >
         {registerLabel}
-      </a>
+      </Link>
     </div>
   )
 }

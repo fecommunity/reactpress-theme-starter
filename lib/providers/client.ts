@@ -2,11 +2,19 @@ import { createThemeHttpStack } from '@fecommunity/reactpress-toolkit/theme'
 import { normalizeList, normalizePaginated } from '@/lib/reactpress/normalizeApiResponse'
 import { materializeProvider } from '@/lib/providers/materializeProvider'
 
+/** API messages already shown in UI (login form, etc.) — skip dev console noise. */
+function isExpectedClientError(message: string, status?: number): boolean {
+  if (status === 400 || status === 401 || status === 403) return true
+  return /用户名|密码|登录|注册|邮箱|授权|已存在|锁定|未认证|无权|Unauthorized|Request failed/i.test(
+    message
+  )
+}
+
 const stack = createThemeHttpStack({
-  onError: (msg) => {
-    if (process.env.NODE_ENV === 'development') {
-      console.error('[my-blog]', msg)
-    }
+  onError: (msg, status) => {
+    if (process.env.NODE_ENV !== 'development') return
+    if (isExpectedClientError(msg, status)) return
+    console.error('[my-blog]', msg)
   },
 })
 

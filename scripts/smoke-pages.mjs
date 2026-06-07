@@ -28,6 +28,7 @@ const pages = [
   ['/knowledge/reactpress-docs/api-overview/', 200],
   ['/knowledge/reactpress-docs/theme-manifest/', 200],
   ['/login/', 200],
+  ['/register/', 200],
   ['/nav/example.com/', 200],
   ['/this-page-does-not-exist/', 404],
   ['/rss/', 200],
