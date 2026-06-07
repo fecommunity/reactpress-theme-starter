@@ -39,7 +39,6 @@ jobs:
     needs: check
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
-    environment: NPM_TOKEN
     permissions:
       contents: read
     steps:
