@@ -99,7 +99,7 @@ export default function ArticleCarousel({ articles = [] }: ArticleCarouselProps)
 
   return (
     <section
-      className="rp-carousel group/carousel relative isolate overflow-hidden rounded-xl bg-[var(--bg-second)] shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5"
+      className={`rp-carousel group/carousel relative isolate overflow-hidden rounded-xl bg-[var(--bg-second)] shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5${paused ? ' is-paused' : ''}`}
       aria-roledescription="carousel"
       aria-label={t('recommendToReading')}
       style={{ '--rp-autoplay-ms': `${AUTOPLAY_MS}ms` } as CSSProperties}
@@ -130,9 +130,10 @@ export default function ArticleCarousel({ articles = [] }: ArticleCarouselProps)
             >
               {shouldLoadImage ? (
                 <img
+                  key={isActive ? `cover-${progressKey}` : article.id}
                   src={coverSrc}
                   alt=""
-                  className="rp-cover-zoom absolute inset-0 h-full w-full bg-[var(--bg-second)] object-contain object-center"
+                  className="rp-cover-zoom rp-carousel-cover-motion absolute inset-0 h-full w-full bg-[var(--bg-second)] object-contain object-center"
                   width={1200}
                   height={460}
                   decoding={index === 0 ? 'sync' : 'async'}
