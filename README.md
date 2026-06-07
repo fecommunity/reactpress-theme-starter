@@ -48,21 +48,36 @@ ReactPress API  ──REST──▶  Theme Starter (Next.js)  ──▶  Public 
 
 **Requirements:** Node.js 20+, pnpm 9+
 
-```bash
-git clone https://github.com/fecommunity/reactpress-theme-starter.git
-cd reactpress-theme-starter
-pnpm install
-pnpm dev:mock
-```
+### Recommended — ReactPress CLI
 
-Open **http://localhost:3001** — no backend needed. Mock mode serves sample data from [`lib/mock-api/data.ts`](./lib/mock-api/data.ts).
-
-### Connect to a live API
+The fastest way to run a full stack (visitor site, admin console, and API) is the [ReactPress CLI](https://reactpress.surge.sh/). No manual `.env` wiring for a standard setup.
 
 ```bash
-cp .env.example .env   # edit API URLs
-pnpm dev               # default: http://localhost:3002/api
+npm i -g @fecommunity/reactpress@3
+reactpress init
+reactpress dev
 ```
+
+<div align="center">
+
+<img src="./public/cli.png" alt="ReactPress CLI interactive menu" width="100%" />
+
+</div>
+
+After startup, open the URLs printed in the terminal (typically the public site, admin, and API). Use `reactpress doctor` if something fails to start.
+
+**Use this theme with the CLI**
+
+1. Clone this repository and install dependencies (`pnpm install`).
+2. Start the API with `reactpress dev --api-only` (or run the full stack and point the theme at the API).
+3. Copy [`.env.example`](./.env.example) to `.env` if needed — default local API is `http://localhost:3002/api`.
+4. In the theme directory, run:
+
+```bash
+pnpm dev
+```
+
+Open **http://localhost:3001** — the theme loads live content from your ReactPress API.
 
 Remote API during development:
 
@@ -70,25 +85,40 @@ Remote API during development:
 pnpm dev -- --remote-origin api.yoursite.com
 ```
 
+### Local theme preview (mock — no backend)
+
+To work on UI, layout, or styling **without** installing ReactPress or running the API, use the built-in mock server:
+
+```bash
+git clone https://github.com/fecommunity/reactpress-theme-starter.git
+cd reactpress-theme-starter
+pnpm install
+pnpm dev:mock
+```
+
+Open **http://localhost:3001** — sample data comes from [`lib/mock-api/data.ts`](./lib/mock-api/data.ts). This is the same mode used by the [Vercel demo](https://reactpress-theme-starter.vercel.app).
+
 ---
 
 ## Commands
 
-| Command              | Purpose                                  |
-| :------------------- | :--------------------------------------- |
-| `pnpm dev:mock`      | Dev server + mock API                    |
-| `pnpm dev`           | Dev server + live ReactPress API         |
-| `pnpm build:mock`    | Production build with mock data          |
-| `pnpm build`         | Production build (API must be reachable) |
-| `pnpm start`         | Run production server on port **3001**   |
-| `pnpm run check`     | ESLint + Prettier                        |
-| `pnpm run typecheck` | TypeScript check                         |
+| Command              | Purpose                                                       |
+| :------------------- | :------------------------------------------------------------ |
+| `pnpm dev`           | Theme dev server + live ReactPress API (CLI or remote)          |
+| `pnpm dev:mock`      | Theme dev server + built-in mock API (no backend)             |
+| `pnpm build:mock`    | Production build with mock data (Vercel demo / offline build) |
+| `pnpm build`         | Production build (API must be reachable at build time)        |
+| `pnpm start`         | Run production server on port **3001**                        |
+| `pnpm run check`     | ESLint + Prettier                                             |
+| `pnpm run typecheck` | TypeScript check                                              |
+
+For full-stack local development (site + admin + API), prefer **`reactpress dev`** from the ReactPress CLI — see [Quick Start](#quick-start).
 
 ---
 
 ## Configuration
 
-Copy [`.env.example`](./.env.example) to `.env` for live API mode.
+When using **`pnpm dev`** against a live API, copy [`.env.example`](./.env.example) to `.env`. Mock mode (`pnpm dev:mock`) and the ReactPress CLI handle most setup for you.
 
 | Variable                         | Description                                     |
 | :------------------------------- | :---------------------------------------------- |
