@@ -345,7 +345,7 @@ node scripts/smoke-pages.mjs http://127.0.0.1:3001
 ```text
 reactpress-theme-starter/
 ├── app/                    # App Router 页面、订阅源、站点地图、Mock API 路由
-├── components/             # 布局、文章、评论、搜索、组件、视图
+├── components/             # 布局、文章、评论、搜索、小部件、视图
 ├── lib/
 │   ├── mock-api/           # Mock 数据与路由匹配
 │   └── reactpress/         # 启动、元数据、外观、SEO 工具

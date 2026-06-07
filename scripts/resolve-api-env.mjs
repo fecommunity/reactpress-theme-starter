@@ -5,8 +5,6 @@ export const DEFAULT_LOCAL_API = 'http://localhost:3002/api'
 export const DEFAULT_LOCAL_SITE = 'http://localhost:3001'
 export const DEFAULT_LOCAL_ADMIN = 'http://localhost:3000'
 export const DEFAULT_THEME_DEV_PORT = 3001
-/** Public demo API when Vercel deploy has no env configured. */
-export const DEFAULT_VERCEL_DEMO_API = 'https://reactpress-theme-starter.vercel.app/api'
 export const DEFAULT_VERCEL_DEMO_SITE = 'https://reactpress-theme-starter.vercel.app'
 
 function trimUrl(value) {
@@ -66,10 +64,6 @@ export function resolveThemeApiEnv(processEnv = process.env) {
   // Vercel runtime: SSR should call this deployment's /api mock route handler.
   if (mockEnabled && processEnv.VERCEL === '1' && !explicitServer) {
     serverApi = `${resolveClientSiteUrl(processEnv)}/api`
-  }
-
-  if (processEnv.VERCEL === '1' && isLocalhostUrl(serverApi) && !mockEnabled) {
-    serverApi = DEFAULT_VERCEL_DEMO_API
   }
 
   let publicApi = explicitPublic

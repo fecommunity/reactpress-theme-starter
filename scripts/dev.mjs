@@ -28,8 +28,8 @@ const projectRoot = path.resolve(__dirname, '..')
 
 const ERROR_MESSAGES = {
   REMOTE_DEFAULT_REQUIRED:
-    'remote 需配合 URL：使用 --remote-origin 或为 REACTPRESS_DEV_REMOTE_ORIGIN 填写地址',
-  INVALID_ORIGIN: '无效的 API 地址，请使用域名或完整 URL（如 api.yoursite.com）',
+    'remote mode requires a URL: pass --remote-origin or set REACTPRESS_DEV_REMOTE_ORIGIN',
+  INVALID_ORIGIN: 'Invalid API origin — use a hostname or full URL (e.g. api.yoursite.com)',
 }
 
 function parseArgs(argv) {
@@ -115,7 +115,7 @@ function resolveThemeApiEnv(cli) {
       cli.adminOrigin === undefined &&
       cli.clientOrigin === undefined
     ) {
-      console.error('[dev] --remote-origin 需要填写地址（如 api.yoursite.com）')
+      console.error('[dev] --remote-origin requires a hostname (e.g. api.yoursite.com)')
       process.exit(1)
     }
 
