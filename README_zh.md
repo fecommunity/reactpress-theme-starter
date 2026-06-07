@@ -8,7 +8,11 @@
 
 **ReactPress Theme Starter**
 
-<a href="https://github.com/fecommunity/reactpress">ReactPress</a> 官方 Headless 访客站主题 — 基于 Next.js，通过 REST API 渲染后台内容。
+一个轻量、简单、易用的 Next.js 主题，powered by <a href="https://github.com/fecommunity/reactpress">ReactPress</a>。
+
+<a href="https://reactpress-theme-starter.vercel.app">
+  <img src="./public/home-dark.png" alt="ReactPress Theme Starter 界面预览" width="100%" />
+</a>
 
 <br />
 

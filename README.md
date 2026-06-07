@@ -8,7 +8,11 @@
 
 **ReactPress Theme Starter**
 
-Official headless visitor theme for [ReactPress](https://github.com/fecommunity/reactpress) — a Next.js frontend that renders content from the ReactPress REST API.
+A lightweight, simple, and easy-to-use Next.js theme, powered by [ReactPress](https://github.com/fecommunity/reactpress).
+
+<a href="https://reactpress-theme-starter.vercel.app">
+  <img src="./public/home-dark.png" alt="ReactPress Theme Starter preview" width="100%" />
+</a>
 
 <br />
 
