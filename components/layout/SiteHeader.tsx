@@ -142,7 +142,7 @@ export default function SiteHeader() {
   const desktopNavLinkClass = (isActive: boolean) =>
     `rp-nav-link inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg px-3 text-sm no-underline ${
       isActive
-        ? 'bg-[var(--bg-second)] font-medium text-[var(--primary-color)] dark:text-[#ff6659]'
+        ? 'bg-[var(--bg-second)] font-medium text-[var(--primary-button-bg)] dark:text-[#ff6659]'
         : 'text-[var(--second-text-color)] hover:bg-[var(--bg-second)] hover:text-[var(--main-text-color)]'
     }`
 

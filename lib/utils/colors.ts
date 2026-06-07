@@ -72,17 +72,44 @@ export function getReadableTextColor(backgroundColor: string): '#ffffff' | '#1a1
   return whiteContrast >= blackContrast ? '#ffffff' : '#1a1a1a'
 }
 
-export function getTagStyle(backgroundColor: string): { backgroundColor: string; color: string } {
+function adjustTagColors(
+  backgroundColor: string,
+  textColor: '#ffffff' | '#1a1a1a',
+  factor: number
+): { backgroundColor: string; color: string } | null {
   let bg = backgroundColor
-  let color = getReadableTextColor(bg)
 
-  for (let attempt = 0; attempt < 12 && contrastBetween(bg, color) < 4.5; attempt += 1) {
+  for (let attempt = 0; attempt < 16; attempt += 1) {
+    if (contrastBetween(bg, textColor) >= 4.5) {
+      return { backgroundColor: bg, color: textColor }
+    }
     const rgb = parseHexColor(bg)
     if (!rgb) break
-    const factor = color === '#ffffff' ? 0.88 : 1.12
     bg = toHex(rgb[0] * factor, rgb[1] * factor, rgb[2] * factor)
-    color = getReadableTextColor(bg)
   }
 
-  return { backgroundColor: bg, color }
+  return null
+}
+
+export function getTagStyle(backgroundColor: string): { backgroundColor: string; color: string } {
+  const whitePath = adjustTagColors(backgroundColor, '#ffffff', 0.85)
+  const blackPath = adjustTagColors(backgroundColor, '#1a1a1a', 1.12)
+
+  if (whitePath && blackPath) {
+    const originalContrast = Math.max(
+      contrastBetween(backgroundColor, '#ffffff'),
+      contrastBetween(backgroundColor, '#1a1a1a')
+    )
+    const whiteDelta = Math.abs(contrastBetween(whitePath.backgroundColor, '#ffffff') - originalContrast)
+    const blackDelta = Math.abs(contrastBetween(blackPath.backgroundColor, '#1a1a1a') - originalContrast)
+    return whiteDelta <= blackDelta ? whitePath : blackPath
+  }
+
+  return (
+    whitePath ??
+    blackPath ?? {
+      backgroundColor,
+      color: getReadableTextColor(backgroundColor),
+    }
+  )
 }

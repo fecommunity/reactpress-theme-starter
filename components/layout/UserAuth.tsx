@@ -100,7 +100,7 @@ export default function UserAuth({ layout = 'header' }: { layout?: UserAuthLayou
         </Link>
         <Link
           href={resolveThemeAuthHref('register', authFrom)}
-          className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-[var(--primary-color)] text-sm font-medium text-white no-underline transition-opacity hover:opacity-90"
+          className="rp-primary-button inline-flex h-11 w-full items-center justify-center rounded-lg text-sm font-medium no-underline transition-opacity hover:opacity-90"
         >
           {registerLabel}
         </Link>
@@ -118,7 +118,7 @@ export default function UserAuth({ layout = 'header' }: { layout?: UserAuthLayou
       </Link>
       <Link
         href={resolveThemeAuthHref('register', authFrom)}
-        className="inline-flex h-8 items-center justify-center rounded-lg bg-[var(--primary-color)] px-3 text-sm font-medium text-white no-underline transition-opacity hover:opacity-90"
+        className="rp-primary-button inline-flex h-8 items-center justify-center rounded-lg px-3 text-sm font-medium no-underline transition-opacity hover:opacity-90"
       >
         {registerLabel}
       </Link>

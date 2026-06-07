@@ -101,9 +101,8 @@ export default class TagCloudEngine {
       el.onmouseout = function (this: HTMLAnchorElement) {
         meta.on = false
         this.style.zIndex = String(meta.zIndex)
-        this.style.color = '#fff'
         this.style.padding = '5px 8px'
-        this.style.opacity = String(meta.alpha)
+        this.style.opacity = '1'
       }
 
       this.mcList.push(meta)
@@ -207,7 +206,7 @@ export default class TagCloudEngine {
 
       el.style.left = `${this.mcList[i].cx + l - this.mcList[i].offsetWidth / 2}px`
       el.style.top = `${this.mcList[i].cy + t - this.mcList[i].offsetHeight / 2}px`
-      el.style.opacity = String(this.mcList[i].alpha)
+      el.style.opacity = '1'
       el.style.zIndex = String(this.mcList[i].zIndex)
     }
   }

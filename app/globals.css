@@ -1869,6 +1869,17 @@ html[data-rp-loading]::before {
   box-sizing: border-box;
 }
 
+.rp-sidebar-widget--compact .rp-sidebar-widget__body {
+  height: auto;
+  min-height: 0;
+  max-height: none;
+}
+
+.rp-sidebar-widget--compact .rp-sidebar-widget__tags-list {
+  height: auto;
+  min-height: 0;
+}
+
 .rp-sidebar-widget__body .rp-recommend-scroll {
   height: 100%;
   padding-block: 0.375rem;

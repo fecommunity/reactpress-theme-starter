@@ -23,6 +23,21 @@ function normalizeHex(value: string | undefined): string | undefined {
   return trimmed.toLowerCase()
 }
 
+function darkenHex(hex: string, amount = 0.22): string {
+  const normalized = normalizeHex(hex)
+  if (!normalized) return hex
+  const value = normalized.slice(1)
+  const channels = [0, 2, 4].map((start) => parseInt(value.slice(start, start + 2), 16))
+  const factor = 1 - amount
+  return `#${channels
+    .map((channel) =>
+      Math.max(0, Math.min(255, Math.round(channel * factor)))
+        .toString(16)
+        .padStart(2, '0')
+    )
+    .join('')}`
+}
+
 /** Maps Customizer color mods to Tailwind v4 primary scale overrides. */
 export function buildMyBlogAppearanceCss(mods: ThemeMods): string {
   const base = buildBrandingAppearanceCss(mods)
@@ -34,13 +49,15 @@ export function buildMyBlogAppearanceCss(mods: ThemeMods): string {
   const blocks: string[] = [base]
 
   if (lightPrimary) {
+    const buttonBg = darkenHex(lightPrimary)
     blocks.push(
-      `body:not(.dark) { --primary-color: ${lightPrimary}; --primary-button-bg: ${lightPrimary}; --color-primary-500: ${lightPrimary}; --color-primary-600: ${lightPrimary}; }`
+      `body:not(.dark) { --primary-color: ${lightPrimary}; --primary-button-bg: ${buttonBg}; --color-primary-500: ${lightPrimary}; --color-primary-600: ${buttonBg}; }`
     )
   }
   if (darkPrimary) {
+    const buttonBg = darkenHex(darkPrimary)
     blocks.push(
-      `body.dark { --primary-color: ${darkPrimary}; --primary-button-bg: ${darkPrimary}; --color-primary-500: ${darkPrimary}; --color-primary-400: ${darkPrimary}; }`
+      `body.dark { --primary-color: ${darkPrimary}; --primary-button-bg: ${buttonBg}; --color-primary-500: ${darkPrimary}; --color-primary-400: ${darkPrimary}; }`
     )
   }
   if (lightBg) {

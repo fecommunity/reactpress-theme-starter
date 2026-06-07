@@ -205,7 +205,7 @@ export default function ArticleCarousel({ articles = [] }: ArticleCarouselProps)
           </button>
 
           <div
-            className="absolute right-5 bottom-3.5 z-20 hidden items-center gap-1.5 md:bottom-9 md:flex lg:right-8"
+            className="absolute right-5 bottom-3.5 z-20 hidden items-center gap-1 md:bottom-9 md:flex lg:right-8"
             role="tablist"
             aria-label={t('recommendToReading')}
           >
@@ -218,7 +218,7 @@ export default function ArticleCarousel({ articles = [] }: ArticleCarouselProps)
                   role="tab"
                   aria-selected={isDotActive}
                   aria-label={`${index + 1} / ${slides.length}`}
-                  className="flex h-4 cursor-pointer items-center justify-center border-0 bg-transparent p-0"
+                  className="flex min-h-6 min-w-6 cursor-pointer items-center justify-center border-0 bg-transparent p-1"
                   onClick={() => goTo(index)}
                 >
                   <span className={`rp-carousel-dot ${isDotActive ? 'is-active h-1.5' : ''}`} />

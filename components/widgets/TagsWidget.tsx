@@ -83,7 +83,6 @@ export default function TagsWidget({
           <li key={tagKey(tag, index)} className="m-0 p-0">
             <Link
               href={`/tag/${tag.value}`}
-              aria-label={tag.label}
               className="inline-block rounded px-2 py-1 text-sm no-underline transition-all duration-200 hover:scale-105 hover:opacity-90 hover:shadow-sm"
               style={getTagStyle(getColorFromNumber(index))}
             >
@@ -100,7 +99,9 @@ export default function TagsWidget({
     )
 
   return (
-    <div className="rp-widget-panel rp-sidebar-widget mb-5 overflow-hidden rounded-xl bg-[var(--bg-box)] leading-snug shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5">
+    <div
+      className={`rp-widget-panel rp-sidebar-widget mb-5 overflow-hidden rounded-xl bg-[var(--bg-box)] leading-snug shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5${useTagCloud ? ' rp-sidebar-widget--cloud' : ' rp-sidebar-widget--compact'}`}
+    >
       {needTitle ? (
         <div className="rp-sidebar-widget__header">
           <TagIcon size={16} className="mr-2 inline-block text-[var(--primary-color)]" />
@@ -141,7 +142,10 @@ export default function TagsWidget({
               <ul>
                 {tags.map((tag, index) => (
                   <li key={tagKey(tag, index)}>
-                    <Link href={`/tag/${tag.value}`}>{tag.label}</Link>
+                    <Link href={`/tag/${tag.value}`}>
+                      {tag.label}
+                      {typeof tag.articleCount === 'number' ? ` [${tag.articleCount}]` : ''}
+                    </Link>
                   </li>
                 ))}
               </ul>

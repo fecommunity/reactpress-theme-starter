@@ -10,10 +10,12 @@ import { buildMyBlogAppearanceCss } from '@/lib/reactpress/appearance'
 import { getApiPreconnectOrigin } from '@/lib/reactpress/env'
 import { ReactPressAppProviders } from '@/lib/reactpress/providers'
 import { buildRootMetadata } from '@/lib/reactpress/siteMetadata'
+import { DEFAULT_DESCRIPTION } from '@/lib/reactpress/seoMetadata'
 import { colorModeInitScript } from '@fecommunity/reactpress-toolkit/theme/server'
 import type { Metadata, Viewport } from 'next'
 
 export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildRootMetadata()
@@ -30,10 +32,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const appearanceCss = buildMyBlogAppearanceCss(bootstrap.themeMods)
   const basePath = process.env.BASE_PATH || ''
   const apiPreconnect = getApiPreconnectOrigin()
+  const rootMetadata = await buildRootMetadata()
+  const siteDescription =
+    typeof rootMetadata.description === 'string' && rootMetadata.description.trim()
+      ? rootMetadata.description
+      : DEFAULT_DESCRIPTION
 
   return (
     <html lang={bootstrap.initialLocale} suppressHydrationWarning>
       <head>
+        <meta name="description" content={siteDescription} />
         <script
           dangerouslySetInnerHTML={{
             __html: `document.documentElement.setAttribute('data-rp-loading','');`,

@@ -15,6 +15,7 @@
     "build:mock": "node scripts/build-mock.mjs",
     "build:ci": "pnpm clean && cross-env INIT_CWD=$PWD next build",
     "start": "cross-env INIT_CWD=$PWD next start -p 3001",
+    "start:mock": "node scripts/start-mock.mjs",
     "lint": "eslint . --fix",
     "lint:check": "eslint .",
     "typecheck": "tsc --noEmit",
