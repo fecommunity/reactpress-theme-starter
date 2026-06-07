@@ -7,24 +7,40 @@
   "author": "ReactPress",
   "authorUri": "https://reactpress.surge.sh/",
   "themeUri": "https://github.com/fecommunity/reactpress-theme-starter",
-  "tags": ["博客", "Tailwind", "App Router", "ReactPress"],
+  "tags": [
+    "博客",
+    "Tailwind",
+    "App Router",
+    "ReactPress"
+  ],
   "cover": "public/logo-400.png",
   "requires": ">=3.0.0",
-  "supports": { "darkMode": true, "menus": ["primary"] },
+  "supports": {
+    "darkMode": true,
+    "menus": [
+      "primary"
+    ]
+  },
   "templates": {
+    "404": "app/not-found.tsx",
     "home": "app/page.tsx",
     "single": "app/article/[id]/page.tsx",
     "page": "app/page/[id]/page.tsx",
     "archive-category": "app/category/[category]/page.tsx",
     "archive-tag": "app/tag/[tag]/page.tsx",
     "archives": "app/archives/page.tsx",
-    "search": "app/search/page.tsx",
-    "404": "app/not-found.tsx"
+    "search": "app/search/page.tsx"
   },
   "appearance": {
     "panels": [
-      { "id": "basic", "title": "基础配置" },
-      { "id": "style", "title": "样式配置" }
+      {
+        "id": "basic",
+        "title": "基础配置"
+      },
+      {
+        "id": "style",
+        "title": "样式配置"
+      }
     ],
     "sections": [
       {
@@ -56,8 +72,14 @@
         "panel": "style",
         "title": "颜色",
         "groups": [
-          { "id": "light", "title": "浅色模式" },
-          { "id": "dark", "title": "深色模式" }
+          {
+            "id": "light",
+            "title": "浅色模式"
+          },
+          {
+            "id": "dark",
+            "title": "深色模式"
+          }
         ],
         "settings": [
           {
