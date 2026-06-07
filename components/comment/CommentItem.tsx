@@ -21,7 +21,7 @@ export default function CommentItem({
   isLast = false,
   onSuccess,
 }: CommentItemProps) {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const [editorVisible, toggleEditorVisible] = useToggle(false)
   const [showMore, toggleMore] = useToggle(false)
   const avatarSize = isChild ? 20 : 28
@@ -60,7 +60,7 @@ export default function CommentItem({
                 {' · '}
               </span>
             ) : null}
-            <LocaleTime date={comment.createAt} timeago />
+            <LocaleTime date={comment.createAt} timeago locale={locale} />
             <button
               type="button"
               className="rp-comment-reply-btn"

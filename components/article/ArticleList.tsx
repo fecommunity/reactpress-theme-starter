@@ -42,6 +42,7 @@ function ArticleCard({
   animate?: boolean
   compact?: boolean
 }) {
+  const { locale } = useLocale()
   const eager = index < 3
 
   return (
@@ -115,7 +116,7 @@ function ArticleCard({
               <span className="inline-flex items-center max-md:hidden">
                 <ClockIcon size={14} />
                 <span className="ml-1.5">
-                  <LocaleTime date={article.publishAt} format="yyyy-MM-dd" />
+                  <LocaleTime date={article.publishAt} format="yyyy-MM-dd" locale={locale} />
                 </span>
               </span>
             </div>

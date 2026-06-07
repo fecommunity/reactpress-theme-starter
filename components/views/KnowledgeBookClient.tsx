@@ -21,7 +21,7 @@ export default function KnowledgeBookClient({
   book,
   otherBooks = [],
 }: KnowledgeBookClientProps) {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const chapters = useMemo(() => book.children ?? [], [book])
 
   const startReading = useCallback(() => {
@@ -71,7 +71,7 @@ export default function KnowledgeBookClient({
                     {book.views} {t('readingCount')}
                   </span>
                   <span className="mx-2">·</span>
-                  <LocaleTime date={book.publishAt} />
+                  <LocaleTime date={book.publishAt} locale={locale} />
                 </p>
                 <button
                   type="button"
@@ -99,7 +99,7 @@ export default function KnowledgeBookClient({
                         {chapter.title}
                       </span>
                       <span className="flex shrink-0 items-center gap-2 text-xs text-[var(--second-text-color)]">
-                        <LocaleTime date={chapter.createAt} />
+                        <LocaleTime date={chapter.createAt} locale={locale} />
                         <span aria-hidden>›</span>
                       </span>
                     </Link>

@@ -12,7 +12,7 @@ interface KnowledgeListProps {
 }
 
 export default function KnowledgeList({ knowledges = [], small = false }: KnowledgeListProps) {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
 
   if (!knowledges.length) {
     return (
@@ -39,7 +39,7 @@ export default function KnowledgeList({ knowledges = [], small = false }: Knowle
               <div className="font-semibold text-[var(--main-text-color)]">{knowledge.title}</div>
               <div className="mt-1 flex items-center gap-2 text-xs text-[var(--second-text-color)]">
                 <span className="h-3 w-px bg-[var(--border-color)]" />
-                <LocaleTime date={knowledge.publishAt} timeago />
+                <LocaleTime date={knowledge.publishAt} timeago locale={locale} />
               </div>
             </header>
             {!small ? (

@@ -31,7 +31,7 @@ export default function KnowledgeChapterClient({
   book,
   chapter,
 }: KnowledgeChapterClientProps) {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const chapters = useMemo(() => book.children ?? [], [book.children])
   const tocs = parseArticleToc(chapter.toc ?? '')
   const idx = chapters.findIndex((item) => item.id === chapter.id)
@@ -93,7 +93,7 @@ export default function KnowledgeChapterClient({
                   <p className="mt-2 text-sm text-[var(--second-text-color)]">
                     <span>
                       {t('publishAt')}
-                      <LocaleTime date={chapter.publishAt} />
+                      <LocaleTime date={chapter.publishAt} locale={locale} />
                     </span>
                     <span> • </span>
                     <span>

@@ -33,7 +33,7 @@ function ChevronIcon({ direction }: { direction: 'left' | 'right' }) {
 }
 
 export default function ArticleCarousel({ articles = [] }: ArticleCarouselProps) {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const slides = useMemo(
     () => (articles || []).filter((article) => article.cover).slice(0, 6),
     [articles]
@@ -165,7 +165,7 @@ export default function ArticleCarousel({ articles = [] }: ArticleCarouselProps)
                       {article.title}
                     </h2>
                     <p className="m-0 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-white/75 md:text-[0.8125rem]">
-                      <LocaleTime date={article.publishAt} timeago />
+                      <LocaleTime date={article.publishAt} timeago locale={locale} />
                       <span className="text-white/40" aria-hidden>
                         ·
                       </span>
