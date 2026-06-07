@@ -11,7 +11,7 @@ Thank you for your interest in contributing. This repository is the official hea
 - Report bugs or suggest features via [GitHub Issues](https://github.com/fecommunity/reactpress-theme-starter/issues)
 - Improve documentation (README, comments, mock data)
 - Fix bugs or enhance UI/UX in theme components
-- Extend mock API coverage for local development and CI
+- Extend mock API coverage for local development
 
 Please open an issue before large changes (new routes, breaking API assumptions, major refactors) so we can align on scope.
 
@@ -64,8 +64,6 @@ Before opening a pull request, run:
 pnpm run check        # ESLint + Prettier
 pnpm run typecheck    # TypeScript (tsc --noEmit)
 ```
-
-CI (see [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)) also runs a mock-API production build.
 
 ### Smoke test (optional)
 

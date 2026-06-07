@@ -150,8 +150,6 @@ Route templates are declared in [`theme.json`](./theme.json). Appearance (colors
 | [Code of Conduct](./CODE_OF_CONDUCT.md)     | Community standards               |
 | [Security](./SECURITY.md)                   | Report vulnerabilities            |
 
-CI runs lint, typecheck, and a mock-API production build on every push — see [`.github/workflows/ci.yml`](./.github/workflows/ci.yml).
-
 ---
 
 ## Links

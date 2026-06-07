@@ -150,8 +150,6 @@ theme.json     主题清单（路由、外观 Schema）
 | [行为准则](./CODE_OF_CONDUCT.md)            | 社区行为标准             |
 | [安全策略](./SECURITY.md)                   | 漏洞报告                 |
 
-CI 在每次 push 时执行 lint、typecheck 和 Mock API 生产构建 — 见 [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)。
-
 ---
 
 ## 相关链接

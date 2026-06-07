@@ -11,7 +11,7 @@
 - 通过 [GitHub Issues](https://github.com/fecommunity/reactpress-theme-starter/issues) 报告 Bug 或提出功能建议
 - 改进文档（README、注释、Mock 数据）
 - 修复 Bug 或优化主题组件 UI/UX
-- 扩展 Mock API，便于本地开发与 CI
+- 扩展 Mock API，便于本地开发
 
 较大改动（新路由、破坏性 API 假设、大规模重构）请先开 Issue 讨论范围。
 
@@ -64,8 +64,6 @@ pnpm dev:mock
 pnpm run check        # ESLint + Prettier
 pnpm run typecheck    # TypeScript（tsc --noEmit）
 ```
-
-CI（见 [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)）还会执行 Mock API 生产构建。
 
 ### 冒烟测试（可选）
 
