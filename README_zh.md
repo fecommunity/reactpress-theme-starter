@@ -1,27 +1,42 @@
 <div align="center">
 
-# ReactPress Theme Starter
-
-<img src="./public/logo-400.png" alt="ReactPress Theme Starter" width="128" />
-
-<br />
-
-[ReactPress](https://github.com/fecommunity/reactpress) 发布平台官方 **Headless 访客站主题**。
-
-基于 Next.js App Router，从 ReactPress REST API 拉取并渲染全部公开内容。
+<a href="https://reactpress.surge.sh/">
+  <img src="./public/logo.png" alt="ReactPress" width="520" />
+</a>
 
 <br />
 
-[**在线演示**](https://reactpress-theme-starter.vercel.app) · [**官方文档**](https://reactpress.surge.sh/) · [**English**](./README.md)
+<p><strong>ReactPress Theme Starter</strong></p>
+
+<p><em><a href="https://github.com/fecommunity/reactpress">ReactPress</a> 发布平台官方 Headless 访客站主题</em></p>
+
+<p><sub>Next.js 15 · App Router · ReactPress REST API · Tailwind CSS 4</sub></p>
 
 <br />
 
-<a href="http://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-0074c1?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" /></a>
-<a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js_15-000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js 15" /></a>
-<a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React_19-61dafb?style=flat-square&logo=react&logoColor=white" alt="React 19" /></a>
-<a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_4-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4" /></a>
-<a href="https://pnpm.io/"><img src="https://img.shields.io/badge/pnpm_9-F69220?style=flat-square&logo=pnpm&logoColor=white" alt="pnpm 9" /></a>
-<a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square" alt="MIT License" /></a>
+<p>
+  <a href="https://reactpress-theme-starter.vercel.app"><strong>在线演示</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://reactpress.surge.sh/"><strong>官方文档</strong></a>
+  &nbsp;·&nbsp;
+  <a href="./README.md"><strong>English</strong></a>
+</p>
+
+<br />
+
+<p>
+  <a href="http://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-0074c1?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+  &nbsp;
+  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js_15-000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js 15" /></a>
+  &nbsp;
+  <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React_19-61dafb?style=flat-square&logo=react&logoColor=white" alt="React 19" /></a>
+  &nbsp;
+  <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_4-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4" /></a>
+  &nbsp;
+  <a href="https://pnpm.io/"><img src="https://img.shields.io/badge/pnpm_9-F69220?style=flat-square&logo=pnpm&logoColor=white" alt="pnpm 9" /></a>
+  &nbsp;
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square" alt="MIT License" /></a>
+</p>
 
 </div>
 
@@ -29,21 +44,32 @@
 
 ## 目录
 
-- [概览](#概览)
-- [技术栈](#技术栈)
-- [路由覆盖](#路由覆盖)
-- [功能特性](#功能特性)
-- [快速开始](#快速开始)
-- [环境变量](#环境变量)
-- [脚本命令](#脚本命令)
-- [Mock API](#mock-api)
-- [部署](#部署)
-- [主题清单](#主题清单)
-- [目录结构](#目录结构)
-- [持续集成](#持续集成)
-- [相关资源](#相关资源)
+<table>
+<tr>
+<td valign="top" width="50%">
 
-<br />
+**快速上手**
+
+[概览](#概览) · [快速开始](#快速开始) · [环境变量](#环境变量) · [脚本命令](#脚本命令)
+
+**架构说明**
+
+[技术栈](#技术栈) · [路由覆盖](#路由覆盖) · [功能特性](#功能特性) · [主题清单](#主题清单)
+
+</td>
+<td valign="top" width="50%">
+
+**运维部署**
+
+[Mock API](#mock-api) · [部署](#部署) · [持续集成](#持续集成)
+
+**参考**
+
+[目录结构](#目录结构) · [相关资源](#相关资源)
+
+</td>
+</tr>
+</table>
 
 ---
 

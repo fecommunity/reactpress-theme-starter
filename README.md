@@ -1,27 +1,42 @@
 <div align="center">
 
-# ReactPress Theme Starter
-
-<img src="./public/logo-400.png" alt="ReactPress Theme Starter" width="128" />
-
-<br />
-
-Official **headless visitor theme** for the [ReactPress](https://github.com/fecommunity/reactpress) publishing platform.
-
-A Next.js App Router application that renders all public content from the ReactPress REST API.
+<a href="https://reactpress.surge.sh/">
+  <img src="./public/logo.png" alt="ReactPress" width="520" />
+</a>
 
 <br />
 
-[**Live Demo**](https://reactpress-theme-starter.vercel.app) · [**Documentation**](https://reactpress.surge.sh/) · [**简体中文**](./README_zh.md)
+<p><strong>ReactPress Theme Starter</strong></p>
+
+<p><em>Official headless visitor theme for the ReactPress publishing platform</em></p>
+
+<p><sub>Next.js 15 · App Router · ReactPress REST API · Tailwind CSS 4</sub></p>
 
 <br />
 
-<a href="http://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-0074c1?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" /></a>
-<a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js_15-000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js 15" /></a>
-<a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React_19-61dafb?style=flat-square&logo=react&logoColor=white" alt="React 19" /></a>
-<a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_4-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4" /></a>
-<a href="https://pnpm.io/"><img src="https://img.shields.io/badge/pnpm_9-F69220?style=flat-square&logo=pnpm&logoColor=white" alt="pnpm 9" /></a>
-<a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square" alt="MIT License" /></a>
+<p>
+  <a href="https://reactpress-theme-starter.vercel.app"><strong>Live Demo</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://reactpress.surge.sh/"><strong>Documentation</strong></a>
+  &nbsp;·&nbsp;
+  <a href="./README_zh.md"><strong>简体中文</strong></a>
+</p>
+
+<br />
+
+<p>
+  <a href="http://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-0074c1?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+  &nbsp;
+  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js_15-000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js 15" /></a>
+  &nbsp;
+  <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React_19-61dafb?style=flat-square&logo=react&logoColor=white" alt="React 19" /></a>
+  &nbsp;
+  <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_4-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4" /></a>
+  &nbsp;
+  <a href="https://pnpm.io/"><img src="https://img.shields.io/badge/pnpm_9-F69220?style=flat-square&logo=pnpm&logoColor=white" alt="pnpm 9" /></a>
+  &nbsp;
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square" alt="MIT License" /></a>
+</p>
 
 </div>
 
@@ -29,21 +44,32 @@ A Next.js App Router application that renders all public content from the ReactP
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Technology Stack](#technology-stack)
-- [Route Coverage](#route-coverage)
-- [Capabilities](#capabilities)
-- [Quick Start](#quick-start)
-- [Configuration](#configuration)
-- [Scripts](#scripts)
-- [Mock API](#mock-api)
-- [Deployment](#deployment)
-- [Theme Manifest](#theme-manifest)
-- [Directory Structure](#directory-structure)
-- [Continuous Integration](#continuous-integration)
-- [Resources](#resources)
+<table>
+<tr>
+<td valign="top" width="50%">
 
-<br />
+**Getting Started**
+
+[Overview](#overview) · [Quick Start](#quick-start) · [Configuration](#configuration) · [Scripts](#scripts)
+
+**Architecture**
+
+[Technology Stack](#technology-stack) · [Route Coverage](#route-coverage) · [Capabilities](#capabilities) · [Theme Manifest](#theme-manifest)
+
+</td>
+<td valign="top" width="50%">
+
+**Operations**
+
+[Mock API](#mock-api) · [Deployment](#deployment) · [Continuous Integration](#continuous-integration)
+
+**Reference**
+
+[Directory Structure](#directory-structure) · [Resources](#resources)
+
+</td>
+</tr>
+</table>
 
 ---
 
