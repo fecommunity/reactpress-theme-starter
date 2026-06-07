@@ -78,7 +78,7 @@ export default function TagsWidget({
 
   const compactTagList =
     tags.length > 0 ? (
-      <ul className="m-0 flex list-none flex-wrap gap-2 p-4">
+      <ul className="rp-sidebar-widget__tags-list">
         {tags.map((tag, index) => (
           <li key={tagKey(tag, index)} className="m-0 p-0">
             <Link
@@ -94,61 +94,63 @@ export default function TagsWidget({
         ))}
       </ul>
     ) : (
-      <div className="px-4 py-6 text-center text-sm text-[var(--second-text-color)]">
+      <div className="flex h-full items-center justify-center px-4 text-sm text-[var(--second-text-color)]">
         {t('empty')}
       </div>
     )
 
   return (
-    <div className="rp-widget-panel mb-5 overflow-hidden rounded-xl bg-[var(--bg-box)] leading-snug shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5">
+    <div className="rp-widget-panel rp-sidebar-widget mb-5 overflow-hidden rounded-xl bg-[var(--bg-box)] leading-snug shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5">
       {needTitle ? (
-        <div className="border-b border-[var(--border-color)] p-4 font-bold text-[var(--main-text-color)]">
+        <div className="rp-sidebar-widget__header">
           <TagIcon size={16} className="mr-2 inline-block text-[var(--primary-color)]" />
           <span>{t('tagTitle')}</span>
         </div>
       ) : null}
 
-      {useTagCloud ? (
-        <>
-          <div className="relative mx-auto my-2 h-[260px] w-[250px] max-w-full">
-            {showCloudSkeleton ? <TagCloudSkeleton /> : null}
-            {tags.length > 0 ? (
-              <TagCloud
-                className={`transition-opacity duration-300 ${cloudReady ? 'opacity-100' : 'opacity-0'}`}
-                onReadyChange={handleCloudReadyChange}
-                aria-hidden
-              >
+      <div className="rp-sidebar-widget__body">
+        {useTagCloud ? (
+          <>
+            <div className="rp-sidebar-widget__tag-host">
+              {showCloudSkeleton ? <TagCloudSkeleton /> : null}
+              {tags.length > 0 ? (
+                <TagCloud
+                  className={`transition-opacity duration-300 ${cloudReady ? 'opacity-100' : 'opacity-0'}`}
+                  onReadyChange={handleCloudReadyChange}
+                  aria-hidden
+                >
+                  {tags.map((tag, index) => (
+                    <a
+                      key={tagKey(tag, index)}
+                      href={`/tag/${tag.value}`}
+                      tabIndex={-1}
+                      aria-hidden
+                      style={getTagStyle(getColorFromNumber(index))}
+                    >
+                      {tag.label}
+                    </a>
+                  ))}
+                </TagCloud>
+              ) : (
+                <div className="flex h-full items-center justify-center px-4 text-sm text-[var(--second-text-color)]">
+                  {t('empty')}
+                </div>
+              )}
+            </div>
+            <nav aria-label={t('tagTitle')} className="sr-only">
+              <ul>
                 {tags.map((tag, index) => (
-                  <a
-                    key={tagKey(tag, index)}
-                    href={`/tag/${tag.value}`}
-                    tabIndex={-1}
-                    aria-hidden
-                    style={getTagStyle(getColorFromNumber(index))}
-                  >
-                    {tag.label}
-                  </a>
+                  <li key={tagKey(tag, index)}>
+                    <Link href={`/tag/${tag.value}`}>{tag.label}</Link>
+                  </li>
                 ))}
-              </TagCloud>
-            ) : (
-              <div className="flex h-full items-center justify-center px-4 text-sm text-[var(--second-text-color)]">
-                {t('empty')}
-              </div>
-            )}
-          </div>
-          <nav aria-label={t('tagTitle')} className="sr-only">
-            <ul>
-              {tags.map((tag, index) => (
-                <li key={tagKey(tag, index)}>
-                  <Link href={`/tag/${tag.value}`}>{tag.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </>
-      ) : (
-        compactTagList
-      )}
+              </ul>
+            </nav>
+          </>
+        ) : (
+          compactTagList
+        )}
+      </div>
     </div>
   )
 }

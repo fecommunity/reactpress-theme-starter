@@ -1393,41 +1393,98 @@ html[data-rp-loading]::before {
   }
 }
 
-/* Homepage recommend list (inline mode) */
-.rp-recommend-inline .rp-recommend-title [data-num]::before {
-  content: attr(data-num);
-  display: inline-block;
-  width: 18px;
-  margin-right: 5px;
-  font-size: 14px;
-  line-height: 18px;
-  text-align: center;
-  color: #fff;
-  background-color: var(--primary-color);
+/* Homepage recommend list — hot-rank sidebar (inline mode) */
+.rp-recommend-item + .rp-recommend-item,
+.rp-recommend-scroll-row + .rp-recommend-scroll-row {
+  border-top: 1px solid color-mix(in srgb, var(--border-color) 62%, transparent);
 }
 
-.rp-recommend-inline a:hover .rp-recommend-title {
+.rp-recommend-link {
+  border-left: 2px solid transparent;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.rp-recommend-link:hover,
+.rp-recommend-link:focus-visible {
+  background: color-mix(in srgb, var(--bg-second) 48%, transparent);
+  border-left-color: color-mix(in srgb, var(--primary-color) 55%, transparent);
+}
+
+.rp-recommend-rank {
+  flex-shrink: 0;
+  width: 1.375rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-align: center;
+  color: color-mix(in srgb, var(--second-text-color) 44%, transparent);
+}
+
+.rp-recommend-rank[data-rank='1'] {
+  font-size: 0.9375rem;
   color: var(--primary-color);
 }
 
-.rp-recommend-inline a:hover .rp-recommend-title [data-num]::before {
-  color: #fff;
+.rp-recommend-rank[data-rank='2'],
+.rp-recommend-rank[data-rank='3'] {
+  color: color-mix(in srgb, var(--primary-color) 76%, var(--second-text-color));
+}
+
+.rp-recommend-title {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.rp-recommend-views {
+  min-width: 2.625rem;
+  justify-content: flex-end;
+  font-size: 0.6875rem;
+  color: color-mix(in srgb, var(--second-text-color) 68%, transparent);
+  transition: color 0.2s ease;
+}
+
+.rp-recommend-link:hover .rp-recommend-views,
+.rp-recommend-link:focus-visible .rp-recommend-views {
+  color: color-mix(in srgb, var(--second-text-color) 88%, transparent);
 }
 
 .rp-recommend-scroll {
-  --rp-recommend-row-h: 52px;
+  --rp-recommend-row-h: 42px;
   --rp-recommend-visible: 5;
 }
 
 .rp-recommend-scroll-viewport {
   height: calc(var(--rp-recommend-row-h) * var(--rp-recommend-visible));
   overflow: hidden;
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+  transition: mask-image 0.35s ease;
+}
+
+.rp-recommend-scroll-viewport.is-moving {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
 }
 
 .rp-recommend-scroll-track {
+  --rp-recommend-scroll-ms: 0.58s;
   will-change: transform;
-  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform var(--rp-recommend-scroll-ms) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .rp-recommend-scroll-track.is-instant {
@@ -1437,6 +1494,48 @@ html[data-rp-loading]::before {
 .rp-recommend-scroll-row {
   height: var(--rp-recommend-row-h);
   box-sizing: border-box;
+}
+
+.rp-recommend-scroll-row .rp-recommend-link {
+  height: 100%;
+  padding-block: 0;
+  box-sizing: border-box;
+}
+
+.rp-recommend-scroll-track.is-moving .rp-recommend-scroll-row:first-child .rp-recommend-link {
+  animation: rp-recommend-fade-out var(--rp-recommend-scroll-ms, 0.58s) cubic-bezier(0.4, 0, 0.2, 1)
+    forwards;
+  pointer-events: none;
+}
+
+.rp-recommend-scroll-track.is-moving .rp-recommend-scroll-row:last-child .rp-recommend-link {
+  animation: rp-recommend-fade-in var(--rp-recommend-scroll-ms, 0.58s) cubic-bezier(0.4, 0, 0.2, 1)
+    0.08s forwards;
+  opacity: 0;
+}
+
+@keyframes rp-recommend-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.25;
+  }
+}
+
+@keyframes rp-recommend-fade-in {
+  from {
+    opacity: 0.2;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.rp-recommend-scroll.is-paused .rp-recommend-scroll-viewport {
+  opacity: 0.94;
 }
 
 @keyframes recommend-shimmer {
@@ -1693,6 +1792,74 @@ html[data-rp-loading]::before {
     transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.28s ease;
+}
+
+/* Sidebar widgets — aligned card width & body height */
+.rp-sidebar-widget {
+  --rp-sidebar-widget-body-h: 222px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.rp-sidebar-widget__header {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 53px;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 700;
+  color: var(--main-text-color);
+  box-sizing: border-box;
+}
+
+.rp-sidebar-widget__body {
+  height: var(--rp-sidebar-widget-body-h);
+  min-height: var(--rp-sidebar-widget-body-h);
+  max-height: var(--rp-sidebar-widget-body-h);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.rp-sidebar-widget__body .rp-recommend-scroll {
+  height: 100%;
+  padding-block: 0.375rem;
+  box-sizing: border-box;
+}
+
+.rp-sidebar-widget__body .rp-recommend-list:not(.rp-recommend-scroll-track) {
+  height: 100%;
+  overflow: hidden;
+  padding-block: 0.375rem;
+  box-sizing: border-box;
+}
+
+.rp-sidebar-widget__tag-host {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.rp-sidebar-widget__tag-host .rp-tag-cloud,
+.rp-sidebar-widget__tag-host .rp-tag-cloud-skeleton {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.rp-sidebar-widget__tags-list {
+  display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0.5rem;
+  overflow: auto;
+  padding: 1rem;
+  margin: 0;
+  list-style: none;
 }
 
 .rp-widget-panel:hover {
@@ -2895,6 +3062,8 @@ html[data-rp-loading]::before {
   .rp-archive-banner__content,
   .rp-article-wrap,
   .rp-recommend-scroll-track,
+  .rp-recommend-scroll-track.is-moving .rp-recommend-scroll-row:first-child .rp-recommend-link,
+  .rp-recommend-scroll-track.is-moving .rp-recommend-scroll-row:last-child .rp-recommend-link,
   .rp-notification-bar,
   .rp-notification-ticker-item.is-entering,
   .rp-notification-ticker-item.is-leaving {

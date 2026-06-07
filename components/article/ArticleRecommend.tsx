@@ -5,11 +5,19 @@ import Link from '@/components/shared/Link'
 import SectionHeading, { EmptyState } from '@/components/shared/SectionHeading'
 import { ArticleProvider } from '@/lib/providers/client'
 import { normalizeList, normalizePaginated } from '@/lib/reactpress/normalizeApiResponse'
-import { EyeIcon } from '@/lib/utils/icons'
+import { EyeIcon, HeartIcon } from '@/lib/utils/icons'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import { slimArticlesForList } from '@fecommunity/reactpress-toolkit/theme'
 import type { IArticle } from '@fecommunity/reactpress-toolkit/types'
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+  type TransitionEvent,
+} from 'react'
 
 interface ArticleRecommendProps {
   articleId?: string | null
@@ -37,8 +45,18 @@ const SKELETON_ROWS = 5
 const INLINE_VISIBLE = 5
 const INLINE_FETCH_SIZE = 15
 const VERTICAL_FETCH_SIZE = 6
-const SCROLL_ROW_PX = 52
-const SCROLL_INTERVAL_MS = 3200
+const SCROLL_ROW_PX = 42
+const SCROLL_INTERVAL_MS = 3600
+
+function formatCompactViews(views: number): string {
+  if (views >= 10000) {
+    return `${(views / 10000).toFixed(1).replace(/\.0$/, '')}w`
+  }
+  if (views >= 1000) {
+    return `${(views / 1000).toFixed(1).replace(/\.0$/, '')}k`
+  }
+  return String(views)
+}
 
 function dedupeById(articles: RecommendArticle[]): RecommendArticle[] {
   const seen = new Set<string>()
@@ -79,19 +97,21 @@ async function loadRecommendArticles(
 
 function RecommendSkeleton() {
   return (
-    <ul className="m-0 list-none px-4 pb-4" aria-hidden>
+    <ul className="rp-recommend-list m-0 list-none" aria-hidden>
       {Array.from({ length: SKELETON_ROWS }, (_, i) => (
-        <li key={i} className="flex items-center gap-2 pt-4">
-          <span className="h-[18px] w-[18px] shrink-0 animate-pulse rounded bg-[var(--border-color)]" />
-          <span className="h-3.5 max-w-[72%] flex-1 animate-pulse rounded bg-[var(--border-color)]" />
-          <span className="h-3.5 w-10 shrink-0 animate-pulse rounded bg-[var(--border-color)]" />
+        <li key={i} className="rp-recommend-item">
+          <div className="flex items-center gap-2.5 px-4 py-2.5">
+            <span className="h-4 w-5 shrink-0 animate-pulse rounded bg-[var(--border-color)]" />
+            <span className="h-3.5 flex-1 animate-pulse rounded bg-[var(--border-color)]" />
+            <span className="h-3 w-9 shrink-0 animate-pulse rounded bg-[var(--border-color)]" />
+          </div>
         </li>
       ))}
     </ul>
   )
 }
 
-function RecommendScrollRow({
+function RecommendRow({
   article,
   rank,
   compact = false,
@@ -101,20 +121,21 @@ function RecommendScrollRow({
   compact?: boolean
 }) {
   return (
-    <li className={compact ? 'rp-recommend-scroll-row flex items-center' : undefined}>
+    <li className={compact ? 'rp-recommend-scroll-row' : 'rp-recommend-item'}>
       <Link
         href={`/article/${article.id}`}
         title={article.title}
-        className="flex w-full items-center justify-between gap-2 overflow-hidden text-ellipsis whitespace-nowrap text-[var(--second-text-color)] no-underline hover:text-[var(--primary-color)]"
+        className="rp-recommend-link group flex items-center gap-3 px-4 py-2.5 no-underline"
       >
-        <span className="rp-recommend-title flex min-w-0 flex-1 items-center overflow-hidden text-ellipsis whitespace-nowrap text-[var(--main-text-color)]">
-          <span className="truncate" data-num={rank}>
-            {article.title}
-          </span>
+        <span className="rp-recommend-rank" data-rank={rank} aria-hidden>
+          {rank}
         </span>
-        <span className="inline-flex w-[54px] shrink-0 items-center justify-end text-[var(--second-text-color)]">
-          <EyeIcon size={14} />
-          <span className="ml-1">{article.views}</span>
+        <span className="rp-recommend-title min-w-0 flex-1 truncate text-[var(--main-text-color)] transition-colors group-hover:text-[var(--primary-color)]">
+          {article.title}
+        </span>
+        <span className="rp-recommend-views inline-flex shrink-0 items-center gap-1 tabular-nums">
+          <EyeIcon size={12} />
+          <span>{formatCompactViews(article.views)}</span>
         </span>
       </Link>
     </li>
@@ -122,11 +143,31 @@ function RecommendScrollRow({
 }
 
 function RecommendInlineScroller({ articles }: { articles: RecommendArticle[] }) {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [offset, setOffset] = useState(0)
+  const [trackY, setTrackY] = useState(0)
+  const [moving, setMoving] = useState(false)
   const [paused, setPaused] = useState(false)
   const [instant, setInstant] = useState(false)
   const [reduceMotion, setReduceMotion] = useState(false)
   const resetTimerRef = useRef<number | null>(null)
+
+  const rankById = useMemo(() => {
+    const map = new Map<string, number>()
+    articles.forEach((article, index) => map.set(article.id, index + 1))
+    return map
+  }, [articles])
+
+  const loopArticles = useMemo(() => [...articles, ...articles], [articles])
+
+  const windowItems = useMemo(
+    () =>
+      loopArticles.slice(offset, offset + INLINE_VISIBLE + 1).map((article, index) => ({
+        article,
+        rank: rankById.get(article.id) ?? offset + index + 1,
+        key: `${article.id}-${offset + index}`,
+      })),
+    [loopArticles, offset, rankById]
+  )
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -137,10 +178,6 @@ function RecommendInlineScroller({ articles }: { articles: RecommendArticle[] })
   }, [])
 
   const canScroll = articles.length > INLINE_VISIBLE && !reduceMotion
-  const loopItems = useMemo(
-    () => (canScroll ? [...articles, ...articles] : articles),
-    [articles, canScroll]
-  )
 
   const clearResetTimer = useCallback(() => {
     if (resetTimerRef.current !== null) {
@@ -150,40 +187,46 @@ function RecommendInlineScroller({ articles }: { articles: RecommendArticle[] })
   }, [])
 
   useEffect(() => {
-    setActiveIndex(0)
+    setOffset(0)
+    setTrackY(0)
+    setMoving(false)
     setInstant(false)
   }, [articles])
 
   useEffect(() => {
-    clearResetTimer()
-    if (!canScroll || paused) return undefined
+    if (!canScroll || paused || moving) return undefined
 
     const timer = window.setInterval(() => {
-      setActiveIndex((prev) => prev + 1)
+      setMoving(true)
+      setTrackY(-SCROLL_ROW_PX)
     }, SCROLL_INTERVAL_MS)
 
     return () => window.clearInterval(timer)
-  }, [canScroll, paused, articles, clearResetTimer])
+  }, [canScroll, moving, paused])
 
   useEffect(() => clearResetTimer, [clearResetTimer])
 
-  const handleTransitionEnd = () => {
-    if (!canScroll || activeIndex < articles.length) return
+  const handleTrackTransitionEnd = (event: TransitionEvent<HTMLUListElement>) => {
+    if (event.target !== event.currentTarget || event.propertyName !== 'transform' || instant) {
+      return
+    }
+    if (!moving) return
 
-    clearResetTimer()
     setInstant(true)
-    setActiveIndex(0)
+    setOffset((prev) => (prev + 1) % articles.length)
+    setTrackY(0)
+    setMoving(false)
     resetTimerRef.current = window.setTimeout(() => {
       setInstant(false)
       resetTimerRef.current = null
-    }, 20)
+    }, 24)
   }
 
   if (!canScroll) {
     return (
-      <ul className="rp-recommend-inline rp-recommend-fade-in m-0 flex list-none flex-col gap-2 px-4 py-3">
+      <ul className="rp-recommend-list rp-recommend-fade-in m-0 list-none">
         {articles.map((article, index) => (
-          <RecommendScrollRow key={article.id} article={article} rank={index + 1} />
+          <RecommendRow key={article.id} article={article} rank={index + 1} />
         ))}
       </ul>
     )
@@ -191,7 +234,7 @@ function RecommendInlineScroller({ articles }: { articles: RecommendArticle[] })
 
   return (
     <div
-      className="rp-recommend-scroll rp-recommend-fade-in px-4 py-3"
+      className={`rp-recommend-scroll rp-recommend-fade-in${paused ? ' is-paused' : ''}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -201,19 +244,17 @@ function RecommendInlineScroller({ articles }: { articles: RecommendArticle[] })
         }
       }}
     >
-      <div className="rp-recommend-scroll-viewport" aria-live="off">
+      <div
+        className={`rp-recommend-scroll-viewport${moving ? ' is-moving' : ''}`}
+        aria-live="off"
+      >
         <ul
-          className={`rp-recommend-inline rp-recommend-scroll-track m-0 list-none ${instant ? 'is-instant' : ''}`}
-          style={{ transform: `translateY(-${activeIndex * SCROLL_ROW_PX}px)` }}
-          onTransitionEnd={handleTransitionEnd}
+          className={`rp-recommend-list rp-recommend-scroll-track m-0 list-none ${instant ? 'is-instant' : ''}${moving ? ' is-moving' : ''}`}
+          style={{ transform: `translate3d(0, ${trackY}px, 0)` }}
+          onTransitionEnd={handleTrackTransitionEnd}
         >
-          {loopItems.map((article, index) => (
-            <RecommendScrollRow
-              key={`${article.id}-${index}`}
-              article={article}
-              rank={(index % articles.length) + 1}
-              compact
-            />
+          {windowItems.map(({ article, rank, key }) => (
+            <RecommendRow key={key} article={article} rank={rank} compact />
           ))}
         </ul>
       </div>
@@ -302,21 +343,23 @@ export default function ArticleRecommend({
   }
 
   return (
-    <div className="rp-widget-panel mb-5 overflow-hidden rounded-xl bg-[var(--bg-box)] leading-snug shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5">
+    <div className="rp-widget-panel rp-sidebar-widget mb-5 overflow-hidden rounded-xl bg-[var(--bg-box)] leading-snug shadow-[var(--box-shadow)] ring-1 ring-black/5 dark:ring-white/5">
       {needTitle ? (
-        <div className="border-b border-[var(--border-color)] p-4 font-bold text-[var(--main-text-color)]">
-          <span className="mr-2 text-[var(--primary-color)]">♥</span>
+        <div className="rp-sidebar-widget__header">
+          <HeartIcon size={16} className="mr-2 inline-block text-[var(--primary-color)]" />
           <span>{t('recommendToReading')}</span>
         </div>
       ) : null}
 
-      {showSkeleton ? (
-        <RecommendSkeleton />
-      ) : showEmpty ? (
-        <EmptyState />
-      ) : (
-        <RecommendInlineScroller articles={articles} />
-      )}
+      <div className="rp-sidebar-widget__body">
+        {showSkeleton ? (
+          <RecommendSkeleton />
+        ) : showEmpty ? (
+          <EmptyState />
+        ) : (
+          <RecommendInlineScroller articles={articles} />
+        )}
+      </div>
     </div>
   )
 }
