@@ -3,6 +3,7 @@
 import ArticleRecommend from '@/components/article/ArticleRecommend'
 import DoubleColumnLayout from '@/components/layout/DoubleColumnLayout'
 import Link from '@/components/shared/Link'
+import ThemeImage from '@/components/shared/ThemeImage'
 import SectionHeading from '@/components/shared/SectionHeading'
 import { ChevronLeftIcon, ChevronRightIcon } from '@/lib/utils/icons'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
@@ -51,7 +52,7 @@ function SiteIcon({ src, label }: { src: string; label: string }) {
   }
 
   return (
-    <img
+    <ThemeImage
       src={src}
       alt=""
       width={56}

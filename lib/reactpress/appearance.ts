@@ -5,11 +5,9 @@ import {
 
 function modValue(mods: ThemeMods, key: string): string | undefined {
   const raw = mods?.[key]
-  if (typeof raw === 'string') return raw
-  if (raw && typeof raw === 'object' && 'value' in raw) {
-    return typeof raw.value === 'string' ? raw.value : undefined
-  }
-  return undefined
+  if (typeof raw !== 'string') return undefined
+  const trimmed = raw.trim()
+  return trimmed || undefined
 }
 
 function normalizeHex(value: string | undefined): string | undefined {

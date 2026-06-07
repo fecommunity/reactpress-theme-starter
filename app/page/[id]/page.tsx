@@ -1,5 +1,6 @@
 import CmsPageClient from '@/components/article/CmsPageClient'
 import { buildCmsPageMetadata, parseSiteSeoContext } from '@/lib/reactpress/contentSeo'
+import { coercePublishedPage } from '@/lib/reactpress/coercePublishedPage'
 import {
   fetchCmsPageProps,
   fetchSiteMeta,
@@ -20,13 +21,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { id } = await params
 
   try {
-    const [{ page }, siteMeta, settingRow] = await Promise.all([
+    const [{ page: rawPage }, siteMeta, settingRow] = await Promise.all([
       withApiRetry(() => fetchCmsPageProps(themeApi, id)),
       withApiRetry(() => fetchSiteMeta(themeApi)),
       withApiRetry(() => themeApi.setting.findAll()).then(unwrapSetting),
     ])
 
-    if (!page?.id || page.status !== 'publish') {
+    const page = coercePublishedPage(rawPage)
+    if (!page) {
       return {}
     }
 
@@ -42,8 +44,9 @@ export default async function CmsPage({ params }: PageProps) {
   const { id } = await params
 
   try {
-    const { page } = await withApiRetry(() => fetchCmsPageProps(themeApi, id))
-    if (!page?.id || page.status !== 'publish') {
+    const { page: rawPage } = await withApiRetry(() => fetchCmsPageProps(themeApi, id))
+    const page = coercePublishedPage(rawPage)
+    if (!page) {
       notFound()
     }
     return <CmsPageClient page={page} />

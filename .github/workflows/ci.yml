@@ -33,7 +33,6 @@ jobs:
 
       - name: Typecheck
         run: pnpm run typecheck
-        continue-on-error: true
 
       # Mock API runs in next dev with a separate distDir so production `next build`
       # never shares `.next` with the dev server (avoids vendor-chunks / 500 errors).

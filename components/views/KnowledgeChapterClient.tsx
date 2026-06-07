@@ -32,7 +32,7 @@ export default function KnowledgeChapterClient({
   chapter,
 }: KnowledgeChapterClientProps) {
   const { t } = useLocale()
-  const chapters = book.children ?? []
+  const chapters = useMemo(() => book.children ?? [], [book.children])
   const tocs = parseArticleToc(chapter.toc ?? '')
   const idx = chapters.findIndex((item) => item.id === chapter.id)
 

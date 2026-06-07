@@ -1,5 +1,6 @@
 'use client'
 
+import ThemeImage from '@/components/shared/ThemeImage'
 import type { ReactNode } from 'react'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import { useSiteSetting } from '@fecommunity/reactpress-toolkit/theme'
@@ -24,7 +25,13 @@ function QrPopover({
         role="tooltip"
         className="rp-glass pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 hidden -translate-x-1/2 rounded-xl p-2 shadow-lg group-hover:block"
       >
-        <img src={imageUrl} alt={label} className="max-h-[200px] max-w-[300px]" />
+        <ThemeImage
+          src={imageUrl}
+          alt={label}
+          width={300}
+          height={200}
+          className="h-auto max-h-[200px] w-auto max-w-[300px]"
+        />
       </span>
     </span>
   )

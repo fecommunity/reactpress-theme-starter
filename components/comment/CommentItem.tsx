@@ -61,7 +61,11 @@ export default function CommentItem({
               </span>
             ) : null}
             <LocaleTime date={comment.createAt} timeago />
-            <button type="button" className="rp-comment-reply-btn" onClick={toggleEditorVisible}>
+            <button
+              type="button"
+              className="rp-comment-reply-btn"
+              onClick={() => toggleEditorVisible()}
+            >
               {t('commentNamespace.reply')}
             </button>
           </div>
@@ -89,7 +93,7 @@ export default function CommentItem({
                 onSuccess={onSuccess}
               />
               {comment.children.length > 2 ? (
-                <button type="button" className="rp-comment-show-more" onClick={toggleMore}>
+                <button type="button" className="rp-comment-show-more" onClick={() => toggleMore()}>
                   {showMore ? t('commentShowLess') : t('commentShowMore')}
                 </button>
               ) : null}

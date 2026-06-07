@@ -1,6 +1,7 @@
 'use client'
 
 import Link from '@/components/shared/Link'
+import ThemeImage from '@/components/shared/ThemeImage'
 import { getNavIconByName } from '@/lib/utils/icons'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -106,27 +107,20 @@ function SiteIcon({ child }: { child: NavChild }) {
     setFailed(true)
   }
 
-  const bindImgRef = (node: HTMLImageElement | null) => {
-    if (node?.complete && node.naturalWidth > 0) {
-      setLoaded(true)
-    }
-  }
-
   return (
     <span className="rp-nav-portal__site-icon-stack" aria-hidden>
       {showFallback ? <span className="rp-nav-portal__site-fallback">{initial}</span> : null}
       {src && !failed ? (
-        <img
-          ref={bindImgRef}
+        <ThemeImage
           key={src}
           src={src}
           alt=""
           width={34}
           height={34}
           loading="lazy"
-          decoding="async"
           className={`rp-nav-portal__site-img${loaded ? 'is-visible' : ''}`}
           onLoad={() => setLoaded(true)}
+          onLoadingComplete={() => setLoaded(true)}
           onError={handleError}
         />
       ) : null}

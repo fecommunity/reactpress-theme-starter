@@ -1,5 +1,6 @@
 import CmsPageClient from '@/components/article/CmsPageClient'
 import { buildCmsPageMetadata, parseSiteSeoContext } from '@/lib/reactpress/contentSeo'
+import { coercePublishedPage } from '@/lib/reactpress/coercePublishedPage'
 import { buildListPageMetadata } from '@/lib/reactpress/siteMetadata'
 import { tServer } from '@/lib/reactpress/serverLocale'
 import {
@@ -16,12 +17,13 @@ export const revalidate = 60
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const [{ page }, siteMeta, settingRow] = await Promise.all([
+    const [{ page: rawPage }, siteMeta, settingRow] = await Promise.all([
       withApiRetry(() => fetchCmsPageProps(themeApi, 'suggestions')),
       withApiRetry(() => fetchSiteMeta(themeApi)),
       withApiRetry(() => themeApi.setting.findAll()).then(unwrapSetting),
     ])
-    if (page?.id && page.status === 'publish') {
+    const page = coercePublishedPage(rawPage)
+    if (page) {
       return buildCmsPageMetadata(page, parseSiteSeoContext(settingRow, siteMeta))
     }
   } catch {
@@ -32,8 +34,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function SuggestionsPage() {
   try {
-    const { page } = await withApiRetry(() => fetchCmsPageProps(themeApi, 'suggestions'))
-    if (!page?.id || page.status !== 'publish') {
+    const { page: rawPage } = await withApiRetry(() => fetchCmsPageProps(themeApi, 'suggestions'))
+    const page = coercePublishedPage(rawPage)
+    if (!page) {
       notFound()
     }
     return <CmsPageClient page={page} />

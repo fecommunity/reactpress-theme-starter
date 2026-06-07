@@ -65,7 +65,7 @@
 
 **Reference**
 
-[Directory Structure](#directory-structure) · [Resources](#resources)
+[Directory Structure](#directory-structure) · [Open Source](#open-source) · [Resources](#resources)
 
 </td>
 </tr>
@@ -364,13 +364,25 @@ reactpress-theme-starter/
 | Step | Task                                                         |
 | :--: | :----------------------------------------------------------- |
 |  1   | ESLint and Prettier validation                               |
-|  2   | TypeScript type checking _(non-blocking at time of writing)_ |
+|  2   | TypeScript type checking                                     |
 |  3   | Mock API startup on port **3010**                            |
 |  4   | Production build via `pnpm run build:ci`                     |
 
 ### Monorepo Integration
 
 Place this theme under `themes/` in the ReactPress monorepo, set the toolkit dependency to `workspace:*`, and run `pnpm dev` from the monorepo root.
+
+---
+
+## Open Source
+
+| Document                                    | Description                                                 |
+| :------------------------------------------ | :---------------------------------------------------------- |
+| [Contributing](./CONTRIBUTING.md)           | Development setup, conventions, and pull request guidelines |
+| [Contributing (中文)](./CONTRIBUTING_zh.md) | 中文贡献指南                                                |
+| [Code of Conduct](./CODE_OF_CONDUCT.md)     | Community standards (Contributor Covenant 2.1)              |
+| [Security Policy](./SECURITY.md)            | How to report vulnerabilities responsibly                   |
+| [MIT License](./LICENSE)                    | Software license                                            |
 
 ---
 

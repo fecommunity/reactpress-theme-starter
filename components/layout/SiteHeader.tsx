@@ -6,6 +6,7 @@ import LocaleSwitcher from '@/components/layout/LocaleSwitcher'
 import ThemeSwitch from '@/components/layout/ThemeSwitch'
 import UserAuth from '@/components/layout/UserAuth'
 import Link from '@/components/shared/Link'
+import ThemeImage from '@/components/shared/ThemeImage'
 import Logo from '@/components/shared/logo.svg'
 import { getDocumentScrollTop } from '@/lib/utils/scroll'
 import { getFirstLevelRoute, getIconByName } from '@/lib/utils/icons'
@@ -35,12 +36,13 @@ function HeaderLogo({ systemLogo }: { systemLogo?: string }) {
     /\.(svg|png|jpe?g|gif|webp)(\?.*)?$/i.test(raw)
   ) {
     return (
-      <img
+      <ThemeImage
         src={resolveImageUrl(raw, 'medium')}
         alt="logo"
+        width={159}
+        height={48}
+        priority
         className="relative z-[1] block h-12 w-auto max-w-[159px] object-contain"
-        decoding="sync"
-        fetchPriority="high"
       />
     )
   }
@@ -55,7 +57,7 @@ export default function SiteHeader() {
   const pathname = usePathname() ?? '/'
   const setting = useSiteSetting()
   const { pages, locales = [], siteConfig } = useSiteCatalog()
-  const navLinks = siteConfig?.header?.navLinks ?? []
+  const navLinks = useMemo(() => siteConfig?.header?.navLinks ?? [], [siteConfig?.header?.navLinks])
   const [affix, setAffix] = useToggle(false)
   const [affixVisible, setAffixVisible] = useToggle(false)
   const [visible, setVisible] = useToggle(false)
@@ -125,7 +127,7 @@ export default function SiteHeader() {
         const Icon = getIconByName(menu.path)
         const href = menu.path?.startsWith('/') ? menu.path : `/${menu.path}/`
         return {
-          key: `${index}-${menu.label}`,
+          key: `${index}-${menu.name}`,
           href,
           label: (menu.path ? t(menu.path) : '') || menu.name,
           icon: Icon ? <Icon size={20} /> : null,

@@ -12,7 +12,7 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 })
 
-export default [
+const eslintConfig = [
   {
     ignores: [
       'next-env.d.ts',
@@ -76,3 +76,5 @@ export default [
     },
   },
 ]
+
+export default eslintConfig

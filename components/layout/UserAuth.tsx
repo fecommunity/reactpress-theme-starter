@@ -1,6 +1,7 @@
 'use client'
 
 import Link from '@/components/shared/Link'
+import ThemeImage from '@/components/shared/ThemeImage'
 import { getAdminBaseUrl } from '@/lib/reactpress/env'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import { resolveImageUrl, useSiteUser } from '@fecommunity/reactpress-toolkit/theme'
@@ -40,9 +41,11 @@ export default function UserAuth({ layout = 'header' }: { layout?: UserAuthLayou
           className="inline-flex h-10 w-10 items-center justify-center rounded-full border-0 bg-transparent p-0"
         >
           {user.avatar ? (
-            <img
+            <ThemeImage
               src={resolveImageUrl(user.avatar, 'avatar')}
               alt={user.name}
+              width={28}
+              height={28}
               className="h-7 w-7 rounded-full object-cover"
             />
           ) : (

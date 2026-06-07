@@ -65,7 +65,7 @@
 
 **参考**
 
-[目录结构](#目录结构) · [相关资源](#相关资源)
+[目录结构](#目录结构) · [开源协作](#开源协作) · [相关资源](#相关资源)
 
 </td>
 </tr>
@@ -364,13 +364,25 @@ reactpress-theme-starter/
 | 步骤 | 任务                                   |
 | :--: | :------------------------------------- |
 |  1   | ESLint 与 Prettier 校验                |
-|  2   | TypeScript 类型检查 _（当前为非阻塞）_ |
+|  2   | TypeScript 类型检查                      |
 |  3   | 端口 **3010** 启动 Mock API            |
 |  4   | 执行 `pnpm run build:ci` 生产构建      |
 
 ### Monorepo 联调
 
 将本主题置于 ReactPress 仓库 `themes/` 目录，Toolkit 依赖改为 `workspace:*`，在 Monorepo 根目录运行 `pnpm dev` 即可联动 API 与主题开发。
+
+---
+
+## 开源协作
+
+| 文档                                        | 说明                                     |
+| :------------------------------------------ | :--------------------------------------- |
+| [贡献指南（中文）](./CONTRIBUTING_zh.md)    | 开发环境、约定与 PR 规范                 |
+| [Contributing (English)](./CONTRIBUTING.md) | English contributing guide               |
+| [行为准则](./CODE_OF_CONDUCT.md)            | 社区行为标准（Contributor Covenant 2.1） |
+| [安全策略](./SECURITY.md)                   | 漏洞负责任披露方式                       |
+| [MIT 许可证](./LICENSE)                     | 软件许可                                 |
 
 ---
 

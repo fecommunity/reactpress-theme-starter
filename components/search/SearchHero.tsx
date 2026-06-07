@@ -7,7 +7,7 @@ import { normalizeList } from '@/lib/reactpress/normalizeApiResponse'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import type { IArticle } from '@fecommunity/reactpress-toolkit/types'
 import { getSiteTitle, useSiteSetting } from '@fecommunity/reactpress-toolkit/theme'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 interface SearchCategory {
   key: string
@@ -46,8 +46,14 @@ export default function SearchHero({
   const { t } = useLocale()
   const setting = useSiteSetting()
   const siteTitle = getSiteTitle(setting)
-  const categories = searchCategories?.categories || []
-  const subCategories = searchCategories?.subCategories || {}
+  const categories = useMemo(
+    () => searchCategories?.categories ?? [],
+    [searchCategories?.categories]
+  )
+  const subCategories = useMemo(
+    () => searchCategories?.subCategories ?? {},
+    [searchCategories?.subCategories]
+  )
 
   const [category, setCategory] = useState(categories[0]?.key || 'local')
   const [subCategory, setSubCategory] = useState(
@@ -129,7 +135,7 @@ export default function SearchHero({
 
   useEffect(() => {
     fetchSuggestions(keyword)
-  }, [category, subCategory, fetchSuggestions])
+  }, [category, subCategory, fetchSuggestions, keyword])
 
   const handleSearch = () => {
     if (category === 'local') {

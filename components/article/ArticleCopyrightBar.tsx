@@ -1,6 +1,7 @@
 'use client'
 
 import Link from '@/components/shared/Link'
+import ThemeImage from '@/components/shared/ThemeImage'
 import { getRandomColor } from '@/lib/utils/comment'
 import { useSiteCatalog } from '@fecommunity/reactpress-toolkit/theme'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
@@ -36,7 +37,13 @@ function AuthorAvatar({ name, logo }: { name: string; logo?: string }) {
 
   if (logo && isImageLogo(logo)) {
     return (
-      <img src={resolveImageUrl(logo, 'medium')} alt="" className="rp-article-author-avatar__img" />
+      <ThemeImage
+        src={resolveImageUrl(logo, 'medium')}
+        alt=""
+        width={48}
+        height={48}
+        className="rp-article-author-avatar__img"
+      />
     )
   }
 

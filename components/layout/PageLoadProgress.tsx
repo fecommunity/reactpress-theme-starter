@@ -36,8 +36,8 @@ function PageLoadProgressInner() {
   const [progress, setProgress] = useState(0)
 
   const progressRef = useRef(0)
-  const trickleTimerRef = useRef<ReturnType<typeof setInterval>>()
-  const hideTimerRef = useRef<ReturnType<typeof setTimeout>>()
+  const trickleTimerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   const initialLoadDoneRef = useRef(false)
   const navigatingRef = useRef(false)
   const controlsRef = useRef<{ start: () => void; done: () => void } | null>(null)

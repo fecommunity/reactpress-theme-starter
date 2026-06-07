@@ -1,6 +1,8 @@
 'use client'
 
+import { normalizeSessionUser } from '@/lib/auth/sessionUser'
 import { fetchVisitorSetting } from '@/lib/reactpress/fetchSetting'
+import { materializeBootstrapCatalog } from '@/lib/reactpress/materializeBootstrapCatalog'
 import {
   ReactPressProvider,
   SiteCatalogProvider,
@@ -21,6 +23,7 @@ import {
   type ThemeColorMode,
 } from '@fecommunity/reactpress-toolkit/theme'
 import type { AppBootstrapResult } from '@fecommunity/reactpress-toolkit/theme/server'
+import type { IUser } from '@fecommunity/reactpress-toolkit/types'
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 
 import { HomeFooterProvider } from './homeFooter'
@@ -45,24 +48,13 @@ function VisitorLocaleBootstrap({ locales, ssrLocale }: { locales: string[]; ssr
 }
 
 export function ReactPressAppProviders({ bootstrap, children }: Props) {
-  const {
-    setting: initialSetting,
-    tags,
-    categories,
-    pages,
-    i18n: bootstrapI18n,
-    globalSetting,
-    siteConfig,
-    locales,
-    initialLocale,
-    themeMods,
-  } = bootstrap
+  const catalogSeed = useMemo(() => materializeBootstrapCatalog(bootstrap), [bootstrap])
+  const { i18n: bootstrapI18n, locales, initialLocale, themeMods } = bootstrap
 
   const [theme, setTheme] = useState<ThemeColorMode>('light')
   const [locale, setLocale] = useState(initialLocale)
   const [collapsed, setCollapsed] = useState(false)
   const [user, setUserState] = useState<SiteCatalogContextValue['user']>(null)
-  const [setting] = useState(initialSetting)
   const [i18nCatalog, setI18nCatalog] = useState<Record<string, Record<string, string>>>(
     () =>
       mergeVisitorI18n(bootstrapI18n as Record<string, unknown>) as Record<
@@ -128,8 +120,11 @@ export function ReactPressAppProviders({ bootstrap, children }: Props) {
     [i18nCatalog, locale, prefetchRemainingI18nLocales]
   )
 
-  const setUser = useCallback((next: SiteCatalogContextValue['user']) => {
-    persistThemeSession(next)
+  const setUser = useCallback((next: IUser) => {
+    const session = normalizeSessionUser(next)
+    if (session) {
+      persistThemeSession(session)
+    }
     setUserState(next)
   }, [])
 
@@ -143,15 +138,15 @@ export function ReactPressAppProviders({ bootstrap, children }: Props) {
 
   const catalogValue = useMemo<SiteCatalogContextValue>(
     () => ({
-      setting,
+      setting: catalogSeed.setting,
       i18n: i18nCatalog,
       locale,
       locales,
-      globalSetting,
-      siteConfig,
-      tags,
-      categories,
-      pages,
+      globalSetting: catalogSeed.globalSetting,
+      siteConfig: catalogSeed.siteConfig,
+      tags: catalogSeed.tags,
+      categories: catalogSeed.categories,
+      pages: catalogSeed.pages,
       theme,
       collapsed,
       changeLocale,
@@ -159,19 +154,14 @@ export function ReactPressAppProviders({ bootstrap, children }: Props) {
       setUser,
       removeUser,
       changeTheme,
-      getSetting: () => setting,
+      getSetting: () => catalogSeed.setting,
       toggleCollapse,
     }),
     [
-      setting,
+      catalogSeed,
       i18nCatalog,
       locale,
       locales,
-      globalSetting,
-      siteConfig,
-      tags,
-      categories,
-      pages,
       theme,
       collapsed,
       changeLocale,

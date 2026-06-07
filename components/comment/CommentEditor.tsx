@@ -1,6 +1,7 @@
 'use client'
 
 import CommentEmoji from '@/components/comment/CommentEmoji'
+import ThemeImage from '@/components/shared/ThemeImage'
 import { CommentProvider } from '@/lib/providers/client'
 import { getRandomColor, isLoggedInUser, type CommentNode } from '@/lib/utils/comment'
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
@@ -262,9 +263,11 @@ export function CommentAvatar({
 }) {
   if (avatar) {
     return (
-      <img
+      <ThemeImage
         src={resolveImageUrl(avatar, 'avatar')}
         alt=""
+        width={size}
+        height={size}
         className="shrink-0 rounded-full object-cover"
         style={{ width: size, height: size }}
       />

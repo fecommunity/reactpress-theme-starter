@@ -4,6 +4,7 @@ import { resolveImageUrl, type CarouselArticle } from '@fecommunity/reactpress-t
 import { useLocale } from '@fecommunity/reactpress-toolkit/ui'
 import { LocaleTime } from '@fecommunity/reactpress-toolkit/ui/content'
 import Link from '@/components/shared/Link'
+import ThemeImage from '@/components/shared/ThemeImage'
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 
 const AUTOPLAY_MS = 5000
@@ -129,15 +130,14 @@ export default function ArticleCarousel({ articles = [] }: ArticleCarouselProps)
               aria-hidden={!isActive}
             >
               {shouldLoadImage ? (
-                <img
+                <ThemeImage
                   key={isActive ? `cover-${progressKey}` : article.id}
                   src={coverSrc}
                   alt=""
-                  className="rp-cover-zoom rp-carousel-cover-motion absolute inset-0 h-full w-full bg-[var(--bg-second)] object-contain object-center"
-                  width={1200}
-                  height={460}
-                  decoding={index === 0 ? 'sync' : 'async'}
-                  fetchPriority={index === 0 ? 'high' : undefined}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  className="rp-cover-zoom rp-carousel-cover-motion bg-[var(--bg-second)] object-contain object-center"
+                  priority={index === 0}
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
               ) : (

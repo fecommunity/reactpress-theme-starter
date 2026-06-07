@@ -11,7 +11,7 @@ function isExpectedClientError(message: string, status?: number): boolean {
 }
 
 const stack = createThemeHttpStack({
-  onError: (msg, status) => {
+  onError: (msg: string, status?: number) => {
     if (process.env.NODE_ENV !== 'development') return
     if (isExpectedClientError(msg, status)) return
     console.error('[my-blog]', msg)
